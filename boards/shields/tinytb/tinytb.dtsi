@@ -1,97 +1,125 @@
 /* TinyTB Shield (build-safe + Studio minimal)
- * Seeeduino XIAO BLE (nRF52840)
- * PMW3610: SDIO=P0.02, SCLK=P0.03, CS=P0.28, MOT=P0.29
- * Keys: D0=P0.05, D1=P0.04, D2=P1.11, D3=P1.12
+ *
+ * Board   : Seeeduino XIAO BLE (nRF52840)
+ * Trackball: PixArt PMW3610 on SPI0 (pseudo 3-wire: SDIO shared)
+ *   SDIO = P0.02  (MOSI/MISO 同一ピン)
+ *   SCLK = P0.03
+ *   CS   = P0.28
+ *   MOT  = P0.29
+ *
+ * Keys (direct-wired):
+ *   D0 = P0.05
+ *   D1 = P0.04
+ *   D2 = P1.11
+ *   D3 = P1.12
  */
 
 #include <zephyr/dt-bindings/gpio/gpio.h>
 #include <zephyr/dt-bindings/pinctrl/nrf-pinctrl.h>
 
+/* ---------------- root ---------------- */
  / {
-    compatible = "zmk,shield-tinytb";
+	compatible = "zmk,shield-tinytb";
 
-    chosen {
-        zmk,kscan = &kscan0;
-        zmk,physical-layout = &tinytb_pl;
-        zmk,keyboard-name = "TinyTB";
-    };
+	chosen {
+		/* キースキャンデバイス */
+		zmk,kscan = &kscan0;
 
-    aliases {
-        kscan = &kscan0;
-        /* trackball = &pmw3610;  ← pmw3610 ノードが確認できるまでコメントのまま */
-    };
+		/* ★Studio を使う場合だけ有効にする（使わないなら削除可） */
+		zmk,physical-layout = &tinytb_pl;
+		zmk,keyboard-name = "TinyTB";
+	};
 
-    /* ---- Studio 物理レイアウト（仮の2x2） ---- */
-    tinytb_pl: physical_layout {
-        compatible = "zmk,physical-layout";
-        display-name = "TinyTB 2x2";  /* ★Studio 表示名（必須） */
+	/* 参照のエイリアス（必須ではないが便宜上） */
+	aliases {
+		kscan = &kscan0;
+		/* trackball = &pmw3610;  // 必要なら有効化（下の pmw3610 ラベルを参照） */
+	};
 
-        keys = <
-            0   0   18  18   /* D0 */
-            20  0   18  18   /* D1 */
-            0  20   18  18   /* D2 */
-            20 20   18  18   /* D3 */
-        >;
-    };
+	/* ---- Studio 物理配列（最小・仮の2x2） ---- */
+	tinytb_pl: physical_layout {
+		compatible = "zmk,physical-layout";
+		display-name = "TinyTB 2x2";
 
-    /* ---- 4 direct-wired keys ---- */
-    kscan0: kscan {
-        compatible = "zmk,kscan-gpio-direct";
+		/* 2Dアフィン変換（単位行列＝無変換）: <a b c d tx ty> */
+		transform = <1 0 0 1 0 0>;
 
-        label = "TinyTB Keys";
-        input-gpios = <&gpio0  5 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
-                      <&gpio0  4 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
-                      <&gpio1 11 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
-                      <&gpio1 12 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
-        debounce-press-ms = <5>;
-        debounce-release-ms = <5>;
-    };
+		/* 各キーの x y w h（単位は相対値。必要に応じて実寸へ） */
+		keys = <
+			 0   0   18  18   /* D0 */
+			20   0   18  18   /* D1 */
+			 0  20   18  18   /* D2 */
+			20  20   18  18   /* D3 */
+		>;
+	};
+
+	/* ---- 4 直結キーのキースキャン ---- */
+	kscan0: kscan {
+		compatible = "zmk,kscan-gpio-direct";
+		label = "TinyTB Keys";
+
+		/* tinytb.keymap などでのキー順はこの並び（D0→D3）に対応 */
+		input-gpios = <&gpio0  5 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,  /* D0 P0.05 */
+			      <&gpio0  4 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,  /* D1 P0.04 */
+			      <&gpio1 11 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,  /* D2 P1.11 */
+			      <&gpio1 12 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;  /* D3 P1.12 */
+
+		debounce-press-ms = <5>;
+		debounce-release-ms = <5>;
+	};
 };
 
-/* ---- pinctrl for SPI0 ---- */
+/* --------------- pinctrl (SPI0) --------------- */
+/* SDIO を MOSI/MISO で共用するため、MOSI と MISO に同じ P0.02 を割り当て */
 &pinctrl {
-    spi0_default: spi0_default {
-        group1 {
-            psels = <NRF_PSEL(SPIM_SCK,  0, 3)>,
-                    <NRF_PSEL(SPIM_MOSI, 0, 2)>,
-                    <NRF_PSEL(SPIM_MISO, 0, 2)>;
-        };
-    };
-    spi0_sleep: spi0_sleep {
-        group1 {
-            psels = <NRF_PSEL(SPIM_SCK,  0, 3)>,
-                    <NRF_PSEL(SPIM_MOSI, 0, 2)>,
-                    <NRF_PSEL(SPIM_MISO, 0, 2)>;
-            low-power-enable;
-        };
-    };
+	spi0_default: spi0_default {
+		group1 {
+			psels = <NRF_PSEL(SPIM_SCK,  0, 3)>,
+				<NRF_PSEL(SPIM_MOSI, 0, 2)>,
+				<NRF_PSEL(SPIM_MISO, 0, 2)>;
+		};
+	};
+
+	spi0_sleep: spi0_sleep {
+		group1 {
+			psels = <NRF_PSEL(SPIM_SCK,  0, 3)>,
+				<NRF_PSEL(SPIM_MOSI, 0, 2)>,
+				<NRF_PSEL(SPIM_MISO, 0, 2)>;
+			low-power-enable;
+		};
+	};
 };
 
-/* ---- SPI0 + PMW3610 ---- */
+/* --------------- SPI0 + PMW3610 --------------- */
 &spi0 {
-    status = "okay";
-    pinctrl-0 = <&spi0_default>;
-    pinctrl-1 = <&spi0_sleep>;
-    pinctrl-names = "default", "sleep";
+	status = "okay";
 
-    cs-gpios = <&gpio0 28 GPIO_ACTIVE_LOW>;   /* NCS */
+	/* pinctrl は nRF SPIM バインディングで必須 */
+	pinctrl-0 = <&spi0_default>;
+	pinctrl-1 = <&spi0_sleep>;
+	pinctrl-names = "default", "sleep";
 
-    /* ★このラベル名が 'pmw3610'。aliases から参照するなら必ずこの綴りで！ */
-    pmw3610: pmw3610@0 {
-        compatible = "pixart,pmw3610";
-        reg = <0>;                          /* cs-gpios[0] */
-        spi-max-frequency = <2000000>;
-        irq-gpios = <&gpio0 29 GPIO_ACTIVE_LOW>;
+	/* 3-wire プロパティは Zephyr 3.5 の nRF では未サポート。設定不要 */
+	cs-gpios = <&gpio0 28 GPIO_ACTIVE_LOW>;   /* NCS = P0.28 */
 
-        /* required */
-        evt-type = <0>;     /* 0=pointer (相対XY) */
-        x-input-code = <0>; /* REL_X */
-        y-input-code = <1>; /* REL_Y */
+	/* ★このラベル 'pmw3610' を aliases から参照したい場合は有効に */
+	pmw3610: pmw3610@0 {
+		compatible = "pixart,pmw3610";
+		reg = <0>;                          /* CS index (cs-gpios[0]) */
+		spi-max-frequency = <2000000>;
 
-        /* optional
-         * cpi = <1600>;
-         * invert-x;
-         * invert-y;
-         */
-    };
+		/* MOT（割り込み）。未使用でもあってもOK */
+		irq-gpios = <&gpio0 29 GPIO_ACTIVE_LOW>;  /* P0.29 */
+
+		/* 必須プロパティ（zmk-pmw3610-driver の bindings 準拠） */
+		evt-type = <0>;     /* 0 = relative pointer (XY) */
+		x-input-code = <0>; /* REL_X */
+		y-input-code = <1>; /* REL_Y */
+
+		/* 任意設定：必要に応じて有効化
+		 * cpi = <1600>;     // 解像度（例：800/1200/1600/2400 …）
+		 * invert-x;         // X 方向を反転
+		 * invert-y;         // Y 方向を反転
+		*/
+	};
 };
