@@ -1,29 +1,29 @@
 /* TinyTB Shield (Studio-ready minimal)
  * Board: Seeeduino XIAO BLE (nRF52840)
- * PMW3610: SDIO=P0.02, SCLK=P0.03, NCS=P0.28, MOT(PMW MOT)=P0.29
+ * PMW3610: SDIO=P0.02, SCLK=P0.03, NCS=P0.28, MOT=P0.29
  * Keys (direct): D0=P0.05, D1=P0.04, D2=P1.11, D3=P1.12
  */
 
 #include <zephyr/dt-bindings/gpio/gpio.h>
 #include <zephyr/dt-bindings/pinctrl/nrf-pinctrl.h>
 #include <dt-bindings/zmk/matrix_transform.h>
-#include <physical_layouts.dtsi>
+#include <zmk/physical_layouts.dtsi>
 
 /* ---------- root ---------- */
  / {
     compatible = "zmk,shield-tinytb";
 
-    /* Studio 要件: kscan と physical-layout を chosen で指定 */
+    /* Studio 要件 */
     chosen {
         zmk,kscan = &kscan0;
         zmk,physical-layout = &tinytb_pl;
         zmk,keyboard-name = "TinyTB";
-    }
+    };
 
     aliases {
         kscan = &kscan0;
         trackball = &pmw3610;
-    }
+    };
 
     /* ---- 4 直配線キー (GPIO direct) ---- */
     kscan0: kscan {
@@ -40,14 +40,12 @@
         debounce-release-ms = <5>;
     };
 
-    /* ---- Studio 用 物理配列 (2x2 ざっくり座標) ----
-     * keys 配列は phandle &key_physical_attrs + 7つの数値(w h x y rot rx ry)
-     * transform は行列ノードへの phandle 参照
+    /* ---- Studio 物理配列 (2x2仮配置) ----
+     * keys は「&key_physical_attrs + w h x y rot rx ry」
      */
     tinytb_pl: physical_layout {
         compatible = "zmk,physical-layout";
         display-name = "TinyTB 2x2";
-        kscan = <&kscan0>;
         transform = <&default_transform>;
 
         /*          w   h    x    y   rot  rx  ry  */
@@ -56,10 +54,8 @@
                <&key_physical_attrs  18  18    0   20    0    0   0>, /* D2 */
                <&key_physical_attrs  18  18   20   20    0    0   0>; /* D3 */
     };
-};
 
-/* ---- 行列トランスフォーム（直配線4キーを 1x4 として並べる） ---- */
- / {
+    /* ---- キーマップ変換（1行×4列） ---- */
     default_transform: keymap_transform0 {
         compatible = "zmk,matrix-transform";
         columns = <4>;
@@ -68,9 +64,9 @@
             RC(0,0) RC(0,1) RC(0,2) RC(0,3)
         >;
     };
-}
+};
 
-/* ---- SPI0 ピン割当: SCK=P0.03, MOSI=P0.02, MISO=P0.02（SDIO共用） ---- */
+/* ---- SPI0 ピン: SCK=P0.03, SDIO=P0.02（MOSI/MISO 同ピン） ---- */
 &pinctrl {
     spi0_default: spi0_default {
         group1 {
@@ -90,31 +86,31 @@
     };
 };
 
-/* ---- SPI0 + PMW3610（擬似3線） ---- */
+/* ---- SPI0 + PMW3610 ---- */
 &spi0 {
     status = "okay";
     pinctrl-0 = <&spi0_default>;
     pinctrl-1 = <&spi0_sleep>;
     pinctrl-names = "default", "sleep";
 
-    /* spi-3wire;  ← Zephyr 3.5 の nrf-spim バインディングに無いので未使用 */
+    /* Zephyr 3.5 の nrf-spim に spi-3wire プロパティは無い */
     cs-gpios = <&gpio0 28 GPIO_ACTIVE_LOW>; /* NCS */
 
     pmw3610: pmw3610@0 {
         compatible = "pixart,pmw3610";
-        reg = <0>;
+        reg = <0>;                          /* CS index (cs-gpios[0]) */
         spi-max-frequency = <2000000>;
-        irq-gpios = <&gpio0 29 GPIO_ACTIVE_LOW>; /* MOT pin */
+        irq-gpios = <&gpio0 29 GPIO_ACTIVE_LOW>; /* MOT */
 
-        /* required: イベント種別と Linux input の相対軸コードを数値で */
-        evt-type = <0>;   /* 0=relative pointer */
+        /* 必須: 数値で指定 */
+        evt-type = <0>;     /* 0 = relative pointer */
         x-input-code = <0>; /* REL_X */
         y-input-code = <1>; /* REL_Y */
 
-        /* 任意設定:
+        /* 任意:
+         * // cpi = <1600>;
          * // invert-x;
          * // invert-y;
-         * // cpi = <1600>;
          */
     };
 };
