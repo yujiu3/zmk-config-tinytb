@@ -8,12 +8,14 @@
 
 #define DEFAULT 0
 
-keymap {
-    compatible = "zmk,keymap";
+/{
+    keymap {
+        compatible = "zmk,keymap";
 
-    default_layer {
-        bindings = <
-&kp R  &kp U
-&kp N  &kp M
+        default_layer {
+            bindings = <
+    &kp R  &kp U
+    &kp N  &kp M
         >;
+    };
 };
