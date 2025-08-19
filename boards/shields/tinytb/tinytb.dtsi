@@ -1,80 +1,76 @@
-/* TinyTB Shield (build-safe + Studio minimal)
- *
- * Board   : Seeeduino XIAO BLE (nRF52840)
- * Trackball: PixArt PMW3610 on SPI0 (pseudo 3-wire: SDIO shared)
- *   SDIO = P0.02  (MOSI/MISO 同一ピン)
- *   SCLK = P0.03
- *   CS   = P0.28
- *   MOT  = P0.29
- *
- * Keys (direct-wired):
- *   D0 = P0.05
- *   D1 = P0.04
- *   D2 = P1.11
- *   D3 = P1.12
+/* TinyTB Shield (Studio-ready minimal)
+ * Board: Seeeduino XIAO BLE (nRF52840)
+ * PMW3610: SDIO=P0.02, SCLK=P0.03, NCS=P0.28, MOT(PMW MOT)=P0.29
+ * Keys (direct): D0=P0.05, D1=P0.04, D2=P1.11, D3=P1.12
  */
 
 #include <zephyr/dt-bindings/gpio/gpio.h>
 #include <zephyr/dt-bindings/pinctrl/nrf-pinctrl.h>
+#include <dt-bindings/zmk/matrix_transform.h>
+#include <physical_layouts.dtsi>
 
-/* ---------------- root ---------------- */
+/* ---------- root ---------- */
  / {
     compatible = "zmk,shield-tinytb";
 
+    /* Studio 要件: kscan と physical-layout を chosen で指定 */
     chosen {
         zmk,kscan = &kscan0;
-
-        /* ★Studio を使う場合 */
         zmk,physical-layout = &tinytb_pl;
         zmk,keyboard-name = "TinyTB";
-    };
+    }
 
     aliases {
         kscan = &kscan0;
-        /* trackball = &pmw3610;  // 必要なら有効化 */
-    };
+        trackball = &pmw3610;
+    }
 
-    /* ---- 2D 変換ノード（単位行列：無変換） ---- */
-    tinytb_identity_xform: layout_transform {
-        compatible = "zmk,transform-2d";
-        /* [ a b tx ; c d ty ] → <a b c d tx ty> */
-        matrix = <1 0 0 1 0 0>;
-    };
-
-    /* ---- Studio 物理配列（最小・仮の2x2） ---- */
-tinytb_pl: physical_layout {
-    compatible = "zmk,physical-layout";
-    display-name = "TinyTB 2x2";
-    transform = <&tinytb_identity_xform>;
-
-    /* ★各キーは provider。#key-cells=4 が必須（x,y,w,h を受け取る） */
-    k0: key0 { compatible = "zmk,physical-layout-key"; #key-cells = <4>; };
-    k1: key1 { compatible = "zmk,physical-layout-key"; #key-cells = <4>; };
-    k2: key2 { compatible = "zmk,physical-layout-key"; #key-cells = <4>; };
-    k3: key3 { compatible = "zmk,physical-layout-key"; #key-cells = <4>; };
-
-    /* keys は「&kN x y w h」の並び */
-    keys = <
-        &k0   0   0   18  18   /* D0 */
-        &k1  20   0   18  18   /* D1 */
-        &k2   0  20   18  18   /* D2 */
-        &k3  20  20   18  18   /* D3 */
-    >;
-};
-    /* ---- 4 直結キーのキースキャン ---- */
+    /* ---- 4 直配線キー (GPIO direct) ---- */
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-direct";
         label = "TinyTB Keys";
-        input-gpios = <&gpio0  5 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,  /* D0 P0.05 */
-                      <&gpio0  4 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,  /* D1 P0.04 */
-                      <&gpio1 11 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,  /* D2 P1.11 */
-                      <&gpio1 12 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;  /* D3 P1.12 */
+
+        /* D0=P0.05, D1=P0.04, D2=P1.11, D3=P1.12 */
+        input-gpios = <&gpio0  5 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>, /* D0 */
+                      <&gpio0  4 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>, /* D1 */
+                      <&gpio1 11 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>, /* D2 */
+                      <&gpio1 12 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>; /* D3 */
+
         debounce-press-ms = <5>;
         debounce-release-ms = <5>;
     };
+
+    /* ---- Studio 用 物理配列 (2x2 ざっくり座標) ----
+     * keys 配列は phandle &key_physical_attrs + 7つの数値(w h x y rot rx ry)
+     * transform は行列ノードへの phandle 参照
+     */
+    tinytb_pl: physical_layout {
+        compatible = "zmk,physical-layout";
+        display-name = "TinyTB 2x2";
+        kscan = <&kscan0>;
+        transform = <&default_transform>;
+
+        /*          w   h    x    y   rot  rx  ry  */
+        keys = <&key_physical_attrs  18  18    0    0    0    0   0>, /* D0 */
+               <&key_physical_attrs  18  18   20    0    0    0   0>, /* D1 */
+               <&key_physical_attrs  18  18    0   20    0    0   0>, /* D2 */
+               <&key_physical_attrs  18  18   20   20    0    0   0>; /* D3 */
+    };
 };
 
-/* --------------- pinctrl (SPI0) --------------- */
+/* ---- 行列トランスフォーム（直配線4キーを 1x4 として並べる） ---- */
+ / {
+    default_transform: keymap_transform0 {
+        compatible = "zmk,matrix-transform";
+        columns = <4>;
+        rows = <1>;
+        map = <
+            RC(0,0) RC(0,1) RC(0,2) RC(0,3)
+        >;
+    };
+}
+
+/* ---- SPI0 ピン割当: SCK=P0.03, MOSI=P0.02, MISO=P0.02（SDIO共用） ---- */
 &pinctrl {
     spi0_default: spi0_default {
         group1 {
@@ -94,40 +90,31 @@ tinytb_pl: physical_layout {
     };
 };
 
-/* --------------- SPI0 + PMW3610 --------------- */
+/* ---- SPI0 + PMW3610（擬似3線） ---- */
 &spi0 {
     status = "okay";
     pinctrl-0 = <&spi0_default>;
     pinctrl-1 = <&spi0_sleep>;
     pinctrl-names = "default", "sleep";
 
-    /* 3-wire プロパティは不要（未サポート） */
-    cs-gpios = <&gpio0 28 GPIO_ACTIVE_LOW>;   /* NCS = P0.28 */
+    /* spi-3wire;  ← Zephyr 3.5 の nrf-spim バインディングに無いので未使用 */
+    cs-gpios = <&gpio0 28 GPIO_ACTIVE_LOW>; /* NCS */
 
     pmw3610: pmw3610@0 {
         compatible = "pixart,pmw3610";
-        reg = <0>;                          /* CS index (cs-gpios[0]) */
+        reg = <0>;
         spi-max-frequency = <2000000>;
-        irq-gpios = <&gpio0 29 GPIO_ACTIVE_LOW>;  /* MOT = P0.29 */
+        irq-gpios = <&gpio0 29 GPIO_ACTIVE_LOW>; /* MOT pin */
 
-        /* 必須（zmk-pmw3610-driver bindings） */
-        evt-type = <0>;     /* 0 = relative pointer (XY) */
+        /* required: イベント種別と Linux input の相対軸コードを数値で */
+        evt-type = <0>;   /* 0=relative pointer */
         x-input-code = <0>; /* REL_X */
         y-input-code = <1>; /* REL_Y */
 
-        /* 任意：
-         * cpi = <1600>;
-         * invert-x;
-         * invert-y;
+        /* 任意設定:
+         * // invert-x;
+         * // invert-y;
+         * // cpi = <1600>;
          */
     };
 };
-
-/* ---- 任意のデフォルト（使うときだけコメント解除） ---- */
-/*
-&pmw3610 {
-    cpi = <1600>;
-    // invert-x;
-    // invert-y;
-};
-*/
