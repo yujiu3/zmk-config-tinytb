@@ -3,6 +3,126 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <physical_layouts.dtsi>
 
+
+#define DEFAULT_CPI 600        // トラックボールの感度
+#define ROTATION_ANGLE 30       // トラックボールのY軸を回転
+#define CLIPPER_THRESHOLD 30    // スクロール時に斜めの値をクリップ
+#define INVERT_X 1              // スクロールの反転
+#define INVERT_Y 0              // スクロールの反転
+#define SCROLL_LAYER 2         // スクロールを有効にするレイヤー
+
+#define POLL_PERIOD_MS 30       // キースキャンのポーリング周期（ms）
+#define DEBOUNCE_MS 10          // デバウンス時間 (ms)
+
+
+&spi0 {
+    status = "okay";
+    compatible = "nordic,nrf-spim";
+    cs-gpios = <&gpio1 GPIO_ACTIVE_LOW>; // CS: 1
+
+    pinctrl-0 = <&spi0_default>;
+    pinctrl-1 = <&spi0_sleep>;
+    pinctrl-names = "default", "sleep";
+
+    trackball: pmw3610@0 {
+        compatible = "pixart,pmw3610";
+        reg = <0>;
+        spi-max-frequency = <2000000>;
+        irq-gpios = <&gpio4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; // MOTION: P4
+        cpi = <DEFAULT_CPI>;
+        evt-type = <INPUT_EV_REL>;
+        x-input-code = <INPUT_REL_X>;
+        y-input-code = <INPUT_REL_Y>;
+        force-awake;
+        //force-awake-4ms-mode;
+        status = "okay";
+    };
+};
+
+&pinctrl {
+    spi0_default: spi0_default {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 2)>,   // SCLK:  P2
+                    <NRF_PSEL(SPIM_MOSI, 1)>,  // SDIO:  P1
+                    <NRF_PSEL(SPIM_MISO, 1)>;  // MISOは同じSDIO兼用
+        };
+    };
+
+    spi0_sleep: spi0_sleep {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 2)>,
+                    <NRF_PSEL(SPIM_MOSI, 1)>,
+                    <NRF_PSEL(SPIM_MISO, 1)>;
+            low-power-enable;
+        };
+    };
+};
+
+    xy_transf: xy_transf {
+        compatible = "zmk,input-processor-transform";
+        #input-processor-cells = <1>;
+        type = <INPUT_EV_REL>;
+        x-codes = <INPUT_REL_X>, <INPUT_REL_WHEEL>;
+        y-codes = <INPUT_REL_Y>, <INPUT_REL_HWHEEL>;
+    };
+
+    xy_scaler: xy_scaler {
+        compatible = "zmk,input-processor-scaler";
+        #input-processor-cells = <2>;
+        type = <INPUT_EV_REL>;
+        codes = <INPUT_REL_X>, <INPUT_REL_Y>;
+        track-remainders;
+    };
+
+    x_scaler: x_scaler {
+        compatible = "zmk,input-processor-scaler";
+        #input-processor-cells = <2>;
+        type = <INPUT_EV_REL>;
+        codes = <INPUT_REL_X>;
+    };
+    */
+
+    to_wheel: to_wheel {
+        compatible = "zmk,input-processor-code-mapper";
+        #input-processor-cells = <0>;
+        type = <INPUT_EV_REL>;
+        map = <INPUT_REL_X INPUT_REL_HWHEEL>,
+              <INPUT_REL_Y INPUT_REL_WHEEL>;
+    };
+
+    sensor_rotation: sensor_rotation {
+        compatible = "zmk,input-processor-sensor-rotation";
+        #input-processor-cells = <0>;
+        rotation-angle = <ROTATION_ANGLE>;
+    };
+
+    xy_clipper: xy_clipper {
+        compatible = "zmk,input-processor-xy-clipper";
+        #input-processor-cells = <0>;
+        threshold = <CLIPPER_THRESHOLD>;
+        invert-x = <INVERT_X>;
+        invert-y = <INVERT_Y>;
+    };
+
+    trackball_listener {
+        compatible = "zmk,input-listener";
+        device = <&trackball>;
+
+        input-processors = <&sensor_rotation>;
+
+        scroll {
+            layers = <SCROLL_LAYER>;
+            input-processors = <&sensor_rotation>,
+                               <&xy_clipper>,
+                               <&to_wheel>;
+        };
+    };
+};
+
+
+
+
+
 / {
 	chosen {
                 zmk,physical-layout = &tinytb_physical_layout;
@@ -39,10 +159,10 @@
 		compatible = "zmk,kscan-gpio-direct";
 		label = "KSCAN";
 		input-gpios =
-			<&xiao_d  0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
-			<&xiao_d  3 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
-			<&xiao_d  4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
 			<&xiao_d  5 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
+			<&xiao_d  6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
+			<&xiao_d  7 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
+			<&xiao_d  8 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
 
 		;
 	};
