@@ -83,8 +83,6 @@
 			<&xiao_d  8 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
 		;
 	};
-};
-
 
     /*
     xy_transf: xy_transf {
@@ -136,9 +134,7 @@
     trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-
         input-processors = <&sensor_rotation>;
-
         scroll {
             layers = <SCROLL_LAYER>;
             input-processors = <&sensor_rotation>,
