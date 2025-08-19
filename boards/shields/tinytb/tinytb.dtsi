@@ -84,7 +84,6 @@
 		;
 	};
 
-    /*
     xy_transf: xy_transf {
         compatible = "zmk,input-processor-transform";
         #input-processor-cells = <1>;
@@ -107,7 +106,6 @@
         type = <INPUT_EV_REL>;
         codes = <INPUT_REL_X>;
     };
-    */
 
     to_wheel: to_wheel {
         compatible = "zmk,input-processor-code-mapper";
