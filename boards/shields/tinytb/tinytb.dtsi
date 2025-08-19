@@ -19,7 +19,7 @@
 	/* 4キーをダイレクト配線で取得 */
 	kscan0: kscan {
 		compatible = "zmk,kscan-gpio-direct";
-		label = "TINyTB Keys";
+		label = "TinyTB Keys";
 
 		/* D0=P0.05, D1=P0.04, D2=P1.11, D3=P1.12 */
 		input-gpios = <&gpio0  5 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,  /* D0 */
@@ -32,19 +32,21 @@
 	};
 };
 
-/* -------- pinctrl (SPI0: SCK=P0.03, SDIO/MOSI=P0.02) -------- */
+/* -------- pinctrl (SPI0: SCK=P0.03, SDIO=P0.02) -------- */
 &pinctrl {
 	spi0_default: spi0_default {
 		group1 {
 			psels = <NRF_PSEL(SPIM_SCK,  0, 3)>,
-				<NRF_PSEL(SPIM_MOSI, 0, 2)>;  /* SDIO を MOSI に割当 */
+				<NRF_PSEL(SPIM_MOSI, 0, 2)>,
+				<NRF_PSEL(SPIM_MISO, 0, 2)>; /* MOSI/MISOを同じP0.02に */
 		};
 	};
 
 	spi0_sleep: spi0_sleep {
 		group1 {
 			psels = <NRF_PSEL(SPIM_SCK,  0, 3)>,
-				<NRF_PSEL(SPIM_MOSI, 0, 2)>;
+				<NRF_PSEL(SPIM_MOSI, 0, 2)>,
+				<NRF_PSEL(SPIM_MISO, 0, 2)>;
 			low-power-enable;
 		};
 	};
@@ -59,7 +61,7 @@
 	pinctrl-1 = <&spi0_sleep>;
 	pinctrl-names = "default", "sleep";
 
-	/* ★3線式（SDIO 共有）を明示 */
+	/* ★3線式（SDIO共有） */
 	spi-3wire;
 
 	/* CS は P0.28（NCS） */
@@ -73,7 +75,8 @@
 
 		irq-gpios = <&gpio0 29 GPIO_ACTIVE_LOW>;
 		evt-type = "pointer";
-		/* 必要なら解像度などを追加
+
+		/* 必要に応じて設定可能
 		 * cpi = <1600>;
 		 */
 	};
