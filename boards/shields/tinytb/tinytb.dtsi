@@ -42,28 +42,25 @@
     };
 
     /* ---- Studio 物理配列（最小・仮の2x2） ---- */
-    tinytb_pl: physical_layout {
-        compatible = "zmk,physical-layout";
-        display-name = "TinyTB 2x2";
+tinytb_pl: physical_layout {
+    compatible = "zmk,physical-layout";
+    display-name = "TinyTB 2x2";
+    transform = <&tinytb_identity_xform>;
 
-        /* transform は phandle 参照 */
-        transform = <&tinytb_identity_xform>;
+    /* ★各キーは provider。#key-cells=4 が必須（x,y,w,h を受け取る） */
+    k0: key0 { compatible = "zmk,physical-layout-key"; #key-cells = <4>; };
+    k1: key1 { compatible = "zmk,physical-layout-key"; #key-cells = <4>; };
+    k2: key2 { compatible = "zmk,physical-layout-key"; #key-cells = <4>; };
+    k3: key3 { compatible = "zmk,physical-layout-key"; #key-cells = <4>; };
 
-        /* ★各キー用のノード（phandle化） */
-        k0: key0 { compatible = "zmk,physical-layout-key"; };
-        k1: key1 { compatible = "zmk,physical-layout-key"; };
-        k2: key2 { compatible = "zmk,physical-layout-key"; };
-        k3: key3 { compatible = "zmk,physical-layout-key"; };
-
-        /* ★keys は「&key x y w h」の並び */
-        keys = <
-            &k0   0   0   18  18   /* D0 */
-            &k1  20   0   18  18   /* D1 */
-            &k2   0  20   18  18   /* D2 */
-            &k3  20  20   18  18   /* D3 */
-        >;
-    };
-
+    /* keys は「&kN x y w h」の並び */
+    keys = <
+        &k0   0   0   18  18   /* D0 */
+        &k1  20   0   18  18   /* D1 */
+        &k2   0  20   18  18   /* D2 */
+        &k3  20  20   18  18   /* D3 */
+    >;
+};
     /* ---- 4 直結キーのキースキャン ---- */
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-direct";
