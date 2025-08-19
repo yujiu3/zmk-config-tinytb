@@ -8,6 +8,7 @@
 
 #define DEFAULT 0
 
+/{
 keymap {
     compatible = "zmk,keymap";
 
@@ -16,4 +17,5 @@ keymap {
 &kp R  &kp U
 &kp N  &kp M
         >;
+};
 };
