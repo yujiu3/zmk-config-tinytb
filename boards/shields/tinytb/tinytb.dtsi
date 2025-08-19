@@ -1,6 +1,4 @@
-/* boards/shields/tinytb/tinytb.dtsi
- * TinyTB: PMW3610 (SPI0) + 4 direct-wired keys on Seeeduino XIAO BLE
- */
+/* TinyTB: PMW3610 (SPI0) + 4 direct-wired keys on Seeeduino XIAO BLE */
 
 #include <zephyr/dt-bindings/gpio/gpio.h>
 #include <zephyr/dt-bindings/pinctrl/nrf-pinctrl.h>
@@ -34,7 +32,6 @@
 
 /* -------- pinctrl (SPI0 pins: SCK=1.13, MOSI=1.15, MISO=1.14) -------- */
 &pinctrl {
-	/* default (active) state */
 	spi0_default: spi0_default {
 		group1 {
 			psels = <NRF_PSEL(SPIM_SCK,  1, 13)>,
@@ -43,13 +40,12 @@
 		};
 	};
 
-	/* sleep (optional) */
 	spi0_sleep: spi0_sleep {
 		group1 {
 			psels = <NRF_PSEL(SPIM_SCK,  1, 13)>,
 				<NRF_PSEL(SPIM_MOSI, 1, 15)>,
 				<NRF_PSEL(SPIM_MISO, 1, 14)>;
-			low-power-enable; /* High-Z */
+			low-power-enable;
 		};
 	};
 };
@@ -58,7 +54,7 @@
 &spi0 {
 	status = "okay";
 
-	/* ★必須：pinctrl を与える */
+	/* 必須: pinctrl を付与 */
 	pinctrl-0 = <&spi0_default>;
 	pinctrl-1 = <&spi0_sleep>;
 	pinctrl-names = "default", "sleep";
@@ -66,11 +62,17 @@
 	/* CS は P0.28（NCS） */
 	cs-gpios = <&gpio0 28 GPIO_ACTIVE_LOW>;
 
-	/* Trackball: PMW3610 on CS0, MOT= P0.29 */
+	/* Trackball: PMW3610 on CS0, MOT=P0.29 */
 	pmw3610: pmw3610@0 {
-		compatible = "pixart,pmw3610";   /* ドライバのcompatibleに合わせる */
-		reg = <0>;                       /* cs-gpios[0] に対応 */
+		compatible = "pixart,pmw3610";
+		reg = <0>;
 		spi-max-frequency = <2000000>;
 		irq-gpios = <&gpio0 29 GPIO_ACTIVE_LOW>;
+
+		/* ★この1行が必須（今回のビルドエラー原因） */
+		evt-type = "pointer";
+
+		/* お好み・必要に応じて（例: 解像度） */
+		/* cpi = <1600>; */
 	};
 };
