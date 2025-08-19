@@ -36,26 +36,36 @@
 		/* trackball = &pmw3610;  // 必要なら有効化（下の pmw3610 ラベルを参照） */
 	};
 
-	/* ---- Studio 物理配列（最小・仮の2x2） ---- */
-	tinytb_pl: physical_layout {
-		compatible = "zmk,physical-layout";
-		display-name = "TinyTB 2x2";
 
-		transform = <&tinytb_identity_xform>;
-		keys = <
-			 0   0   18  18   /* D0 */
-			20   0   18  18   /* D1 */
-			 0  20   18  18   /* D2 */
-			20  20   18  18   /* D3 */
-		>;
-	};
+    /* ---- Studio 物理配列（最小・仮の2x2） ---- */
+    tinytb_pl: physical_layout {
+        compatible = "zmk,physical-layout";
+        display-name = "TinyTB 2x2";
 
-  /* ★単位行列の 2D 変換ノード（phandle 参照用） */
-  tinytb_identity_xform: layout_transform {
+        /* transform は phandle 参照が必須 */
+        transform = <&tinytb_identity_xform>;
+
+        /* ★キーごとのノード（phandle化） */
+        k0: key0 { compatible = "zmk,physical-layout-key"; };
+        k1: key1 { compatible = "zmk,physical-layout-key"; };
+        k2: key2 { compatible = "zmk,physical-layout-key"; };
+        k3: key3 { compatible = "zmk,physical-layout-key"; };
+
+        /* ★keys は「phandle + x y w h」を並べる */
+        keys = <
+            &k0   0   0   18  18   /* D0 */
+            &k1  20   0   18  18   /* D1 */
+            &k2   0  20   18  18   /* D2 */
+            &k3  20  20   18  18   /* D3 */
+        >;
+    };
+};
+
+/* ---- 2D 変換ノード（単位行列：無変換） ---- */
+tinytb_identity_xform: layout_transform {
     compatible = "zmk,transform-2d";
     /* [ a b tx ; c d ty ] → <a b c d tx ty> */
     matrix = <1 0 0 1 0 0>;
-  };
 
 	/* ---- 4 直結キーのキースキャン ---- */
 	kscan0: kscan {
