@@ -69,8 +69,6 @@
 	pinctrl-1 = <&spi0_sleep>;
 	pinctrl-names = "default", "sleep";
 
-	spi-3wire; /* ← これ大事！ */
-
 	cs-gpios = <&gpio0 28 GPIO_ACTIVE_LOW>;
 
 	pmw3610: pmw3610@0 {
