@@ -6,9 +6,6 @@ config ZMK_KEYBOARD_NAME
 config ZMK_BLE
     default y
 
-config ZMK_SPLIT_ROLE_CENTRAL
-    default y
-
 config INPUT
     default y
 
