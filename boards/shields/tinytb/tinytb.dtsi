@@ -24,6 +24,8 @@
     /* ---- Studio 物理レイアウト（仮の2x2） ---- */
     tinytb_pl: physical_layout {
         compatible = "zmk,physical-layout";
+        display-name = "TinyTB 2x2";  /* ★Studio 表示名（必須） */
+
         keys = <
             0   0   18  18   /* D0 */
             20  0   18  18   /* D1 */
@@ -35,6 +37,7 @@
     /* ---- 4 direct-wired keys ---- */
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-direct";
+
         label = "TinyTB Keys";
         input-gpios = <&gpio0  5 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
                       <&gpio0  4 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
