@@ -1,4 +1,6 @@
-/* TinyTB: PMW3610 (SPI0) + 4 direct-wired keys on Seeeduino XIAO BLE */
+/* TinyTB: PMW3610 (SPI0 3-wire: SDIO=P0.02, SCLK=P0.03, CS=P0.28, MOT=P0.29)
+ *        + 4 direct-wired keys on Seeeduino XIAO BLE
+ */
 
 #include <zephyr/dt-bindings/gpio/gpio.h>
 #include <zephyr/dt-bindings/pinctrl/nrf-pinctrl.h>
@@ -19,38 +21,36 @@
 		compatible = "zmk,kscan-gpio-direct";
 		label = "TINyTB Keys";
 
-		/* D0=P0.05, D1=P0.04, D2=P0.11, D3=P1.12 */
-		input-gpios = <&gpio0  5 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
-			      <&gpio0  4 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
-			      <&gpio0 11 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
-			      <&gpio1 12 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+		/* D0=P0.05, D1=P0.04, D2=P1.11, D3=P1.12 */
+		input-gpios = <&gpio0  5 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,  /* D0 */
+			      <&gpio0  4 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,  /* D1 */
+			      <&gpio1 11 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,  /* D2 */
+			      <&gpio1 12 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;  /* D3 */
 
 		debounce-press-ms = <5>;
 		debounce-release-ms = <5>;
 	};
 };
 
-/* -------- pinctrl (SPI0 pins: SCK=1.13, MOSI=1.15, MISO=1.14) -------- */
+/* -------- pinctrl (SPI0: SCK=P0.03, SDIO/MOSI=P0.02) -------- */
 &pinctrl {
 	spi0_default: spi0_default {
 		group1 {
-			psels = <NRF_PSEL(SPIM_SCK,  1, 13)>,
-				<NRF_PSEL(SPIM_MOSI, 1, 15)>,
-				<NRF_PSEL(SPIM_MISO, 1, 14)>;
+			psels = <NRF_PSEL(SPIM_SCK,  0, 3)>,
+				<NRF_PSEL(SPIM_MOSI, 0, 2)>;  /* SDIO を MOSI に割当 */
 		};
 	};
 
 	spi0_sleep: spi0_sleep {
 		group1 {
-			psels = <NRF_PSEL(SPIM_SCK,  1, 13)>,
-				<NRF_PSEL(SPIM_MOSI, 1, 15)>,
-				<NRF_PSEL(SPIM_MISO, 1, 14)>;
+			psels = <NRF_PSEL(SPIM_SCK,  0, 3)>,
+				<NRF_PSEL(SPIM_MOSI, 0, 2)>;
 			low-power-enable;
 		};
 	};
 };
 
-/* -------- SPI0 + PMW3610 -------- */
+/* -------- SPI0 + PMW3610 (3-wire) -------- */
 &spi0 {
 	status = "okay";
 
@@ -58,6 +58,9 @@
 	pinctrl-0 = <&spi0_default>;
 	pinctrl-1 = <&spi0_sleep>;
 	pinctrl-names = "default", "sleep";
+
+	/* ★3線式（SDIO 共有）を明示 */
+	spi-3wire;
 
 	/* CS は P0.28（NCS） */
 	cs-gpios = <&gpio0 28 GPIO_ACTIVE_LOW>;
@@ -67,12 +70,11 @@
 		compatible = "pixart,pmw3610";
 		reg = <0>;
 		spi-max-frequency = <2000000>;
+
 		irq-gpios = <&gpio0 29 GPIO_ACTIVE_LOW>;
-
-		/* ★この1行が必須（今回のビルドエラー原因） */
 		evt-type = "pointer";
-
-		/* お好み・必要に応じて（例: 解像度） */
-		/* cpi = <1600>; */
+		/* 必要なら解像度などを追加
+		 * cpi = <1600>;
+		 */
 	};
 };
