@@ -3,14 +3,12 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <physical_layouts.dtsi>
 
-
 #define DEFAULT_CPI 600        // トラックボールの感度
 #define ROTATION_ANGLE 30       // トラックボールのY軸を回転
 #define CLIPPER_THRESHOLD 30    // スクロール時に斜めの値をクリップ
 #define INVERT_X 1              // スクロールの反転
 #define INVERT_Y 0              // スクロールの反転
 #define SCROLL_LAYER 2         // スクロールを有効にするレイヤー
-
 #define POLL_PERIOD_MS 30       // キースキャンのポーリング周期（ms）
 #define DEBOUNCE_MS 10          // デバウンス時間 (ms)
 
@@ -57,7 +55,7 @@
         };
     };
 };
-
+/{
     xy_transf: xy_transf {
         compatible = "zmk,input-processor-transform";
         #input-processor-cells = <1>;
