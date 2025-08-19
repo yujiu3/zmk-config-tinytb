@@ -119,11 +119,7 @@
     };
 };
 
-
-
-
-
-/ {
+{
 	chosen {
                 zmk,physical-layout = &tinytb_physical_layout;
 	};
@@ -143,7 +139,6 @@
             , <&key_physical_attrs 100 100  100  100       0     0     0>
         ;
     };
-
 
 	default_transform: keymap_transform_0 {
 		compatible = "zmk,matrix-transform";
