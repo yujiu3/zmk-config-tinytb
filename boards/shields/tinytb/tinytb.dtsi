@@ -7,7 +7,7 @@
 #include <zephyr/dt-bindings/gpio/gpio.h>
 #include <zephyr/dt-bindings/pinctrl/nrf-pinctrl.h>
 #include <dt-bindings/zmk/matrix_transform.h>
-#include <zmk/physical_layouts.dtsi>
+#include <physical_layouts.dtsi>
 
 /* ---------- root ---------- */
  / {
@@ -40,7 +40,7 @@
         debounce-release-ms = <5>;
     };
 
-    /* ---- Studio 物理配列 (2x2仮配置) ----
+    /* ---- Studio 物理配列 (2x2 仮配置) ----
      * keys は「&key_physical_attrs + w h x y rot rx ry」
      */
     tinytb_pl: physical_layout {
