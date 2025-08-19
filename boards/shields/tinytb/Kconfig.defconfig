@@ -1,0 +1,24 @@
+if SHIELD_TINYTB
+
+config ZMK_KEYBOARD_NAME
+    default "tinytb"
+
+config ZMK_BLE
+    default y
+
+config ZMK_SPLIT_ROLE_CENTRAL
+    default y
+
+config INPUT
+    default y
+
+config ZMK_POINTING
+    default y
+
+config RGBLED_WIDGET_BATTERY_LEVEL_HIGH
+    default 30
+
+config RGBLED_WIDGET_BATTERY_LEVEL_CRITICAL
+    default 10
+
+endif
