@@ -1,38 +1,94 @@
-/* TinyTB Shield (build-safe minimal) */
+/* TinyTB Shield (build-safe + Studio minimal)
+ * Seeeduino XIAO BLE (nRF52840)
+ * PMW3610: SDIO=P0.02, SCLK=P0.03, CS=P0.28, MOT=P0.29
+ * Keys: D0=P0.05, D1=P0.04, D2=P1.11, D3=P1.12
+ */
+
+#include <zephyr/dt-bindings/gpio/gpio.h>
+#include <zephyr/dt-bindings/pinctrl/nrf-pinctrl.h>
+
  / {
-     compatible = "zmk,shield-tinytb";
+    compatible = "zmk,shield-tinytb";
 
-     chosen {
-         zmk,kscan = &kscan0;
-         zmk,physical-layout = &tinytb_pl;
-         zmk,keyboard-name = "TinyTB";
-     };
+    chosen {
+        zmk,kscan = &kscan0;
+        zmk,physical-layout = &tinytb_pl;
+        zmk,keyboard-name = "TinyTB";
+    };
 
-     aliases {
-         kscan = &kscan0;
-         trackball = &pmw3610;
-     };
+    aliases {
+        kscan = &kscan0;
+        /* trackball = &pmw3610;  ← pmw3610 ノードが確認できるまでコメントのまま */
+    };
 
-     /* ---- 物理レイアウト (仮の2x2) ---- */
-     tinytb_pl: physical_layout {
-         compatible = "zmk,physical-layout";
-         keys = <
-             0   0   18  18   /* D0 */
-             20  0   18  18   /* D1 */
-             0  20   18  18   /* D2 */
-             20  20   18  18   /* D3 */
-         >;
-     };
+    /* ---- Studio 物理レイアウト（仮の2x2） ---- */
+    tinytb_pl: physical_layout {
+        compatible = "zmk,physical-layout";
+        keys = <
+            0   0   18  18   /* D0 */
+            20  0   18  18   /* D1 */
+            0  20   18  18   /* D2 */
+            20 20   18  18   /* D3 */
+        >;
+    };
 
-     /* ---- 4 direct-wired keys ---- */
-     kscan0: kscan {
-         compatible = "zmk,kscan-gpio-direct";
-         label = "TinyTB Keys";
-         input-gpios = <&gpio0  5 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
-                       <&gpio0  4 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
-                       <&gpio1 11 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
-                       <&gpio1 12 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
-         debounce-press-ms = <5>;
-         debounce-release-ms = <5>;
-     };
- };
+    /* ---- 4 direct-wired keys ---- */
+    kscan0: kscan {
+        compatible = "zmk,kscan-gpio-direct";
+        label = "TinyTB Keys";
+        input-gpios = <&gpio0  5 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
+                      <&gpio0  4 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
+                      <&gpio1 11 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
+                      <&gpio1 12 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+        debounce-press-ms = <5>;
+        debounce-release-ms = <5>;
+    };
+};
+
+/* ---- pinctrl for SPI0 ---- */
+&pinctrl {
+    spi0_default: spi0_default {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK,  0, 3)>,
+                    <NRF_PSEL(SPIM_MOSI, 0, 2)>,
+                    <NRF_PSEL(SPIM_MISO, 0, 2)>;
+        };
+    };
+    spi0_sleep: spi0_sleep {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK,  0, 3)>,
+                    <NRF_PSEL(SPIM_MOSI, 0, 2)>,
+                    <NRF_PSEL(SPIM_MISO, 0, 2)>;
+            low-power-enable;
+        };
+    };
+};
+
+/* ---- SPI0 + PMW3610 ---- */
+&spi0 {
+    status = "okay";
+    pinctrl-0 = <&spi0_default>;
+    pinctrl-1 = <&spi0_sleep>;
+    pinctrl-names = "default", "sleep";
+
+    cs-gpios = <&gpio0 28 GPIO_ACTIVE_LOW>;   /* NCS */
+
+    /* ★このラベル名が 'pmw3610'。aliases から参照するなら必ずこの綴りで！ */
+    pmw3610: pmw3610@0 {
+        compatible = "pixart,pmw3610";
+        reg = <0>;                          /* cs-gpios[0] */
+        spi-max-frequency = <2000000>;
+        irq-gpios = <&gpio0 29 GPIO_ACTIVE_LOW>;
+
+        /* required */
+        evt-type = <0>;     /* 0=pointer (相対XY) */
+        x-input-code = <0>; /* REL_X */
+        y-input-code = <1>; /* REL_Y */
+
+        /* optional
+         * cpi = <1600>;
+         * invert-x;
+         * invert-y;
+         */
+    };
+};
