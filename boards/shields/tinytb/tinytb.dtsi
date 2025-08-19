@@ -19,39 +19,43 @@
 
 /* ---------------- root ---------------- */
  / {
-	compatible = "zmk,shield-tinytb";
+    compatible = "zmk,shield-tinytb";
 
-	chosen {
-		/* キースキャンデバイス */
-		zmk,kscan = &kscan0;
+    chosen {
+        zmk,kscan = &kscan0;
 
-		/* ★Studio を使う場合だけ有効にする（使わないなら削除可） */
-		zmk,physical-layout = &tinytb_pl;
-		zmk,keyboard-name = "TinyTB";
-	};
+        /* ★Studio を使う場合 */
+        zmk,physical-layout = &tinytb_pl;
+        zmk,keyboard-name = "TinyTB";
+    };
 
-	/* 参照のエイリアス（必須ではないが便宜上） */
-	aliases {
-		kscan = &kscan0;
-		/* trackball = &pmw3610;  // 必要なら有効化（下の pmw3610 ラベルを参照） */
-	};
+    aliases {
+        kscan = &kscan0;
+        /* trackball = &pmw3610;  // 必要なら有効化 */
+    };
 
+    /* ---- 2D 変換ノード（単位行列：無変換） ---- */
+    tinytb_identity_xform: layout_transform {
+        compatible = "zmk,transform-2d";
+        /* [ a b tx ; c d ty ] → <a b c d tx ty> */
+        matrix = <1 0 0 1 0 0>;
+    };
 
     /* ---- Studio 物理配列（最小・仮の2x2） ---- */
     tinytb_pl: physical_layout {
         compatible = "zmk,physical-layout";
         display-name = "TinyTB 2x2";
 
-        /* transform は phandle 参照が必須 */
+        /* transform は phandle 参照 */
         transform = <&tinytb_identity_xform>;
 
-        /* ★キーごとのノード（phandle化） */
+        /* ★各キー用のノード（phandle化） */
         k0: key0 { compatible = "zmk,physical-layout-key"; };
         k1: key1 { compatible = "zmk,physical-layout-key"; };
         k2: key2 { compatible = "zmk,physical-layout-key"; };
         k3: key3 { compatible = "zmk,physical-layout-key"; };
 
-        /* ★keys は「phandle + x y w h」を並べる */
+        /* ★keys は「&key x y w h」の並び */
         keys = <
             &k0   0   0   18  18   /* D0 */
             &k1  20   0   18  18   /* D1 */
@@ -59,81 +63,74 @@
             &k3  20  20   18  18   /* D3 */
         >;
     };
-};
 
-/* ---- 2D 変換ノード（単位行列：無変換） ---- */
-tinytb_identity_xform: layout_transform {
-    compatible = "zmk,transform-2d";
-    /* [ a b tx ; c d ty ] → <a b c d tx ty> */
-    matrix = <1 0 0 1 0 0>;
-
-	/* ---- 4 直結キーのキースキャン ---- */
-	kscan0: kscan {
-		compatible = "zmk,kscan-gpio-direct";
-		label = "TinyTB Keys";
-
-		/* tinytb.keymap などでのキー順はこの並び（D0→D3）に対応 */
-		input-gpios = <&gpio0  5 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,  /* D0 P0.05 */
-			      <&gpio0  4 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,  /* D1 P0.04 */
-			      <&gpio1 11 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,  /* D2 P1.11 */
-			      <&gpio1 12 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;  /* D3 P1.12 */
-
-		debounce-press-ms = <5>;
-		debounce-release-ms = <5>;
-	};
+    /* ---- 4 直結キーのキースキャン ---- */
+    kscan0: kscan {
+        compatible = "zmk,kscan-gpio-direct";
+        label = "TinyTB Keys";
+        input-gpios = <&gpio0  5 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,  /* D0 P0.05 */
+                      <&gpio0  4 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,  /* D1 P0.04 */
+                      <&gpio1 11 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,  /* D2 P1.11 */
+                      <&gpio1 12 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;  /* D3 P1.12 */
+        debounce-press-ms = <5>;
+        debounce-release-ms = <5>;
+    };
 };
 
 /* --------------- pinctrl (SPI0) --------------- */
-/* SDIO を MOSI/MISO で共用するため、MOSI と MISO に同じ P0.02 を割り当て */
 &pinctrl {
-	spi0_default: spi0_default {
-		group1 {
-			psels = <NRF_PSEL(SPIM_SCK,  0, 3)>,
-				<NRF_PSEL(SPIM_MOSI, 0, 2)>,
-				<NRF_PSEL(SPIM_MISO, 0, 2)>;
-		};
-	};
+    spi0_default: spi0_default {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK,  0, 3)>,
+                    <NRF_PSEL(SPIM_MOSI, 0, 2)>,
+                    <NRF_PSEL(SPIM_MISO, 0, 2)>;
+        };
+    };
 
-	spi0_sleep: spi0_sleep {
-		group1 {
-			psels = <NRF_PSEL(SPIM_SCK,  0, 3)>,
-				<NRF_PSEL(SPIM_MOSI, 0, 2)>,
-				<NRF_PSEL(SPIM_MISO, 0, 2)>;
-			low-power-enable;
-		};
-	};
+    spi0_sleep: spi0_sleep {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK,  0, 3)>,
+                    <NRF_PSEL(SPIM_MOSI, 0, 2)>,
+                    <NRF_PSEL(SPIM_MISO, 0, 2)>;
+            low-power-enable;
+        };
+    };
 };
 
 /* --------------- SPI0 + PMW3610 --------------- */
 &spi0 {
-	status = "okay";
+    status = "okay";
+    pinctrl-0 = <&spi0_default>;
+    pinctrl-1 = <&spi0_sleep>;
+    pinctrl-names = "default", "sleep";
 
-	/* pinctrl は nRF SPIM バインディングで必須 */
-	pinctrl-0 = <&spi0_default>;
-	pinctrl-1 = <&spi0_sleep>;
-	pinctrl-names = "default", "sleep";
+    /* 3-wire プロパティは不要（未サポート） */
+    cs-gpios = <&gpio0 28 GPIO_ACTIVE_LOW>;   /* NCS = P0.28 */
 
-	/* 3-wire プロパティは Zephyr 3.5 の nRF では未サポート。設定不要 */
-	cs-gpios = <&gpio0 28 GPIO_ACTIVE_LOW>;   /* NCS = P0.28 */
+    pmw3610: pmw3610@0 {
+        compatible = "pixart,pmw3610";
+        reg = <0>;                          /* CS index (cs-gpios[0]) */
+        spi-max-frequency = <2000000>;
+        irq-gpios = <&gpio0 29 GPIO_ACTIVE_LOW>;  /* MOT = P0.29 */
 
-	/* ★このラベル 'pmw3610' を aliases から参照したい場合は有効に */
-	pmw3610: pmw3610@0 {
-		compatible = "pixart,pmw3610";
-		reg = <0>;                          /* CS index (cs-gpios[0]) */
-		spi-max-frequency = <2000000>;
+        /* 必須（zmk-pmw3610-driver bindings） */
+        evt-type = <0>;     /* 0 = relative pointer (XY) */
+        x-input-code = <0>; /* REL_X */
+        y-input-code = <1>; /* REL_Y */
 
-		/* MOT（割り込み）。未使用でもあってもOK */
-		irq-gpios = <&gpio0 29 GPIO_ACTIVE_LOW>;  /* P0.29 */
-
-		/* 必須プロパティ（zmk-pmw3610-driver の bindings 準拠） */
-		evt-type = <0>;     /* 0 = relative pointer (XY) */
-		x-input-code = <0>; /* REL_X */
-		y-input-code = <1>; /* REL_Y */
-
-		/* 任意設定：必要に応じて有効化
-		 * cpi = <1600>;     // 解像度（例：800/1200/1600/2400 …）
-		 * invert-x;         // X 方向を反転
-		 * invert-y;         // Y 方向を反転
-		*/
-	};
+        /* 任意：
+         * cpi = <1600>;
+         * invert-x;
+         * invert-y;
+         */
+    };
 };
+
+/* ---- 任意のデフォルト（使うときだけコメント解除） ---- */
+/*
+&pmw3610 {
+    cpi = <1600>;
+    // invert-x;
+    // invert-y;
+};
+*/
