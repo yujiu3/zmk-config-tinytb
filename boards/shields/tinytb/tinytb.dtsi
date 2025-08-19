@@ -41,10 +41,7 @@
 		compatible = "zmk,physical-layout";
 		display-name = "TinyTB 2x2";
 
-		/* 2Dアフィン変換（単位行列＝無変換）: <a b c d tx ty> */
-		transform = <1 0 0 1 0 0>;
-
-		/* 各キーの x y w h（単位は相対値。必要に応じて実寸へ） */
+		transform = <&tinytb_identity_xform>;
 		keys = <
 			 0   0   18  18   /* D0 */
 			20   0   18  18   /* D1 */
@@ -52,6 +49,13 @@
 			20  20   18  18   /* D3 */
 		>;
 	};
+
+  /* ★単位行列の 2D 変換ノード（phandle 参照用） */
+  tinytb_identity_xform: layout_transform {
+    compatible = "zmk,transform-2d";
+    /* [ a b tx ; c d ty ] → <a b c d tx ty> */
+    matrix = <1 0 0 1 0 0>;
+  };
 
 	/* ---- 4 直結キーのキースキャン ---- */
 	kscan0: kscan {
