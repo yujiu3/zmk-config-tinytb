@@ -1,58 +1,41 @@
-/* TinyTB Shield
- *
- * Hardware:
- *  - Seeeduino XIAO BLE
- *  - PMW3610 (Trackball, SPI0 3-wire)
- *    SDIO = P0.02
- *    SCLK = P0.03
- *    CS   = P0.28
- *    MOT  = P0.29
- *  - 4 Direct-wired keys
- *    D0=P0.05, D1=P0.04, D2=P1.11, D3=P1.12
+/* TinyTB Shield (build-safe minimal)
+ * Seeeduino XIAO BLE (nRF52840)
+ * PMW3610 (SPI0 疑似3線: SDIO=P0.02, SCLK=P0.03, CS=P0.28, MOT=P0.29)
+ * Keys: D0=P0.05, D1=P0.04, D2=P1.11, D3=P1.12
  */
 
 #include <zephyr/dt-bindings/gpio/gpio.h>
 #include <zephyr/dt-bindings/pinctrl/nrf-pinctrl.h>
-#include <zephyr/dt-bindings/input/linux-event-codes.h>  /* ← 追加 */
 
-
-/ {
+ / {
 	compatible = "zmk,shield-tinytb";
 
-	chosen {
-		zmk,kscan = &kscan0;
-	};
+	chosen { zmk,kscan = &kscan0; };
 
-	aliases {
-		kscan = &kscan0;
-		trackball = &pmw3610;
-	};
+	aliases { kscan = &kscan0; trackball = &pmw3610; };
 
-	/* --- 4 direct-wired keys --- */
+	/* ---- 4 direct-wired keys ---- */
 	kscan0: kscan {
 		compatible = "zmk,kscan-gpio-direct";
 		label = "TinyTB Keys";
-
 		input-gpios = <&gpio0  5 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,  /* D0 */
 			      <&gpio0  4 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,  /* D1 */
 			      <&gpio1 11 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,  /* D2 */
 			      <&gpio1 12 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;  /* D3 */
-
 		debounce-press-ms = <5>;
 		debounce-release-ms = <5>;
 	};
 };
 
-/* --- pinctrl for SPI0 --- */
+/* ---- pinctrl for SPI0: SCK=P0.03, MOSI=P0.02, MISO=P0.02 ---- */
 &pinctrl {
 	spi0_default: spi0_default {
 		group1 {
 			psels = <NRF_PSEL(SPIM_SCK,  0, 3)>,
 				<NRF_PSEL(SPIM_MOSI, 0, 2)>,
-				<NRF_PSEL(SPIM_MISO, 0, 2)>; /* MOSI/MISO 共通: P0.02 */
+				<NRF_PSEL(SPIM_MISO, 0, 2)>;
 		};
 	};
-
 	spi0_sleep: spi0_sleep {
 		group1 {
 			psels = <NRF_PSEL(SPIM_SCK,  0, 3)>,
@@ -63,14 +46,14 @@
 	};
 };
 
-/* --- SPI0 + PMW3610 --- */
+/* ---- SPI0 + PMW3610 ---- */
 &spi0 {
 	status = "okay";
 	pinctrl-0 = <&spi0_default>;
 	pinctrl-1 = <&spi0_sleep>;
 	pinctrl-names = "default", "sleep";
 
-	/* spi-3wire は使わない（Zephyr 3.5系では未サポート） */
+	/* 'spi-3wire' は書かない（Zephyr 3.5 は非対応） */
 	cs-gpios = <&gpio0 28 GPIO_ACTIVE_LOW>;
 
 	pmw3610: pmw3610@0 {
@@ -80,13 +63,14 @@
 		irq-gpios = <&gpio0 29 GPIO_ACTIVE_LOW>;
 
 		/* required properties */
-		evt-type = <0>;        /* 数値: 0=ポインタ(相対XY) 想定 */
-		x-input-code = <REL_X>;  /* 数値扱い */
-		y-input-code = <REL_Y>;  /* 数値扱い */
+		evt-type = <0>;     /* 0 = pointer (相対XY) */
+		x-input-code = <0>; /* REL_X */
+		y-input-code = <1>; /* REL_Y */
 
-		/* 任意設定（必要なら） */
-		/* cpi = <1600>; */
-		/* invert-x; */
-		/* invert-y; */
+		/* 任意:
+		 * // invert-x;
+		 * // invert-y;
+		 * // cpi = <1600>;
+		 */
 	};
 };
