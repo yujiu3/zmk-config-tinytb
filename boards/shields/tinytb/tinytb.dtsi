@@ -28,13 +28,13 @@
     /* ---- 4 直配線キー (GPIO direct) ---- */
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-direct";
-        label = "TinyTB Keys";
+        label = "KSCAN";
 
         /* D0=P0.05, D1=P0.04, D2=P1.11, D3=P1.12 */
-        input-gpios = <&gpio0  5 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>, /* D0 */
-                      <&gpio0  4 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>, /* D1 */
-                      <&gpio1 11 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>, /* D2 */
-                      <&gpio1 12 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>; /* D3 */
+        input-gpios = <&gpio0  5 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>, /* D0 */
+                      <&gpio0  4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>, /* D1 */
+                      <&gpio1 11 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>, /* D2 */
+                      <&gpio1 12 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* D3 */
 
         debounce-press-ms = <5>;
         debounce-release-ms = <5>;
@@ -56,7 +56,7 @@
     };
 
     /* ---- キーマップ変換（1行×4列） ---- */
-    default_transform: keymap_transform0 {
+    default_transform: keymap_transform_0 {
         compatible = "zmk,matrix-transform";
         columns = <4>;
         rows = <1>;
@@ -100,15 +100,17 @@
         compatible = "pixart,pmw3610";
         reg = <0>;                          /* CS index (cs-gpios[0]) */
         spi-max-frequency = <2000000>;
-        irq-gpios = <&gpio0 29 GPIO_ACTIVE_LOW>; /* MOT */
+        irq-gpios = <&gpio0 29 GPIO_ACTIVE_LOW | GPIO_PULL_UP>; /* MOT */
 
         /* 必須: 数値で指定 */
-        evt-type = <0>;     /* 0 = relative pointer */
-        x-input-code = <0>; /* REL_X */
-        y-input-code = <1>; /* REL_Y */
+        evt-type = <INPUT_EV_REL>;     /* 0 = relative pointer */
+        x-input-code = <INPUT_REL_X>; /* REL_X */
+        y-input-code = <INPUT_REL_Y>; /* REL_Y */
+        force-awake;
+        status + "okay";
 
         /* 任意:
-         * // cpi = <1600>;
+         cpi = <1600>;
          * // invert-x;
          * // invert-y;
          */
