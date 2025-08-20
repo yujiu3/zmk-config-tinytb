@@ -4,19 +4,26 @@ config ZMK_KEYBOARD_NAME
     default "tinytb"
 
 config ZMK_BLE
+    bool
     default y
 
 config INPUT
-    default y
-
-config SPI
-    default y
-
-config ZMK_POINTING
+    bool
     default y
 
 config PMW3610
+    bool
     default y
+
+config SPI
+    bool
+    default y
+
+config ZMK_POINTING
+    bool
+    default y
+
+
 
 config PMW3610_SWAP_XY
     default y
