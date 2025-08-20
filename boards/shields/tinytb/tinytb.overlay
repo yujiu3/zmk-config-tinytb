@@ -1,27 +1,60 @@
-#include "tinytb.dtsi"
+#include <dt-bindings/zmk/matrix_transform.h>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <input/processors.dtsi>
 
+/ {
+    kscan0: kscan0 {
+        compatible = "zmk,kscan-gpio-matrix";
+        diode-direction = "col2row";
+        wakeup-source;
+
+        col-gpios
+            = <&xiao_d 0 GPIO_ACTIVE_HIGH>
+            , <&xiao_d 1 GPIO_ACTIVE_HIGH>
+            ;
+
+        row-gpios
+            = <&xiao_d 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&xiao_d 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            ;
+    };
+
+    default_transform: keymap_transform0 {
+        compatible = "zmk,matrix-transform";
+        columns = <1>; // Length of the "col-gpios" array
+        rows = <4>; // Length of the "row-gpios" array
+        map = <
+        //   Key 1 | Key 2
+            RC(0,0) RC(0,1)
+        //   Key 3 | Key 4
+            RC(0,2) RC(0,3)
+        >;
+    };
+
+    chosen {
+        zmk,kscan = &kscan0;
+        zmk,matrix_transform = &default_transform;
+    };
+};
 
 &pinctrl {
     spi0_default: spi0_default {
         group1 {
-            psels = <NRF_PSEL(SPIM_SCK, 0, 3)>,
-                <NRF_PSEL(SPIM_MOSI, 0, 2)>,
-                <NRF_PSEL(SPIM_MISO, 0, 2)>;
+			psels = <NRF_PSEL(SPIM_SCK, 0, 3)>, //SCLK
+			    	<NRF_PSEL(SPIM_MOSI, 0, 2)>, //SDIO
+			    	<NRF_PSEL(SPIM_MISO, 0, 2)>; //SDIO
         };
     };
 
     spi0_sleep: spi0_sleep {
         group1 {
-            psels = <NRF_PSEL(SPIM_SCK, 0, 3)>,
-                <NRF_PSEL(SPIM_MOSI, 0, 2)>,
-                <NRF_PSEL(SPIM_MISO, 0, 2)>;
+			psels = <NRF_PSEL(SPIM_SCK, 0, 3)>, //SCLK
+			    	<NRF_PSEL(SPIM_MOSI, 0, 2)>, //SDIO
+			    	<NRF_PSEL(SPIM_MISO, 0, 2)>; //SDIO
             low-power-enable;
         };
     };
 };
-
-#include <zephyr/dt-bindings/input/input-event-codes.h>
 
 &spi0 {
     status = "okay";
@@ -29,34 +62,24 @@
     pinctrl-0 = <&spi0_default>;
     pinctrl-1 = <&spi0_sleep>;
     pinctrl-names = "default", "sleep";
-    cs-gpios = <&gpio0 28 GPIO_ACTIVE_LOW>;
+    cs-gpios = <&xiao_d 3 GPIO_ACTIVE_LOW>; //NCS
 
     trackball: trackball@0 {
         status = "okay";
         compatible = "pixart,pmw3610";
         reg = <0>;
         spi-max-frequency = <2000000>;
-        irq-gpios = <&gpio0 29 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        irq-gpios = <&xiao_d 4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; //MOT
         cpi = <600>;
         evt-type = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
         y-input-code = <INPUT_REL_Y>;
-
-        force-awake;
-        /* keep the sensor awake while ZMK activity state is ACTIVE,
-           fallback to normal downshift mode after ZMK goes into IDLE / SLEEP mode.
-           thus, the sensor would be a `wakeup-source` */
-
-        force-awake-4ms-mode;
-        /* while force-awake is acitvated, enable this mode to force sampling per 
-           4ms, where the default sampling rate is 8ms. */
-        /* NOTE: apply this mode if you need 250Hz with direct USB connection. */
     };
 };
 
 / {
-  trackball_listener {
-    compatible = "zmk,input-listener";
-    device = <&trackball>;
-  };
+    trackball_listener {
+        compatible = "zmk,input-listener";
+        device = <&trackball>;
+    };
 };
