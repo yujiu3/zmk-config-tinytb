@@ -1,4 +1,2 @@
 #include "tinytb.dtsi"
 #include <input/processors.dtsi>
-
-&xiao_serial { status = "disabled"; };
