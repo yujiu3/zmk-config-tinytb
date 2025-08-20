@@ -9,7 +9,16 @@ config ZMK_BLE
 config INPUT
     default y
 
+config SPI
+    default y
+
 config ZMK_POINTING
+    default y
+
+config PMW3610
+    default y
+
+config PMW3610_SWAP_XY
     default y
 
 config RGBLED_WIDGET_BATTERY_LEVEL_HIGH
