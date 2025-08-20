@@ -87,6 +87,8 @@
 };
 
 /* ---- SPI0 + PMW3610 ---- */
+
+#include <zephyr/dt-bindings/input/input-event-codes.h>
 &spi0 {
     status = "okay";
     compatible = "nordic, nrf-spim";
@@ -98,20 +100,16 @@
     cs-gpios = <&gpio0 28 GPIO_ACTIVE_LOW>; /* NCS */
 
     pmw3610: pmw3610@0 {
+        status = "okay";
         compatible = "pixart,pmw3610";
         reg = <0>;                          /* CS index (cs-gpios[0]) */
         spi-max-frequency = <2000000>;
-        irq-gpios = <&gpio0 29 GPIO_ACTIVE_LOW | GPIO_PULL_UP>; /* MOT */
-
-        /* 必須: 数値で指定 */
+        irq-gpios = <&gpio0 29 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* MOT */
+        cpi = <600>;
         evt-type = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
         y-input-code = <INPUT_REL_Y>;
         force-awake;
-        status = "okay";
-
-        /* 任意:
-         cpi = <600>;
          * // invert-x;
          * // invert-y;
          */
