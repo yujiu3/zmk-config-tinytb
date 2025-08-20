@@ -89,6 +89,7 @@
 /* ---- SPI0 + PMW3610 ---- */
 &spi0 {
     status = "okay";
+    compatible = "nordic, nrf-spim";
     pinctrl-0 = <&spi0_default>;
     pinctrl-1 = <&spi0_sleep>;
     pinctrl-names = "default", "sleep";
@@ -103,14 +104,14 @@
         irq-gpios = <&gpio0 29 GPIO_ACTIVE_LOW | GPIO_PULL_UP>; /* MOT */
 
         /* 必須: 数値で指定 */
-        evt-type = <INPUT_EV_REL>;     /* 0 = relative pointer */
-        x-input-code = <INPUT_REL_X>; /* REL_X */
-        y-input-code = <INPUT_REL_Y>; /* REL_Y */
+        evt-type = <INPUT_EV_REL>;
+        x-input-code = <INPUT_REL_X>;
+        y-input-code = <INPUT_REL_Y>;
         force-awake;
         status = "okay";
 
         /* 任意:
-         cpi = <1600>;
+         cpi = <600>;
          * // invert-x;
          * // invert-y;
          */
