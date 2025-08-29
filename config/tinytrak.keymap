@@ -15,7 +15,6 @@
             bindings = <
                 &mkp RCLK  &mkp RCLK  &mkp LCLK  &mkp LCLK
             >;
-
         };
 
         scrl_layer {
@@ -34,7 +33,6 @@
             key-positions = <0 1>;
         };
     };
-};
 
     behaviors {
 
@@ -43,8 +41,6 @@ scroll_up_down: behavior_sensor_rotate_mouse_wheel_up_down {
     #sensor-binding-cells = <0>;
     bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
     tap-ms = <20>;
-}
-
-
-
+};
+};
 };
