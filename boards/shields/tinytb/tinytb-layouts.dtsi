@@ -1,13 +1,19 @@
+#include <input/processors.dtsi>
+#include <dt-bindings/zmk/input_transform.h>
+#include <dt-bindings/zmk/matrix_transform.h>
 #include <physical_layouts.dtsi>
 
 / {
-    tinytb_physical_layout: tinytb_physical_layout {
-        compatible = "zmk,physical-layout";
-        display-name = "Default Layout";
+	chosen {
+                zmk,physical-layout = &tinytgwhb_physical_layout;
+	};
 
-        // Reference to the kscan and matrix transform nodes
-        kscan = <&kscan0>;
+
+    tinytb_physical_layout: tinyrb_physical_layout {
+        compatible = "zmk,physical-layout";
+        display-name = "Default";
         transform = <&default_transform>;
+        kscan = <&kscan0>;
 
         keys  //                     w   h    x    y     rot    rx    ry
             = <&key_physical_attrs 100 100    0    0       0     0     0>
@@ -16,4 +22,24 @@
             , <&key_physical_attrs 100 100  100  100       0     0     0>
             ;
     };
+
+    default_transform: keymap_transform_0 {
+        compatible = "zmk,matrix-transform";
+        columns = <4>;
+        rows = <1>;
+        map = <
+            RC(0,0) RC(0,1) RC(0,2) RC(0,3)
+        >;
+    };
+
+    kscan0: kscan {
+        compatible = "zmk,kscan-gpio-direct";
+        label = "KSCAN";
+        input-gpios =
+            <&gpio0 5 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
+            <&gpio0 4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
+            <&gpio1 11 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
+            <&gpio1 12 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+    };
+
 };
