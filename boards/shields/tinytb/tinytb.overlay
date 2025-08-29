@@ -32,14 +32,6 @@
 	};
 
 
-&pinctrl {
-    spi0_default: spi0_default {
-        group1 {
-			psels = <NRF_PSEL(SPIM_SCK, 0, 5)>, //SCLK
-			    	<NRF_PSEL(SPIM_MOSI, 0, 4)>, //SDIO
-			    	<NRF_PSEL(SPIM_MISO, 0, 4)>; //SDIO
-        };
-    };
 
 	kscan0: kscan {
 		compatible = "zmk,kscan-gpio-direct";
@@ -83,7 +75,14 @@
     };
 };
 
-
+&pinctrl {
+    spi0_default: spi0_default {
+        group1 {
+			psels = <NRF_PSEL(SPIM_SCK, 0, 5)>, //SCLK
+			    	<NRF_PSEL(SPIM_MOSI, 0, 4)>, //SDIO
+			    	<NRF_PSEL(SPIM_MISO, 0, 4)>; //SDIO
+        };
+    };
 
 / {
     trackball_listener {
