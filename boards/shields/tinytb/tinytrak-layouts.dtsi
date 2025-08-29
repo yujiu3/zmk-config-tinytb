@@ -9,7 +9,7 @@
 	};
 
 
-    tinytb_physical_layout: tinytb_physical_layout {
+    tinytrak_physical_layout: tinytrak_physical_layout {
         compatible = "zmk,physical-layout";
         display-name = "Default";
         transform = <&default_transform>;
