@@ -1,14 +1,11 @@
-
 on:
   workflow_dispatch:
   push:
-    # ZMKビルド用（必要なら他のパスも追加OK）
     paths:
       - "config/**"
       - "boards/**"
       - "zephyr/**"
       - "build.yaml"
-
   pull_request:
     paths:
       - "config/**"
@@ -19,7 +16,17 @@ on:
       - "config/*.dtsi"
       - "keymap_drawer.config.yaml"
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  # 既存の ZMK ユーザ設定ビルド
   build:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    with:
+      # ↓ アーティファクト名を一意に（run_id/run_attemptはGitHubが毎回付与）
+      artifact-name: tinytb-${{ github.run_id }}-${{ github.run_attempt }}
+      # ↓ 表示名や追加引数もここで渡せます（必要なら）
+      display-name: tinytb rgbled_adapter - seeeduino_xiao_ble
+      extra-west-args: -S "studio-rpc-usb-uart"
+      extra-cmake-args: -DSHIELD="tinytb rgbled_adapter" -DZMK_EXTRA_MODULES='/${{ github.workspace }}'
