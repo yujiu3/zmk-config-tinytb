@@ -16,7 +16,7 @@
 &mkp RCLK
 &mo 1 
 &mkp LCLK
-&ht  &mo scrl_layer   &mkp MB1
+&mkp LCLK
 >;
         };
 
