@@ -18,16 +18,12 @@
 #
 ---
 include:
-  - board: "seeeduino_xiao_ble"
-    shield: "tinytrak rgbled_adapter"
-    snippet: "studio-rpc-usb-uart"
-    cmake-args: "-DCONFIG_ZMK_STUDIO=y"
-    artifact-name: "tinytrak-rgbled-studio"   # ← 固有名
+  # ← 通常ファーム（Studio入りを一本化）
+  - board: seeeduino_xiao_ble
+    shield: tinytrak rgbled_adapter
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
 
-  - board: "seeeduino_xiao_ble"
-    shield: "tinytrak rgbled_adapter"
-    artifact-name: "tinytrak-rgbled-base"     # ← 固有名（上と別名）
-
-  - board: "seeeduino_xiao_ble"
-    shield: "settings_reset"
-    artifact-name: "tinytrak-reset"           # ← 固有名
+  # ← リセット用ファーム
+  - board: seeeduino_xiao_ble
+    shield: settings_reset
