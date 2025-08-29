@@ -1,7 +1,7 @@
-if SHIELD_TINYTB
+if SHIELD_TINYTRAK
 
     config ZMK_KEYBOARD_NAME
-        default "TinyTB"
+        default "TinyTrak"
 
     config INPUT
         bool
