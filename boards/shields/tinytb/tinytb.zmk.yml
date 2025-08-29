@@ -1,8 +1,8 @@
 file_format: "1"
-id: tinytb
-name: TinyTB
+id: tinytrak
+name: TinyTrak
 type: shield
-url: https://github.com/k3peta/zmk-config-tinytb
+url: https://github.com/k3peta/zmk-config-tinytrak
 requires: [seeeduino_xiao_ble]
 features:
   - keys
