@@ -15,7 +15,7 @@ scroll_up_down: behavior_sensor_rotate_mouse_wheel_up_down {
     tap-ms = <20>;
 }
 
-    combos 
+    combos {
         compatible = "zmk,combos";
 
         bt0 {
