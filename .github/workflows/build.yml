@@ -1,4 +1,19 @@
-on: [push, pull_request, workflow_dispatch]
+name: Build ZMK
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "config/**"
+      - "boards/**"
+      - "zephyr/**"
+      - "build.yaml"
+  pull_request:
+    paths:
+      - "config/**"
+      - "boards/**"
+      - "zephyr/**"
+      - "build.yaml"
 
 jobs:
   build:
