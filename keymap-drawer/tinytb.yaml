@@ -1,0 +1,3 @@
+layout: {zmk_keyboard: tinytb}
+layers:
+  default: [B, R, D, M]
