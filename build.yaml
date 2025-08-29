@@ -22,7 +22,12 @@ include:
     shield: tinytrak rgbled_adapter
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
+    artifact-name: tinytrak-rgbled-studio-${{ github.run_id }}
+
   - board: seeeduino_xiao_ble
     shield: tinytrak rgbled_adapter
+    artifact-name: tinytrak-rgbled-${{ github.run_id }}
+
   - board: seeeduino_xiao_ble
     shield: settings_reset
+    artifact-name: tinytrak-reset-${{ github.run_id }}
