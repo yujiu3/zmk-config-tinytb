@@ -1,5 +1,25 @@
-on: [push, pull_request, workflow_dispatch]
+
+on:
+  workflow_dispatch:
+  push:
+    # ZMKビルド用（必要なら他のパスも追加OK）
+    paths:
+      - "config/**"
+      - "boards/**"
+      - "zephyr/**"
+      - "build.yaml"
+
+  pull_request:
+    paths:
+      - "config/**"
+      - "boards/**"
+      - "zephyr/**"
+      - "build.yaml"
+      - "config/*.keymap"
+      - "config/*.dtsi"
+      - "keymap_drawer.config.yaml"
 
 jobs:
+  # 既存の ZMK ユーザ設定ビルド
   build:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
