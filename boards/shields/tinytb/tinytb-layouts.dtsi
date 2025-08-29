@@ -5,11 +5,11 @@
 
 / {
 	chosen {
-                zmk,physical-layout = &tinytgwhb_physical_layout;
+                zmk,physical-layout = &tinytb_physical_layout;
 	};
 
 
-    tinytb_physical_layout: tinyrb_physical_layout {
+    tinytb_physical_layout: tinytb_physical_layout {
         compatible = "zmk,physical-layout";
         display-name = "Default";
         transform = <&default_transform>;
