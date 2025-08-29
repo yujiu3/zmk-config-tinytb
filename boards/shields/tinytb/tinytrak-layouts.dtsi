@@ -5,7 +5,7 @@
 
 / {
 	chosen {
-                zmk,physical-layout = &tinytb_physical_layout;
+                zmk,physical-layout = &tinytrak_physical_layout;
 	};
 
 
