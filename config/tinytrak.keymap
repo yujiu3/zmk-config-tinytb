@@ -9,9 +9,17 @@
 
         default_layer {
             bindings = <
-                &bt BT_CLR &bt BT_SEL 0
-                &hold_tap LCLK RCLK     /* 単押し：左クリック, ホールド：右クリック */
-                &mkp RCLK &trans
+                // タップで MB1（左クリック）、ホールドでスクロールアップ
+                &hold_scroll &mkp MB1 &msc SCROLL_UP
+
+                // タップで MB2（右クリック）、ホールドでスクロールダウン
+                &hold_scroll &mkp MB2 &msc SCROLL_DOWN
+
+                // シフトキー
+                &kp LSHFT
+
+                // ESCキー
+                &kp ESC
             >;
         };
     };
