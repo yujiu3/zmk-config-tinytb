@@ -70,7 +70,7 @@
     };
 
     /* スクロール時のみ有効化するリスナー */
-    trackball_scroll_listener {
+    trackball_scroll_listener: trackball_scroll_listener {
         compatible = "zmk,input-listener";
         device     = <&trackball>;
     };
