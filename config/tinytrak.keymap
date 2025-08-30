@@ -4,14 +4,24 @@
 #include <dt-bindings/zmk/mouse.h>
 
 / {
-    keymap {
-        compatible = "zmk,keymap";
-
-        default_layer {
-            bindings = <
-                &mkp LCLK   &bt BT_SEL 0
-                &mkp RCLK   &bt BT_CLR
-            >;
+    behaviors {
+        hold_scroll: hold_scroll {
+            compatible = "zmk,behavior-hold-listener";
+            label = "HOLD_SCROLL";
+            listeners = <&trackball_listener &trackball_scroller>;
         };
+    };
+};
+
+&keymap {
+    compatible = "zmk,keymap";
+
+    default_layer {
+        bindings = <
+            &hold_scroll
+            &kp BTN_RIGHT
+            &kp BTN_LEFT
+            &kp BTN_MIDDLE
+        >;
     };
 };
