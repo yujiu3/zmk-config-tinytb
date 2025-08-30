@@ -4,6 +4,20 @@
 #include <dt-bindings/zmk/mouse.h>
 
 / {
+    behaviors {
+        scroll_up_down: mouse_wheel_up_down {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
+        };
+
+        scroll_right_left: mouse_wheel_right_left {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc SCRL_LEFT>, <&msc SCRL_RIGHT>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
