@@ -40,22 +40,22 @@
             <&gpio1 12 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
     };
 
-/* --- カーソル移動（常時ON） --- */
-trackball_listener: trackball_listener {
-    compatible = "zmk,input-listener";
-    device = <&trackball>;
-    status = "okay";
-};
+/* --- カーソル移動用 --- */
+    trackball_listener: trackball_listener {
+        compatible = "zmk,input-listener";
+        device = <&trackball>;
+        status = "okay";
+    };
 
-/* --- スクロール用（ホールド時にON） --- */
-trackball_scroller: trackball_scroller {
-    compatible = "zmk,input-listener";
-    device = <&trackball>;
-    status = "disabled";
-    input-processors =
-        <&zip_xy_to_scroll_mapper>,
-        <&zip_scroll_scaler 1 5>;
-};
+    /* --- スクロール用（デフォルトは無効） --- */
+    trackball_scroller: trackball_scroller {
+        compatible = "zmk,input-listener";
+        device = <&trackball>;
+        status = "disabled";
+        input-processors =
+            <&zip_xy_to_scroll_mapper>,
+            <&zip_scroll_scaler 1 5>;
+    };
 };
 
 &spi0 {
@@ -74,7 +74,6 @@ trackball_scroller: trackball_scroller {
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         cpi = <600>;
 
-        /* 相対入力: XY を ZIP プロセッサでスクロールに変換 */
         evt-type = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
         y-input-code = <INPUT_REL_Y>;
