@@ -8,14 +8,14 @@
                 zmk,matrix_transform = &tinytb_transform;
 	};
 
-    default_transform: keymap_transform_0 {
-        compatible = "zmk,matrix-transform";
-        columns = <4>;
-        rows = <1>;
-        map = <
-            RC(0,0) RC(0,1) RC(0,2) RC(0,3) //右回り
-        >;
-    };
+tinytb_transform: keymap_transform_tinytb {
+    compatible = "zmk,matrix-transform";
+    columns = <4>;
+    rows = <1>;
+    map = <
+        RC(0,0) RC(0,1) RC(0,2) RC(0,3)
+    >;
+};
 
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-direct";
@@ -38,18 +38,17 @@
     };
 
 
-    default_transform: keymap_transform_0 {
-        compatible = "zmk,matrix-transform";
-        display-name = "Default";
-        transform = <&default_transform>;
-        kscan = <&kscan0>;
-
-        keys  //                     w   h    x    y     rot    rx    ry
-            = <&key_physical_attrs 100 100    0    0       0     0     0>
-            , <&key_physical_attrs 100 100  100    0       0     0     0>
-            , <&key_physical_attrs 100 100    0  100       0     0     0>
-            , <&key_physical_attrs 100 100  100  100       0     0     0>
-            ;
-    };
+tinytrak_physical_layout: tinytrak_physical_layout {
+    compatible = "zmk,physical-layout";
+    display-name = "Default";
+    /* ここを default_transform → tinytb_transform に変更 */
+    transform = <&tinytb_transform>;
+    kscan = <&kscan0>;
+    keys =
+        <&key_physical_attrs 100 100 100   0   0 0 0>,
+        <&key_physical_attrs 100 100 200   0   0 0 0>,
+        <&key_physical_attrs 100 100 100 100   0 0 0>,
+        <&key_physical_attrs 100 100 200 100   0 0 0>;
+};
 
 };
