@@ -43,7 +43,6 @@
     /* --- 通常カーソル移動用リスナー --- */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
-        device = <&trackball>;
         status = disabled;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>;       //Y軸反転
