@@ -1,14 +1,18 @@
+/* &mkp でマウスボタン定数を使うために必須 */
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+
 / {
     keymap {
         compatible = "zmk,keymap";
 
+        /* 1:左上, 2:右上, 3:右下, 4:左下（時計回り） */
         default_layer {
             sensor-bindings = <&trackball_listener>;
             bindings = <
-                &mo(1)        /* 1: 押している間だけ SCROLL 層 */
-                &mkp LCLK     /* 左クリック */
-                &mkp RCLK     /* 右クリック */
-                &mkp MCLK     /* 中クリック */
+                &mkp INPUT_BTN_LEFT     /* 1: 左クリック */
+                &mkp INPUT_BTN_RIGHT    /* 2: 右クリック */
+                &mkp INPUT_BTN_MIDDLE   /* 3: 中クリック */
+                &mo 1                   /* 4: ホールドでスクロール層 */
             >;
         };
 
