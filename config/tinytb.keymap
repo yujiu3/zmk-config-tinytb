@@ -3,7 +3,6 @@
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
-#include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 
 #define ZMK_POINTING_SCRL_VAL 100
@@ -21,9 +20,7 @@
 };
 
 / {
-
     behaviors {
-
         scroll_up_down: mouse_wheel_up_down {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
@@ -41,32 +38,39 @@
         };
     };
 
-
-
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
             bindings = <
-                &bt BT_CLR    &bt BT_SEL 0
-                &mkp RCLK     &mkp LCLK
+&bt BT_CLR  &mo 1  &mkp RCLK  &mkp LCLK
             >;
-            sensor-bindings = <&scroll_up_down>;        };
+
+            sensor-bindings = <&scroll_up_down>;
         };
 
         layer_1 {
             bindings = <
-                &trans        &trans
-                &trans        &trans
+&trans  &trans  &trans  &trans
             >;
-            sensor-bindings = <&scroll_right_left>;
-        };
-
-        layer_2 {
-            bindings = <
-                &trans        &trans
-                &trans        &trans
-            >;
-            sensor-bindings = <&scroll_up_down>;
         };
     };
+
+    layer_1 {
+        bindings = <
+                &trans        &trans
+                &trans        &trans
+        >;
+
+        sensor-bindings = <&scroll_right_left>;
+    };
+
+    layer_2 {
+        bindings = <
+                &trans        &trans
+                &trans        &trans
+        >;
+
+        sensor-bindings = <&scroll_up_down>;
+    };
+};
