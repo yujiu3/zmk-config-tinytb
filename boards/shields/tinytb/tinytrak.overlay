@@ -40,28 +40,22 @@
             <&gpio1 12 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
     };
 
-    /* --- マウスカーソル用（いったんOFF） --- */
-    trackball_listener: trackball_listener {
-        compatible = "zmk,input-listener";
-        device = <&trackball>;
-        status = "disabled";
-        /* 必要なら Y 反転などはここにプロセッサを追加
-         * 例) , <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>
-         */
-    };
+/* --- カーソル移動（常時ON） --- */
+trackball_listener: trackball_listener {
+    compatible = "zmk,input-listener";
+    device = <&trackball>;
+    status = "okay";
+};
 
-    /* --- スクロール用（テストのためON） --- */
-    trackball_scroller: trackball_scroller {
-        compatible = "zmk,input-listener";
-        device = <&trackball>;
-        status = "okay";
-        input-processors =
-            <&zip_xy_to_scroll_mapper>,
-            /* 横スクロール方向を反転したい場合は以下を有効化
-             * , <&zip_scroll_transform INPUT_TRANSFORM_X_INVERT>
-             */
-            <&zip_scroll_scaler 1 5>; /* スクロール量の倍率 (1/5) を調整 */
-    };
+/* --- スクロール用（ホールド時にON） --- */
+trackball_scroller: trackball_scroller {
+    compatible = "zmk,input-listener";
+    device = <&trackball>;
+    status = "disabled";
+    input-processors =
+        <&zip_xy_to_scroll_mapper>,
+        <&zip_scroll_scaler 1 5>;
+};
 };
 
 &spi0 {
