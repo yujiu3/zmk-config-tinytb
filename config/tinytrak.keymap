@@ -2,18 +2,16 @@
     keymap {
         compatible = "zmk,keymap";
 
-        /* 0: デフォルト層（カーソル移動＆クリック） */
         default_layer {
             sensor-bindings = <&trackball_listener>;
             bindings = <
-                &ht_scroll   /* 1: ホールドでSCROLL層(1) */
-                &mkp RCLK    /* 2: 右クリック */
-                &mkp LCLK    /* 3: 左クリック */
-                &mkp MCLK    /* 4: 中クリック */
+                &ht_scroll                  /* 1: ホールドでSCROLL層 */
+                &mkp LCLK                   /* 2: 左クリック */
+                &mkp RCLK                   /* 3: 右クリック */
+                &mkp MCLK                   /* 4: 中クリック */
             >;
         };
 
-        /* 1: スクロール層（XY→スクロール） */
         SCROLL {
             sensor-bindings = <&trackball_scroller>;
             bindings = <
