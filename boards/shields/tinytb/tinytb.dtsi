@@ -8,7 +8,7 @@
                 zmk,matrix_transform = &tinytb_transform;
 	};
 
-tinytb_transform: keymap_transform_tinytb {
+default_transform: keymap_transform_0 {
     compatible = "zmk,matrix-transform";
     columns = <4>;
     rows = <1>;
@@ -37,18 +37,5 @@ tinytb_transform: keymap_transform_tinytb {
             //<&zip_temp_layer 5 500>;                            //オートマウスレイヤーの選択
     };
 
-
-tinytb_physical_layout: tinytb_physical_layout {
-    compatible = "zmk,physical-layout";
-    display-name = "Default";
-    /* ここを default_transform → tinytb_transform に変更 */
-    transform = <&tinytb_transform>;
-    kscan = <&kscan0>;
-    keys =
-        <&key_physical_attrs 100 100 100   0   0 0 0>,
-        <&key_physical_attrs 100 100 200   0   0 0 0>,
-        <&key_physical_attrs 100 100 100 100   0 0 0>,
-        <&key_physical_attrs 100 100 200 100   0 0 0>;
-};
 
 };
