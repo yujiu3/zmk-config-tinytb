@@ -7,20 +7,19 @@
     keymap {
         compatible = "zmk,keymap";
 
+        /* レイヤー0：通常（カーソル移動） */
         default_layer {
             bindings = <
-                &mo 1        &bt BT_SEL 0
-                &mkp LCLK    &mkp RCLK
+                &bt BT_CLR   &bt BT_SEL 0
+                &mkp LCLK    &mo 1           /* 押している間だけレイヤー1（スクロール） */
             >;
         };
 
-        /* ---- スクロールレイヤー（トラックボール＝スクロール） ---- */
-        scroll_layer: scroll_layer {
-            sensors = <&trackball_scroll_listener>;
-            /* キーは基本そのまま（必要なら好きに変更可） */
+        /* レイヤー1：スクロール（listener が自動変換） */
+        scroll_layer {
             bindings = <
-                &trans           &trans
-                &mkp LCLK        &mkp RCLK
+                &trans       &trans
+                &mkp RCLK    &trans
             >;
         };
     };
