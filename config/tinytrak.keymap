@@ -9,8 +9,8 @@
 
         default_layer {
             bindings = <
-                &kp N1   &kp N2
-                &kp N3   &kp N4
+                &mkp LCLK   &bt BT_SEL 0
+                &mkp RCLK   &bt BT_CLR
             >;
         };
     };
