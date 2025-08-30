@@ -1,50 +1,30 @@
-#include <input/processors.dtsi>
-#include <dt-bindings/zmk/input_transform.h>
-#include <zephyr/dt-bindings/input/input-event-codes.h>
-#include <behaviors.dtsi>
-#include <dt-bindings/zmk/bt.h>
-#include <dt-bindings/zmk/pointing.h>
-
 #define ZMK_POINTING_SCRL_VAL 100
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/mouse.h>
 
 / {
     keymap {
         compatible = "zmk,keymap";
 
+        /* ---- 通常レイヤー（トラックボール＝マウス移動） ---- */
         default_layer {
+            sensors = <&trackball_listener>;
             bindings = <
-&mkp RCLK
-&mo 1 
-&mkp LCLK
-&mkp LCLK
->;
-        };
-
-        scrl_layer {
-            bindings = <
-&mkp RCLK  &lt 1 ESC  &mkp LCLK  &mkp RCLK
+                &bt BT_CLR      &bt BT_SEL 0
+                &lt &scroll_layer &mkp LCLK   &mkp RCLK   /* ← タップ=左クリック / 長押し=スクロール層 */
             >;
-
-            sensor-bindings = <&scroll_up_down>;
         };
-    };
 
-    combos {
-        compatible = "zmk,combos";
-
-        bt0 {
-            bindings = <&bt BT_NXT>;
-            key-positions = <0 1>;
-        };
-    };
-
-    behaviors {
-        scroll_up_down: behavior_sensor_rotate_mouse_wheel_up_down {
-            compatible = "zmk,behavior-sensor-rotate";
-            #sensor-binding-cells = <0>;
-            bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
-
-            tap-ms = <20>;
+        /* ---- スクロールレイヤー（トラックボール＝スクロール） ---- */
+        scroll_layer: scroll_layer {
+            sensors = <&trackball_scroll_listener>;
+            /* キーは基本そのまま（必要なら好きに変更可） */
+            bindings = <
+                &trans           &trans
+                &mkp LCLK        &mkp RCLK
+            >;
         };
     };
 };
