@@ -5,10 +5,12 @@
 #include <physical_layouts.dtsi>
 
 / {
+    /* 物理レイアウトをこのシールド側で明示 */
     chosen {
         zmk,physical-layout = &tinytrak_physical_layout;
     };
 
+    /* ---- 物理レイアウト ---- */
     tinytrak_physical_layout: tinytrak_physical_layout {
         compatible = "zmk,physical-layout";
         display-name = "Default";
@@ -21,6 +23,7 @@
             <&key_physical_attrs 100 100 200 100   0 0 0>;
     };
 
+    /* ---- 行列変換（1x4）---- */
     default_transform: keymap_transform_0 {
         compatible = "zmk,matrix-transform";
         columns = <4>;
@@ -30,9 +33,10 @@
         >;
     };
 
+    /* ---- 4キー直結スキャン ---- */
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-direct";
-        label = "KSCAN";
+        /* 4つの入力ピン。配線そのまま（0.28, 0.29, 1.11, 1.12） */
         input-gpios =
             <&gpio0 28 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
             <&gpio0 29 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
@@ -40,38 +44,31 @@
             <&gpio1 12 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
     };
 
-    /* --- 通常カーソル移動用リスナー --- */
+    /* ---- トラックボール（カーソル用リスナー）---- */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
         status = "okay";
-        /* 必要なら Y 反転を有効化
+        /* 反転/入替が必要なら下を有効化
          * input-processors = <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>;
          */
     };
-    };    /* --- スクロール用リスナー --- */
 
-behaviors {
-        hold_tap: behavior_hold_tap {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
-            flavor = "tap-preferred";
-        };
-
+    /* ---- スクロール用リスナー（キーで有効化する想定）---- */
     trackball_scroller: trackball_scroller {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        status = "okay";
+        status = "disabled";
         input-processors =
             <&zip_xy_to_scroll_mapper>,
-            /* 横スクロール反転したい場合は次行を有効化
-             * , <&zip_scroll_transform INPUT_TRANSFORM_X_INVERT>
-             */
-            <&zip_scroll_scaler 1 5>; /* スクロール量を 1/5 に */
+            <&zip_scroll_scaler 1 5>;
+        /* 横スクロール反転が必要なら下を追記
+         * , <&zip_scroll_transform INPUT_TRANSFORM_X_INVERT>
+         */
     };
 };
 
+/* ---- SPI & PMW3610 本体 ---- */
 &spi0 {
     status = "okay";
     compatible = "nordic,nrf-spim";
@@ -95,6 +92,7 @@ behaviors {
     };
 };
 
+/* ---- SPI ピン設定（XIAO BLE 既存配線に合わせてそのまま）---- */
 &pinctrl {
     spi0_default: spi0_default {
         group1 {
