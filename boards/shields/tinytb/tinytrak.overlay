@@ -49,8 +49,16 @@
          * input-processors = <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>;
          */
     };
+    };    /* --- スクロール用リスナー --- */
 
-    /* --- スクロール用リスナー --- */
+behaviors {
+        hold_tap: behavior_hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            flavor = "tap-preferred";
+        };
+
     trackball_scroller: trackball_scroller {
         compatible = "zmk,input-listener";
         device = <&trackball>;
