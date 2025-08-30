@@ -19,7 +19,7 @@
 ---
 include:
   - board: seeeduino_xiao_ble
-    shield: tinytrak rgbled_adapter
+    shield: tinytb rgbled_adapter
 
   - board: seeeduino_xiao_ble
     shield: settings_reset
