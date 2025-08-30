@@ -12,7 +12,7 @@
             bindings = <
                 &bt BT_CLR    &bt BT_SEL 0
                 /* ホールドで L1（スクロール）／タップで左クリック */
-                &lt 1 &mkp LCLK     &mkp RCLK
+                &lt 1 &mkp LCLK
             >;
         };
 
