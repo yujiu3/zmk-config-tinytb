@@ -7,23 +7,19 @@
     keymap {
         compatible = "zmk,keymap";
 
-        /* --- デフォルトレイヤー --- */
         default_layer {
             bindings = <
-                &mo 1           &bt BT_SEL 0   /* 左上キーで一時的に scroll_layer に切替 */
-                &mkp LCLK       &mkp RCLK
+                &mo 1        &bt BT_SEL 0
+                &mkp LCLK    &mkp RCLK
             >;
         };
 
-        /* --- スクロールレイヤー --- */
         scroll_layer {
+            sensor-bindings = <&scroll_proc>;   /* ← overlay の processor を参照 */
             bindings = <
-                &none           &none
-                &none           &none
+                &trans &trans
+                &trans &trans
             >;
-
-            /* スクロール変換 processor を有効化 */
-            sensor-bindings = <&scroll_proc>;
         };
     };
 };
