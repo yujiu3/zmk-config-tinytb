@@ -3,31 +3,26 @@ if SHIELD_TINYTRAK
     config ZMK_KEYBOARD_NAME
         default "TinyTrak"
 
-    config INPUT
-        bool
-        default y
-
-    config PMW3610
-        bool
-        default y
-
-    config SPI
-        bool
-        default y
-
     config ZMK_BLE
-        bool
+        default y
+
+    config INPUT
         default y
 
     config ZMK_POINTING
-        bool
         default y
 
-config RGBLED_WIDGET_BATTERY_LEVEL_HIGH
-    default 30
+    config SPI
+        default y
 
-config RGBLED_WIDGET_BATTERY_LEVEL_CRITICAL
-    default 10
+    config PMW3610
+        default y
+
+    config RGBLED_WIDGET_BATTERY_LEVEL_HIGH
+        default 30
+
+    config RGBLED_WIDGET_BATTERY_LEVEL_CRITICAL
+        default 10
 
 
 endif
