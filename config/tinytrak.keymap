@@ -7,19 +7,29 @@
     keymap {
         compatible = "zmk,keymap";
 
-        default_layer {
+        default_layer: default_layer {
             bindings = <
-                // タップで MB1（左クリック）、ホールドでスクロールアップ
-                &hold_scroll &mkp MB1 &msc SCROLL_UP
+                /* K1: タップ=左クリック, ホールド=層1(スクロール) */
+                &ht 0 &mkp MB1        &mo 1
 
-                // タップで MB2（右クリック）、ホールドでスクロールダウン
-                &hold_scroll &mkp MB2 &msc SCROLL_DOWN
+                /* K2: タップ=右クリック, ホールド=層1(スクロール) */
+                &ht 0 &mkp MB2        &mo 1
 
-                // シフトキー
+                /* K3: シフト */
                 &kp LSHFT
 
-                // ESCキー
+                /* K4: ESC */
                 &kp ESC
+            >;
+        };
+
+        /* スクロール層: キー配列自体は任意。層が有効の間だけ
+           overlay 側の `scroller { layers = <1>; ... }` が効いて
+           トラックボールがスクロール動作に変わる想定。 */
+        scroll_layer: scroll_layer {
+            // レイヤー番号は 1（&mo 1 と一致）
+            bindings = <
+                &mkp MB1   &mkp MB2   &kp LSHFT   &kp ESC
             >;
         };
     };
