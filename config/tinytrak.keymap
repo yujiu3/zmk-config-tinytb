@@ -1,36 +1,33 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/mouse.h>
 
-/ {
-    keymap {
-        compatible = "zmk,keymap";
+ / {
+     keymap {
+         compatible = "zmk,keymap";
 
-        default_layer: default_layer {
-            bindings = <
-                /* K1: タップ=左クリック, ホールド=層1(スクロール) */
-                &ht 0 &mkp MB1        &mo 1
+         default_layer {
+             bindings = <
+                 &kp ESC      &kp LSHFT    &kp TAB    &kp ENTER
+             >;
+         };
 
-                /* K2: タップ=右クリック, ホールド=層1(スクロール) */
-                &ht 0 &mkp MB2        &mo 1
+         /* 長押しで切り替えるスクロール用レイヤー（離散スクロール） */
+         scroll_layer {
+             bindings = <
+                 &msc SCROLL_UP   &msc SCROLL_DOWN   &msc SCROLL_LEFT   &msc SCROLL_RIGHT
+             >;
+         };
 
-                /* K3: シフト */
-                &kp LSHFT
-
-                /* K4: ESC */
-                &kp ESC
-            >;
-        };
-
-        /* スクロール層: キー配列自体は任意。層が有効の間だけ
-           overlay 側の `scroller { layers = <1>; ... }` が効いて
-           トラックボールがスクロール動作に変わる想定。 */
-        scroll_layer: scroll_layer {
-            // レイヤー番号は 1（&mo 1 と一致）
-            bindings = <
-                &mkp MB1   &mkp MB2   &kp LSHFT   &kp ESC
-            >;
-        };
-    };
-};
+         /* ここで「長押しでレイヤー1へ」だけを割り当てる（タップは通常キー） */
+         /* 例：K1 を ESC のタップ/ホールドにする場合 */
+         /* 物理4キーのうち、K1/K2 を “レイヤータップキー” にしておく */
+         /* ※ &lt はタップに「キーコード」を求めるので、&mkp MB1 は使えません */
+         default_layer.modifiers {
+             // 物理配置に合わせて、必要な位置へレイヤータップを置き換えてください
+             bindings = <
+                 &lt 1 ESC    &lt 1 LSHFT   &kp TAB     &kp ENTER
+             >;
+         };
+     };
+ };
