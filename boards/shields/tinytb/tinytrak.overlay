@@ -42,6 +42,43 @@
         compatible = "zmk,input-listener";
         device = <&trackball>;
     };
+
+
+/* スクロール変換とスクロール用リスナーを追加 */
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+
+
+    transformers {
+        /* REL_X/Y → ホイール 変換 */
+        scroll_proc: input_transform@0 {
+            compatible = "zmk,input-transform";
+            label = "SCROLL_PROC";
+
+            /* 入力（トラックボールの移動） */
+            src-evt-type = <INPUT_EV_REL>;
+            src-x-code   = <INPUT_REL_X>;
+            src-y-code   = <INPUT_REL_Y>;
+
+            /* 出力（ホイール）*/
+            dst-evt-type = <INPUT_EV_REL>;
+            dst-x-code   = <INPUT_REL_HWHEEL>; /* 横スクロール ← X */
+            dst-y-code   = <INPUT_REL_WHEEL>;  /* 縦スクロール ← Y */
+
+            /* スクロールの速さ/向き調整 */
+            scale-x = <1>;
+            scale-y = <-1>; /* 逆方向なら 1 に */
+        };
+    };
+
+    /* スクロール用のリスナー（変換を噛ませる） */
+    trackball_scroll_listener: trackball_scroll_listener {
+        compatible = "zmk,input-listener";
+        device     = <&trackball>;
+        processor  = <&scroll_proc>;
+    };
+
+
+
 };
 
 &spi0 {
