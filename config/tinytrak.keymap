@@ -23,23 +23,18 @@
     keymap {
         compatible = "zmk,keymap";
 
+        /* レイヤー0: 通常（カーソル/クリック） */
         default_layer {
             bindings = <
-                /* キー1: ホールドで SCROLL レイヤー、タップで何もしない */
-                &hold_tap 200 0 &none &mo SCROLL
-
-                /* キー2: 右クリック */
-                &mkp RCLK
-
-                /* キー3: 左クリック */
-                &mkp LCLK
-
-                /* キー4: 中クリック */
-                &mkp MCLK
+                &ht_scroll   /* 1: ホールドでスクロール層、タップは何もしない */
+                &mkp RCLK    /* 2: 右クリック */
+                &mkp LCLK    /* 3: 左クリック */
+                &mkp MCLK    /* 4: 中クリック */
             >;
         };
 
-        scroll_layer {
+        /* レイヤー1: スクロール用（ホールド中のみ有効） */
+        SCROLL {
             bindings = <
                 &trans &trans &trans &trans
             >;
