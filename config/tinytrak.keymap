@@ -8,17 +8,27 @@
 
         default_layer {
             bindings = <
-                /* 1: ホールド中はスクロール、単押しは無効(=なし) */
-                &hold_tap     0 0  &none  &none
+                /* キー1: タップ時は何もせず、ホールド中にスクロールレイヤーへ */
+                &hold_tap 200 0 &none &mo SCROLL
 
-                /* 2: 右クリック */
+                /* キー2: 右クリック */
                 &mkp RCLK
 
-                /* 3: 左クリック */
+                /* キー3: 左クリック */
                 &mkp LCLK
 
-                /* 4: 中クリック */
+                /* キー4: 中クリック */
                 &mkp MCLK
+            >;
+        };
+
+        scroll_layer {
+            bindings = <
+                /* キー1: レイヤー離脱（離したら戻る） */
+                &trans
+                &trans
+                &trans
+                &trans
             >;
         };
     };
