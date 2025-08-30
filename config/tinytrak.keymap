@@ -7,20 +7,12 @@
     keymap {
         compatible = "zmk,keymap";
 
-        /* LAYER 0: 通常（カーソル移動） */
         default_layer {
+            /* 左上: BTクリア / 右上: BTプロファイル0
+               左下: 左クリック / 右下: 右クリック */
             bindings = <
-                &bt BT_CLR    &bt BT_SEL 0
-                /* ホールドで L1（スクロール）／タップで左クリック */
-                &lt 1 &mkp LCLK
-            >;
-        };
-
-        /* LAYER 1: スクロール（trackball_scroll_listener が有効） */
-        scroll_layer {
-            bindings = <
-                &none &none
-                &none &none
+                &bt BT_CLR     &bt BT_SEL 0
+                &mkp LCLK      &mkp RCLK
             >;
         };
     };
