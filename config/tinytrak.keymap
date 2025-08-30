@@ -1,40 +1,21 @@
-#include <behaviors.dtsi>
-#include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/mouse.h>
-
 / {
-
-    behaviors {
-        ht_scroll: hold_tap {
-            compatible = "zmk,behavior-hold-tap";
-            label = "HT_SCROLL";
-            #binding-cells = <0>;
-
-            /* タイミング類はここで設定 */
-            tapping-term-ms = <200>;
-            quick-tap-ms = <0>;
-            flavor = "balanced"; /* 好みで 'tap-preferred' などでも可 */
-
-            /* tap時 / hold時 のバインディングをここで指定 */
-            bindings = <&none &mo SCROLL>;
-        };
-    };
-
     keymap {
         compatible = "zmk,keymap";
 
-        /* レイヤー0: 通常（カーソル/クリック） */
+        /* 0: デフォルト層（カーソル移動＆クリック） */
         default_layer {
+            sensor-bindings = <&trackball_listener>;
             bindings = <
-                &ht_scroll   /* 1: ホールドでスクロール層、タップは何もしない */
+                &ht_scroll   /* 1: ホールドでSCROLL層(1) */
                 &mkp RCLK    /* 2: 右クリック */
                 &mkp LCLK    /* 3: 左クリック */
                 &mkp MCLK    /* 4: 中クリック */
             >;
         };
 
-        /* レイヤー1: スクロール用（ホールド中のみ有効） */
+        /* 1: スクロール層（XY→スクロール） */
         SCROLL {
+            sensor-bindings = <&trackball_scroller>;
             bindings = <
                 &trans &trans &trans &trans
             >;
