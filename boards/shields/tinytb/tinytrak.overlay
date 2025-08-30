@@ -40,39 +40,32 @@
             <&gpio1 12 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
     };
 
-    /* --- 通常モード: カーソル移動（既存） --- */
+    /* --- 通常カーソル移動用リスナー --- */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
     };
 
-    /* --- スクロール用の変換とリスナー（追加） --- */
+    /* --- スクロール変換 processor --- */
     transformers {
-        /* トラックボールの REL_X/Y をホイールに変換 */
         scroll_proc: input_transform {
             compatible = "zmk,input-transform";
             label = "SCROLL_PROC";
 
-            /* 入力（移動） */
+            /* 入力 (カーソル移動) */
             src-evt-type = <INPUT_EV_REL>;
             src-x-code   = <INPUT_REL_X>;
             src-y-code   = <INPUT_REL_Y>;
 
-            /* 出力（スクロール） */
+            /* 出力 (スクロール) */
             dst-evt-type = <INPUT_EV_REL>;
-            dst-x-code   = <INPUT_REL_HWHEEL>; /* 横スクロール: X→HWHEEL */
-            dst-y-code   = <INPUT_REL_WHEEL>;  /* 縦スクロール: Y→WHEEL  */
+            dst-x-code   = <INPUT_REL_HWHEEL>;
+            dst-y-code   = <INPUT_REL_WHEEL>;
 
-            /* スクロールの倍率／向き。必要に応じて調整 */
+            /* 倍率調整 */
             scale-x = <1>;
             scale-y = <1>;
         };
-    };
-
-    /* スクロール時のみ有効化するリスナー */
-    trackball_scroll_listener: trackball_scroll_listener {
-        compatible = "zmk,input-listener";
-        device     = <&trackball>;
     };
 };
 
@@ -92,7 +85,7 @@
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         cpi = <600>;
 
-        /* ZMKへ相対入力として渡す設定（通常モードで使用） */
+        /* 相対入力 (通常モードでカーソル移動) */
         evt-type = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
         y-input-code = <INPUT_REL_Y>;
