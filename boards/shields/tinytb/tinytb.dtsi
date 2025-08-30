@@ -38,7 +38,7 @@ tinytb_transform: keymap_transform_tinytb {
     };
 
 
-tinytrak_physical_layout: tinytrak_physical_layout {
+tinytb_physical_layout: tinytb_physical_layout {
     compatible = "zmk,physical-layout";
     display-name = "Default";
     /* ここを default_transform → tinytb_transform に変更 */
