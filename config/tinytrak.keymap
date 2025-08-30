@@ -3,6 +3,23 @@
 #include <dt-bindings/zmk/mouse.h>
 
 / {
+
+    behaviors {
+        ht_scroll: hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HT_SCROLL";
+            #binding-cells = <0>;
+
+            /* タイミング類はここで設定 */
+            tapping-term-ms = <200>;
+            quick-tap-ms = <0>;
+            flavor = "balanced"; /* 好みで 'tap-preferred' などでも可 */
+
+            /* tap時 / hold時 のバインディングをここで指定 */
+            bindings = <&none &mo SCROLL>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
