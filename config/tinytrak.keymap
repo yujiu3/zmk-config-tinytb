@@ -5,14 +5,14 @@
         default_layer {
             sensor-bindings = <&trackball_listener>;
             bindings = <
-                &ht_scroll                  /* 1: ホールドでSCROLL層 */
-                &mkp LCLK                   /* 2: 左クリック */
-                &mkp RCLK                   /* 3: 右クリック */
-                &mkp MCLK                   /* 4: 中クリック */
+                &mo(1)        /* 1: 押している間だけ SCROLL 層 */
+                &mkp LCLK     /* 2: 左クリック */
+                &mkp RCLK     /* 3: 右クリック */
+                &mkp MCLK     /* 4: 中クリック */
             >;
         };
 
-        SCROLL {
+        scroll_layer {
             sensor-bindings = <&trackball_scroller>;
             bindings = <
                 &trans &trans &trans &trans
