@@ -49,7 +49,7 @@
     /* --- スクロール用の変換とリスナー（追加） --- */
     transformers {
         /* トラックボールの REL_X/Y をホイールに変換 */
-        scroll_proc: input_transform@0 {
+        scroll_proc: input_transform {
             compatible = "zmk,input-transform";
             label = "SCROLL_PROC";
 
