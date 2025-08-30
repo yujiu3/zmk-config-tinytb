@@ -8,8 +8,8 @@
 
         default_layer {
             bindings = <
-                /* キー1: ホールドで SCROLL レイヤーへ、タップは無効 */
-                &hold_tap <200 0> &none &mo SCROLL
+                /* キー1: ホールドで SCROLL レイヤー、タップで何もしない */
+                &hold_tap 200 0 &none &mo SCROLL
 
                 /* キー2: 右クリック */
                 &mkp RCLK
