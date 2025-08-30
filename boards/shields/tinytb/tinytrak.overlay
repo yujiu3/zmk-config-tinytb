@@ -47,24 +47,26 @@
     };
 
     /* --- スクロール変換 processor --- */
-    transformers {
-        scroll_proc: input_transform {
-            compatible = "zmk,input-transform";
-            label = "SCROLL_PROC";
+transformers {
+    /* トラックボールの REL_X/Y をスクロールに変換 */
+    scroll_proc: input_transform {
+        compatible = "zmk,input-transform";
+        label = "SCROLL_PROC";
 
-            /* 入力 (カーソル移動) */
-            src-evt-type = <INPUT_EV_REL>;
-            src-x-code   = <INPUT_REL_X>;
-            src-y-code   = <INPUT_REL_Y>;
+        #sensor-binding-cells = <0>;   /* ← これを追加！ */
 
-            /* 出力 (スクロール) */
-            dst-evt-type = <INPUT_EV_REL>;
-            dst-x-code   = <INPUT_REL_HWHEEL>;
-            dst-y-code   = <INPUT_REL_WHEEL>;
+        /* 入力（移動） */
+        src-evt-type = <INPUT_EV_REL>;
+        src-x-code   = <INPUT_REL_X>;
+        src-y-code   = <INPUT_REL_Y>;
 
-            /* 倍率調整 */
-            scale-x = <1>;
-            scale-y = <1>;
+        /* 出力（スクロール） */
+        dst-evt-type = <INPUT_EV_REL>;
+        dst-x-code   = <INPUT_REL_HWHEEL>; /* 横スクロール */
+        dst-y-code   = <INPUT_REL_WHEEL>;  /* 縦スクロール */
+
+        scale-x = <1>;
+        scale-y = <1>;
         };
     };
 };
