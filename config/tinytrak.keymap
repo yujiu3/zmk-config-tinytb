@@ -2,29 +2,23 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/mouse.h>
 
-/* ここは config/tinytrak.keymap の全内容 */
- / {
-    /* ホールド中だけスクロールリスナーを有効にする挙動 */
-    behaviors {
-        hold_scroll: hold_scroll {
-            compatible = "zmk,behavior-hold-listener";
-            label = "HOLD_SCROLL";
-            /* overlay 側で定義したリスナーラベルを参照 */
-            listeners = <&trackball_listener &trackball_scroller>;
-        };
-    };
-
-    /* キーマップ本体 */
+/ {
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
-            /* 左上→右上→右下→左下（時計回り: 1,2,3,4） */
             bindings = <
-                &hold_scroll       /* 1: ホールドでスクロール(離すとカーソルに戻る) */
-                &mkp RCLK          /* 2: 右クリック */
-                &mkp LCLK          /* 3: 左クリック */
-                &mkp MCLK          /* 4: 中クリック */
+                /* 1: ホールド中はスクロール、単押しは無効(=なし) */
+                &hold_tap     0 0  &none  &none
+
+                /* 2: 右クリック */
+                &mkp RCLK
+
+                /* 3: 左クリック */
+                &mkp LCLK
+
+                /* 4: 中クリック */
+                &mkp MCLK
             >;
         };
     };
