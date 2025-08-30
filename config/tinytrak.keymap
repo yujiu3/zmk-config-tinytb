@@ -3,31 +3,23 @@
 #include <dt-bindings/zmk/mouse.h>
 
  / {
-     keymap {
-         compatible = "zmk,keymap";
+    keymap {
+        compatible = "zmk,keymap";
 
-         default_layer {
-             bindings = <
-                 &kp ESC      &kp LSHFT    &kp TAB    &kp ENTER
-             >;
-         };
+        // Layer 0: 通常
+        default_layer {
+            bindings = <
+                &lt 1 &mkp RCLK      &mmv MOVE_LEFT
+                &mkp LCLK           &mmv MOVE_RIGHT
+            >;
+        };
 
-         /* 長押しで切り替えるスクロール用レイヤー（離散スクロール） */
-         scroll_layer {
-             bindings = <
-                 &msc SCROLL_UP   &msc SCROLL_DOWN   &msc SCROLL_LEFT   &msc SCROLL_RIGHT
-             >;
-         };
-
-         /* ここで「長押しでレイヤー1へ」だけを割り当てる（タップは通常キー） */
-         /* 例：K1 を ESC のタップ/ホールドにする場合 */
-         /* 物理4キーのうち、K1/K2 を “レイヤータップキー” にしておく */
-         /* ※ &lt はタップに「キーコード」を求めるので、&mkp MB1 は使えません */
-         default_layer.modifiers {
-             // 物理配置に合わせて、必要な位置へレイヤータップを置き換えてください
-             bindings = <
-                 &lt 1 ESC    &lt 1 LSHFT   &kp TAB     &kp ENTER
-             >;
-         };
-     };
+        // Layer 1: スクロール専用（ホールド中のみ有効）
+        scroll_layer {
+            bindings = <
+                &trans              &msc SCRL_LEFT
+                &trans              &msc SCRL_RIGHT
+            >;
+        };
+    };
  };
