@@ -1,7 +1,7 @@
-if SHIELD_TINYTRAK
+if SHIELD_TINYTB
 
     config ZMK_KEYBOARD_NAME
-        default "TinyTrak"
+        default "TinyTB"
 
     config ZMK_BLE
         default y
@@ -18,11 +18,10 @@ if SHIELD_TINYTRAK
     config PMW3610
         default y
 
-    config RGBLED_WIDGET_BATTERY_LEVEL_HIGH
-        default 30
+config RGBLED_WIDGET_BATTERY_LEVEL_HIGH
+    default 30
 
-    config RGBLED_WIDGET_BATTERY_LEVEL_CRITICAL
-        default 10
-
+config RGBLED_WIDGET_BATTERY_LEVEL_CRITICAL
+    default 10
 
 endif

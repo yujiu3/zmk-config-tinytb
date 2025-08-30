@@ -18,12 +18,8 @@
 #
 ---
 include:
-  # ← 通常ファーム（Studio入りを一本化）
   - board: seeeduino_xiao_ble
     shield: tinytrak rgbled_adapter
-    snippet: studio-rpc-usb-uart
-    cmake-args: -DCONFIG_ZMK_STUDIO=y
 
-  # ← リセット用ファーム
   - board: seeeduino_xiao_ble
     shield: settings_reset

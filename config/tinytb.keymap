@@ -1,0 +1,113 @@
+#include <input/processors.dtsi>
+#include <dt-bindings/zmk/input_transform.h>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/pointing.h>
+
+#define ZMK_POINTING_SCRL_VAL 100
+#define MOUSE 5
+#define SCROLL 6
+
+&mt {
+    flavor = "balanced";
+    quick-tap-ms = <0>;
+};
+
+&lt {
+    quick-tap-ms = <300>;
+    flavor = "balanced";
+};
+
+/ {
+
+    behaviors {
+        lt_to_layer_0: lt_to_layer_0 {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LAYER_TAP_TO_0";
+            bindings = <&mo>, <&to_layer_0>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+        };
+
+        scroll_up_down: mouse_wheel_up_down {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
+
+            tap-ms = <20>;
+        };
+
+        scroll_right_left: mouse_wheel_right_left {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc SCRL_LEFT>, <&msc SCRL_RIGHT>;
+
+            tap-ms = <20>;
+        };
+    };
+
+
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            bindings = <
+                &bt BT_CLR    &bt BT_SEL 0
+                &mkp RCLK     &mkp LCLK
+            >;
+            sensor-bindings = <&scroll_up_down>;        };
+        };
+
+        layer_1 {
+            bindings = <
+                &trans        &trans
+                &trans        &trans
+            >;
+            sensor-bindings = <&scroll_right_left>;
+        };
+
+        layer_2 {
+            bindings = <
+                &trans        &trans
+                &trans        &trans
+            >;
+            sensor-bindings = <&scroll_up_down>;
+        };
+
+        layer_3 {
+            bindings = <
+                &trans        &trans
+                &trans        &trans
+            >;
+            sensor-bindings = <&scroll_up_down>;
+        };
+
+        layer_4 {
+            bindings = <
+                &trans        &trans
+                &trans        &trans
+            >;
+            sensor-bindings = <&scroll_up_down>;
+        };
+
+        MOUSE {
+            bindings = <
+                &trans        &trans
+                &trans        &trans
+            >;
+            sensor-bindings = <&scroll_up_down>;
+        };
+
+        SCROLL {
+            bindings = <
+                &trans        &trans
+                &trans        &trans
+            >;
+            sensor-bindings = <&scroll_up_down>;
+        };
+    };
+};
