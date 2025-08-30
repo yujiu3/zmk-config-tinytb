@@ -77,37 +77,5 @@
             >;
             sensor-bindings = <&scroll_up_down>;
         };
-
-        layer_3 {
-            bindings = <
-                &trans        &trans
-                &trans        &trans
-            >;
-            sensor-bindings = <&scroll_up_down>;
-        };
-
-        layer_4 {
-            bindings = <
-                &trans        &trans
-                &trans        &trans
-            >;
-            sensor-bindings = <&scroll_up_down>;
-        };
-
-        MOUSE {
-            bindings = <
-                &trans        &trans
-                &trans        &trans
-            >;
-            sensor-bindings = <&scroll_up_down>;
-        };
-
-        SCROLL {
-            bindings = <
-                &trans        &trans
-                &trans        &trans
-            >;
-            sensor-bindings = <&scroll_up_down>;
-        };
     };
 };
