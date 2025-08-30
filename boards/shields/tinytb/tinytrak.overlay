@@ -40,44 +40,27 @@
             <&gpio1 12 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
     };
 
-    /* ==== Trackball listeners ==== */
-
-    /* 通常カーソル移動用（変換なし。必要ならxy変換を追加可） */
+    /* --- 通常カーソル移動用リスナー --- */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
         status = "okay";
-        /* 例: Y反転したい場合は以下を有効化
+        /* 必要なら Y 反転を有効化
          * input-processors = <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>;
          */
     };
 
-    /* スクロール用（XY→スクロール, 量を1/4にスケール） */
+    /* --- スクロール用リスナー --- */
     trackball_scroller: trackball_scroller {
         compatible = "zmk,input-listener";
         device = <&trackball>;
         status = "okay";
         input-processors =
             <&zip_xy_to_scroll_mapper>,
-            <&zip_scroll_scaler 1 4>;
-        /* 方向を変えたい場合:
-         * , <&zip_scroll_transform INPUT_TRANSFORM_X_INVERT>
-         * , <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>
-         */
-    };
-
-    /* ==== behaviors ==== */
-    behaviors {
-        /* ホールドでレイヤー1(SCROLL)を一時有効化、タップは何もしない */
-        ht_scroll: hold_tap {
-            compatible = "zmk,behavior-hold-tap";
-            label = "HT_SCROLL";
-            #binding-cells = <0>;
-            bindings = <&none &mo 1>;   /* tap: none / hold: momentary layer 1 */
-            tapping-term-ms = <200>;
-            quick-tap-ms = <0>;
-            flavor = "balanced";
-        };
+            /* 横スクロール反転したい場合は次行を有効化
+             * , <&zip_scroll_transform INPUT_TRANSFORM_X_INVERT>
+             */
+            <&zip_scroll_scaler 1 5>; /* スクロール量を 1/5 に */
     };
 };
 
@@ -97,7 +80,7 @@
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         cpi = <600>;
 
-        /* 相対入力でカーソル移動 */
+        /* 相対入力（カーソル移動） */
         evt-type = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
         y-input-code = <INPUT_REL_Y>;
