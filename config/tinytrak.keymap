@@ -14,11 +14,13 @@
             >;
         };
 
-        scroll_layer {
-            sensor-bindings = <&scroll_proc>;   /* ← overlay の processor を参照 */
+        /* ---- スクロールレイヤー（トラックボール＝スクロール） ---- */
+        scroll_layer: scroll_layer {
+            sensors = <&trackball_scroll_listener>;
+            /* キーは基本そのまま（必要なら好きに変更可） */
             bindings = <
-                &trans &trans
-                &trans &trans
+                &trans           &trans
+                &mkp LCLK        &mkp RCLK
             >;
         };
     };
