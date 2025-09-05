@@ -1,15 +1,19 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/mouse.h>
+#include <dt-bindings/zmk/bt.h>
 
 / {
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
-            /* 3x2 = 6キー想定。transformのキー数と必ず一致させる */
+            /* 左→右：MB1 / MB2 / ESC / LSFT */
             bindings = <
-                &kp A   &kp B   &kp C
-                &kp D   &kp E   &kp F
+                &mkp LCLK     /* 左クリック */
+                &mkp RCLK     /* 右クリック */
+                &kp  ESC
+                &kp  LSHFT
             >;
         };
     };
