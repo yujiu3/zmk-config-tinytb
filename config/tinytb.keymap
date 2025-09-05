@@ -43,24 +43,17 @@
 
         default_layer {
             bindings = <
-&bt BT_CLR  &mo 1  &mkp RCLK  &mkp LCLK
-            >;
-
+&mkp LCLK  &mo 1  &mkp RCLK
+&mkp LCLK  &mkp LCLK  &mkp LCLK
+>;
             sensor-bindings = <&scroll_up_down>;
         };
 
-        layer_1 {
-            bindings = <
-&trans  &trans  &trans  &trans
-            >;
-        };
-    };
-
     layer_1 {
         bindings = <
-                &trans        &trans
-                &trans        &trans
-        >;
+                &trans        &trans        &trans
+                &trans        &trans        &trans
+>;
 
         sensor-bindings = <&scroll_right_left>;
     };
