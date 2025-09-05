@@ -3,19 +3,19 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 
 / {
-	chosen {
+    chosen {
         zmk,kscan = &kscan0;
         zmk,matrix_transform = &default_transform;
-	};
+    };
 
-default_transform: keymap_transform_0 {
-    compatible = "zmk,matrix-transform";
-    columns = <4>;
-    rows = <1>;
-    map = <
-        RC(0,0) RC(0,1) RC(0,2) RC(0,3)
-    >;
-};
+    default_transform: keymap_transform_0 {
+        compatible = "zmk,matrix-transform";
+        columns = <4>;
+        rows = <1>;
+        map = <
+            RC(0,0) RC(0,1) RC(0,2) RC(0,3)
+        >;
+    };
 
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-direct";
@@ -30,12 +30,10 @@ default_transform: keymap_transform_0 {
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         status = "disabled";
-        input-processors = 
-            <&zip_xy_transform INPUT_TRANSFORM_XY_SWAP>,        //X軸とY軸の入れ替え
-            <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,       //Y軸反転
-            <&zip_xy_transform INPUT_TRANSFORM_X_INVERT>;       //X軸反転
-            //<&zip_temp_layer 5 500>;                            //オートマウスレイヤーの選択
+        input-processors =
+            <&zip_xy_transform INPUT_TRANSFORM_XY_SWAP>,
+            <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
+            <&zip_xy_transform INPUT_TRANSFORM_X_INVERT>;
+        /* <&zip_temp_layer 5 500>;  ← 使いたいなら有効化 */
     };
-
-
 };
