@@ -2,6 +2,11 @@
 #include <dt-bindings/zmk/input_transform.h>
 #include <dt-bindings/zmk/matrix_transform.h>
 
+#define ROT_0   10
+#define ROT_90  11
+#define ROT_180 12
+#define ROT_270 13
+
 / {
 	chosen {
         zmk,kscan = &kscan0;
@@ -37,6 +42,26 @@ default_transform: keymap_transform_0 {
             //<&zip_xy_transform INPUT_TRANSFORM_X_INVERT>;       //X軸反転
             //<&zip_temp_layer 5 500>;                            //オートマウスレイヤーの選択
     };
+// --- ポインタ用リスナーに基準と上書きを設定 ---
+&trackball_listener {
+    // 基本（0°）：変換なし
+    input-processors = <&zip_xy_transform (0)>;
 
+    rot90 {
+        layers = <ROT_90>;
+        // XY入替 + X反転（= 90°）
+        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_X_INVERT)>;
+    };
+    rot180 {
+        layers = <ROT_180>;
+        // 180° = X反転 + Y反転
+        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>;
+    };
+    rot270 {
+        layers = <ROT_270>;
+        // XY入替 + Y反転（= 270°）
+        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_Y_INVERT)>;
+    };
+};
 
 };
