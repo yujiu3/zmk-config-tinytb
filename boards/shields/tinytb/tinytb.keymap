@@ -48,22 +48,24 @@
                 &bt BT_CLR    &bt BT_SEL 0     &mkp LCLK
                 &mkp LCLK&mkp RCLK     &mkp LCLK
             >;
-            sensor-bindings = <&scroll_up_down>;        };
+            sensor-bindings = <&scroll_up_down>;
         };
 
         layer_1 {
             bindings = <
-                &trans        &trans
-                &trans        &trans
+                &trans        &trans        &trans
+                &trans        &trans        &trans
             >;
             sensor-bindings = <&scroll_right_left>;
         };
 
         layer_2 {
             bindings = <
-                &trans        &trans
-                &trans        &trans
+                &trans        &trans        &trans
+                &trans        &trans        &trans
             >;
             sensor-bindings = <&scroll_up_down>;
         };
     };
+
+};
