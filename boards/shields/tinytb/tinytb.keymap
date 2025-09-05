@@ -64,4 +64,9 @@
             >;
             sensor-bindings = <&scroll_up_down>;
         };
+
+    rot0 { label = "ROT_0";   bindings = <&trans &trans &trans &trans>; };
+    rot90{ label = "ROT_90";  bindings = <&trans &trans &trans &trans>; };
+    rot180{label = "ROT_180"; bindings = <&trans &trans &trans &trans>; };
+    rot270{label = "ROT_270"; bindings = <&trans &trans &trans &trans>; };
     };
