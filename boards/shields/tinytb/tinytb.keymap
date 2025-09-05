@@ -9,64 +9,123 @@
 #define ZMK_POINTING_DEFAULT_SCRL_VAL 100
 #define SCROLL 1
 
-&mt {
-    flavor = "balanced";
-    quick-tap-ms = <0>;
-};
+#define BASE      0
+#define L1        1
+#define L2        2
+#define ROT_0    90
+#define ROT_90   91
+#define ROT_180  92
+#define ROT_270  93
 
-&lt {
-    quick-tap-ms = <300>;
-    flavor = "balanced";
-};
+&mt { flavor = "balanced"; quick-tap-ms = <0>; };
+&lt { quick-tap-ms = <300>; flavor = "balanced"; };
 
-/ {
+ /{
+  behaviors {
+    scroll_up_down: mouse_wheel_up_down {
+      compatible = "zmk,behavior-sensor-rotate";
+      #sensor-binding-cells = <0>;
+      bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
+      tap-ms = <20>;
+    };
+    scroll_right_left: mouse_wheel_right_left {
+      compatible = "zmk,behavior-sensor-rotate";
+      #sensor-binding-cells = <0>;
+      bindings = <&msc SCRL_LEFT>, <&msc SCRL_RIGHT>;
+      tap-ms = <20>;
+    };
+  };
 
-    behaviors {
+  /* 入力プロセッサ（回転） */
+  trackball_listener: trackball_listener {
+    compatible = "zmk,input-listener";
+    status = "okay";
 
-        scroll_up_down: mouse_wheel_up_down {
-            compatible = "zmk,behavior-sensor-rotate";
-            #sensor-binding-cells = <0>;
-            bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
-            tap-ms = <20>;
-        };
+    /* 基本(0°) = 変換なし */
+    input-processors = <&zip_xy_transform (0)>;
 
-        scroll_right_left: mouse_wheel_right_left {
-            compatible = "zmk,behavior-sensor-rotate";
-            #sensor-binding-cells = <0>;
-            bindings = <&msc SCRL_LEFT>, <&msc SCRL_RIGHT>;
-            tap-ms = <20>;
-        };
+    rot90 {
+      layers = <ROT_90>;
+      /* 90° = XY入替 + X反転 */
+      input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_X_INVERT)>;
+    };
+    rot180 {
+      layers = <ROT_180>;
+      /* 180° = X反転 + Y反転 */
+      input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>;
+    };
+    rot270 {
+      layers = <ROT_270>;
+      /* 270° = XY入替 + Y反転 */
+      input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_Y_INVERT)>;
+    };
+  };
+
+  keymap {
+    compatible = "zmk,keymap";
+
+    /* 6キー想定（2×3）: 行ごとに3つずつ並べて6個 */
+    base { label = "BASE";
+      bindings = <
+        &mkp LCLK   &mkp LCLK   &mkp LCLK
+        &mkp LCLK   &mkp RCLK   &mkp LCLK
+      >;
+      sensor-bindings = <&scroll_up_down>;
     };
 
-    keymap {
-        compatible = "zmk,keymap";
-
-        default_layer {
-            bindings = <
-                &mkp LCLK    &mkp LCLK    &mkp LCLK
-                &mkp LCLK    &mkp RCLK     &mkp LCLK
-            >;
-            sensor-bindings = <&scroll_up_down>;        };
-        };
-
-        layer_1 {
-            bindings = <
-                &trans        &trans        &trans
-                &trans        &trans        &trans
-            >;
-            sensor-bindings = <&scroll_right_left>;
-        };
-
-        layer_2 {
-            bindings = <
-                &trans        &trans        &trans
-                &trans        &trans        &trans
-            >;
-            sensor-bindings = <&scroll_up_down>;
-        };
-
-    rot0 { label = "ROT_0";   bindings = <&trans &trans &trans &trans>; };
-    rot90{ label = "ROT_90";  bindings = <&trans &trans &trans &trans>; };
-    rot180{label = "ROT_180"; bindings = <&trans &trans &trans &trans>; };
-    rot270{label = "ROT_270"; bindings = <&trans &trans &trans &trans>; };
+    layer_1 { label = "L1";
+      bindings = <
+        &trans &trans &trans
+        &trans &trans &trans
+      >;
+      sensor-bindings = <&scroll_right_left>;
     };
+
+    layer_2 { label = "L2";
+      bindings = <
+        &trans &trans &trans
+        &trans &trans &trans
+      >;
+      sensor-bindings = <&scroll_up_down>;
+    };
+
+    /* 回転レイヤーはすべて透過（キー配置は変えない）*/
+    rot0   { label = "ROT_0";
+      bindings = <
+        &trans &trans &trans
+        &trans &trans &trans
+      >;
+    };
+    rot90  { label = "ROT_90";
+      bindings = <
+        &trans &trans &trans
+        &trans &trans &trans
+      >;
+    };
+    rot180 { label = "ROT_180";
+      bindings = <
+        &trans &trans &trans
+        &trans &trans &trans
+      >;
+    };
+    rot270 { label = "ROT_270";
+      bindings = <
+        &trans &trans &trans
+        &trans &trans &trans
+      >;
+    };
+  };
+};
+
+/* 重要：実トラックボールデバイスに listener を紐付けること
+ * 下は例。あなたの環境のデバイスノード名に合わせて置き換えてね。
+ */
+/*
+&spi1 {
+  pmw3360@0 {
+    compatible = "...";
+    ... 省略 ...
+    listeners = <&trackball_listener>;  // ←これが肝
+  };
+};
+*/
