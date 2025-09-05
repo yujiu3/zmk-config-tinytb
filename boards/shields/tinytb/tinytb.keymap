@@ -9,18 +9,36 @@
 #define ZMK_POINTING_DEFAULT_SCRL_VAL 100
 #define SCROLL 1
 
-#define BASE      0
-#define L1        1
-#define L2        2
-#define ROT_0    90
-#define ROT_90   91
-#define ROT_180  92
-#define ROT_270  93
+/* どこかの共通ヘッダの近くに */
+#define BASE        0
+#define L1          1
+#define L2          2
+#define SELECT_ROT  80     /* 設定(選択)レイヤー */
+#define ROT_0       90
+#define ROT_90      91
+#define ROT_180     92
+#define ROT_270     93
 
 &mt { flavor = "balanced"; quick-tap-ms = <0>; };
 &lt { quick-tap-ms = <300>; flavor = "balanced"; };
 
  /{
+
+
+  /* --- コンボ定義 --- */
+  combos {
+    compatible = "zmk,combos";
+
+    /* 1+2+3 同時押しで 設定レイヤーを開閉（トグル） */
+    combo_rot_select {
+      timeout-ms = <50>;              /* 反応が鈍ければ少し上げる(例: 60〜80) */
+      key-positions = <0 1 2>;        /* ← ここは “1/2/3 キーの物理位置” */
+      bindings = <&tog SELECT_ROT>;   /* 入る/出るをトグル */
+      /* 必要なら layers = <BASE L1 L2>; を付けて適用範囲を絞る */
+    };
+  };
+
+
   behaviors {
     scroll_up_down: mouse_wheel_up_down {
       compatible = "zmk,behavior-sensor-rotate";
@@ -89,43 +107,31 @@
       sensor-bindings = <&scroll_up_down>;
     };
 
-    /* 回転レイヤーはすべて透過（キー配置は変えない）*/
-    rot0   { label = "ROT_0";
+
+    /* 設定(選択)レイヤー：回転を選んで 6 で確定（閉じる） */
+    selrot { label = "SELECT_ROT";
       bindings = <
-        &trans &trans &trans
-        &trans &trans &trans
+        &to ROT_0     &to ROT_90    &to ROT_180           /* 1,2,3 */
+        &to ROT_270   &trans         &tog SELECT_ROT       /* 4,5,6 : 6で閉じる */
       >;
+      /* sensor-bindings は通常不要。必要なら透過運用に合わせて省略/付与 */
+    };
+
+    /* 回転（すべて透過） */
+    rot0   { label = "ROT_0";
+      bindings = < &trans &trans &trans  &trans &trans &trans >;
     };
     rot90  { label = "ROT_90";
-      bindings = <
-        &trans &trans &trans
-        &trans &trans &trans
-      >;
+      bindings = < &trans &trans &trans  &trans &trans &trans >;
     };
     rot180 { label = "ROT_180";
-      bindings = <
-        &trans &trans &trans
-        &trans &trans &trans
-      >;
+      bindings = < &trans &trans &trans  &trans &trans &trans >;
     };
     rot270 { label = "ROT_270";
-      bindings = <
-        &trans &trans &trans
-        &trans &trans &trans
-      >;
+      bindings = < &trans &trans &trans  &trans &trans &trans >;
     };
+
   };
 };
 
-/* 重要：実トラックボールデバイスに listener を紐付けること
- * 下は例。あなたの環境のデバイスノード名に合わせて置き換えてね。
- */
-/*
-&spi1 {
-  pmw3360@0 {
-    compatible = "...";
-    ... 省略 ...
-    listeners = <&trackball_listener>;  // ←これが肝
-  };
-};
-*/
+
