@@ -3,6 +3,7 @@
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 
 #define ZMK_POINTING_SCRL_VAL 100
@@ -38,33 +39,46 @@
         };
     };
 
+    combos {
+        compatible = "zmk,combos";
+
+        mo3 {
+            bindings = <&mo 2>;
+            key-positions = <2 3>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
             bindings = <
-&bt BT_CLR  &mo 1  &mkp RCLK  &mkp LCLK
+&mo 1  &mo 3  &mkp RCLK  &mkp LCLK
             >;
 
             sensor-bindings = <&scroll_up_down>;
         };
 
-        layer_1 {
+        Vertical {
             bindings = <
-                &bt BT_SEL 0  &trans
-                &bt BT_SEL 1  &bt BT_SEL 2
+&trans  &trans  &kp LEFT_CONTROL  &kp LA(TAB)
             >;
 
             sensor-bindings = <&scroll_right_left>;
         };
 
-        layer_2 {
+        Horizontal {
             bindings = <
-                &trans        &trans
-                &trans        &trans
+&trans  &trans  &trans  &trans
             >;
 
             sensor-bindings = <&scroll_up_down>;
+        };
+
+        Bluetooth {
+            bindings = <
+&bt BT_CLR  &trans  &bt BT_SEL 1  &bt BT_SEL 0
+            >;
         };
     };
 };
