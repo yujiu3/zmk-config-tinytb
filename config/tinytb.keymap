@@ -114,7 +114,7 @@
 
             /* 180° = X反転 + Y反転 */
 
-            input-processors = <&zip_xy_transform (0>;
+            input-processors = <&zip_xy_transform (0)>;
         };
 
         rot270 {
