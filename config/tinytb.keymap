@@ -49,21 +49,22 @@
             sensor-bindings = <&scroll_up_down>;
         };
 
-    layer_1 {
-        bindings = <
+        layer_1 {
+            bindings = <
                 &bt BT_SEL 0  &trans
                 &bt BT_SEL 1  &bt BT_SEL 2
-        >;
+            >;
 
-        sensor-bindings = <&scroll_right_left>;
-    };
+            sensor-bindings = <&scroll_right_left>;
+        };
 
-    layer_2 {
-        bindings = <
+        layer_2 {
+            bindings = <
                 &trans        &trans
                 &trans        &trans
-        >;
+            >;
 
-        sensor-bindings = <&scroll_up_down>;
+            sensor-bindings = <&scroll_up_down>;
+        };
     };
 };
