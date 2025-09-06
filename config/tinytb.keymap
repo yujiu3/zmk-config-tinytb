@@ -44,7 +44,7 @@
         compatible = "zmk,combos";
 
         mo2 {
-            bindings = <&mo 2>;
+            bindings = <&mo 1>;
             key-positions = <2 3>;
         };
     };
@@ -54,18 +54,18 @@
 
         default_layer {
             bindings = <
-&mo 1  &mo 3  &mkp RCLK  &mkp LCLK
+&mo 3  &mo 1  &mkp RCLK  &mkp LCLK
             >;
 
-//            sensor-bindings = <&scroll_up_down>;
+            //            sensor-bindings = <&scroll_up_down>;
         };
 
         layer_1 {
             bindings = <
-&trans  &trans  &kp LEFT_CONTROL  &kp LA(TAB)
+&trans  &trans  &kp LA(TAB)  &kp LEFT_CONTROL
             >;
 
-//            sensor-bindings = <&scroll_right_left>;
+            //            sensor-bindings = <&scroll_right_left>;
         };
 
         layer_2 {
@@ -73,13 +73,14 @@
 &trans  &trans  &trans  &trans
             >;
 
-//            sensor-bindings = <&scroll_up_down>;
-              sensor-bindings = <&scroll_right_left>;
+            //            sensor-bindings = <&scroll_up_down>;
+
+            sensor-bindings = <&scroll_right_left>;
         };
 
         layer_3 {
             bindings = <
-&bt BT_CLR  &trans  &bt BT_SEL 1  &bt BT_SEL 0
+&trans  &bt BT_CLR  &bt BT_SEL 1  &bt BT_SEL 0
             >;
         };
     };
