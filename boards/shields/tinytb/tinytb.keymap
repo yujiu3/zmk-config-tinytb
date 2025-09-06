@@ -7,7 +7,7 @@
 #include <dt-bindings/zmk/pointing.h>
 
 #define ZMK_POINTING_DEFAULT_SCRL_VAL 100
-#define SCROLL 1
+#define SCROLL 4
 
 /* どこかの共通ヘッダの近くに */
 #define BASE        0
@@ -16,7 +16,7 @@
 #define ROT_270     3
 #define L1          4
 #define L2          5
-#define SELECT_BT  6     /* 設定(選択)レイヤー */
+#define SELECT_BT   6     /* 設定(選択)レイヤー */
 
 
 &mt { flavor = "balanced"; quick-tap-ms = <0>; };
