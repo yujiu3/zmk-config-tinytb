@@ -46,7 +46,7 @@
         };
 
         r0 {
-            bindings = <&to 4 0>;
+            bindings = <&to 0>;
             key-positions = <1 4 0>;
         };
 
