@@ -2,7 +2,6 @@
 #include <dt-bindings/zmk/input_transform.h>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <behaviors.dtsi>
-#include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 
 #define ZMK_POINTING_DEFAULT_SCRL_VAL 100
@@ -137,7 +136,7 @@
         selrot {
             label = "SELECT_ROT";
             bindings = <
-&to ROT_0  &to ROT_90  &to ROT_180  &to ROT_270  &kp C_RESET  &tog SELECT_ROT
+&to ROT_0  &to ROT_90  &to ROT_180  &to ROT_270  &trans  &tog SELECT_ROT
             >;
 
             /* sensor-bindings は通常不要。必要なら透過運用に合わせて省略/付与 */
