@@ -109,7 +109,7 @@
         rot180 {
             layers = <ROT_180>;
             /* 180° = X反転 + Y反転 */
-            input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>;
+            input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT | INPUT_TRANSFORM_X_INVERT)>;
         };
 
         rot270 {
