@@ -134,7 +134,7 @@
         base {
             label = "BASE";
             bindings = <
-&to 0  &mkp MCLK  &to 1  &to 2  &mo 4  &to 3
+&to 0  &mkp LCLK  &to 1  &to 2  &mo 4  &to 3
             >;
 
             sensor-bindings = <&scroll_up_down>;
