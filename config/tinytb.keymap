@@ -99,7 +99,7 @@
 
         /* 基本(0°) = 変換なし */
 
-        input-processors = <&zip_xy_transform (0)>;
+        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>;
 
         rot90 {
             layers = <ROT_90>;
