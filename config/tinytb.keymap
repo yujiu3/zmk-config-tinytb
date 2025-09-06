@@ -7,8 +7,9 @@
 #include <dt-bindings/zmk/pointing.h>
 
 #define ZMK_POINTING_SCRL_VAL 100
-#define MOUSE 5
-#define SCROLL 6
+#define SCROLL 1
+#define HOR 2
+#define BL 3
 
 &mt {
     flavor = "balanced";
@@ -42,7 +43,7 @@
     combos {
         compatible = "zmk,combos";
 
-        mo3 {
+        mo2 {
             bindings = <&mo 2>;
             key-positions = <2 3>;
         };
@@ -59,7 +60,7 @@
             sensor-bindings = <&scroll_up_down>;
         };
 
-        Vertical {
+        layer_1 {
             bindings = <
 &trans  &trans  &kp LEFT_CONTROL  &kp LA(TAB)
             >;
@@ -67,7 +68,7 @@
             sensor-bindings = <&scroll_right_left>;
         };
 
-        Horizontal {
+        layer_2 {
             bindings = <
 &trans  &trans  &trans  &trans
             >;
@@ -75,7 +76,7 @@
             sensor-bindings = <&scroll_up_down>;
         };
 
-        Bluetooth {
+        layer_3 {
             bindings = <
 &bt BT_CLR  &trans  &bt BT_SEL 1  &bt BT_SEL 0
             >;
