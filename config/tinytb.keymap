@@ -115,7 +115,7 @@
         rot270 {
             layers = <ROT_270>;
             /* 270° = XY入替 + Y反転 */
-            input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>;
+            input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP| INPUT_TRANSFORM_Y_INVERT)>;
         };
     };
 
