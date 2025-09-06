@@ -55,6 +55,7 @@
 &trackball_listener {
     status = "okay";
     device = <&trackball>;
+    input-processors = <&zip_xy_scaler 3 2>;    //追記
 
     scroller {
         layers = <1>;
@@ -64,9 +65,11 @@
             <&zip_xy_to_scroll_mapper>,                         //スクロールモードに変更
             <&zip_scroll_transform INPUT_TRANSFORM_X_INVERT>,   //スクロールのX軸反転
             <&zip_scroll_scaler 1 5>;                           //スクロール量を1/4倍
+        process-next;    //追記
     };
 
 };
+
 
 
 
