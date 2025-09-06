@@ -74,6 +74,7 @@
             >;
 
 //            sensor-bindings = <&scroll_up_down>;
+              sensor-bindings = <&scroll_right_left>;
         };
 
         layer_3 {
