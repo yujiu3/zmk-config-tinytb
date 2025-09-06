@@ -9,16 +9,14 @@
 #define SCROLL 1
 
 /* どこかの共通ヘッダの近くに */
-
-/* どこかの共通ヘッダの近くに */
 #define BASE        0
-#define L1          1
-#define L2          2
-#define SELECT_ROT  3     /* 設定(選択)レイヤー */
-#define ROT_0       4
-#define ROT_90      5
-#define ROT_180     6
-#define ROT_270     7
+#define ROT_90      1
+#define ROT_180     2
+#define ROT_270     3
+#define L1          4
+#define L2          5
+#define SELECT_BT  6     /* 設定(選択)レイヤー */
+
 
 &mt {
     flavor = "balanced";
@@ -48,27 +46,27 @@
         };
 
         r0 {
-            bindings = <&to 4>;
+            bindings = <&to 4 0>;
             key-positions = <1 4 0>;
         };
 
         r90 {
-            bindings = <&to 5>;
+            bindings = <&to 1>;
             key-positions = <1 4 2>;
         };
 
         r180 {
-            bindings = <&to 6>;
+            bindings = <&to 3>;
             key-positions = <1 4 3>;
         };
 
         r270 {
-            bindings = <&to 7>;
+            bindings = <&to 4>;
             key-positions = <1 4 5>;
         };
 
         bt {
-            bindings = <&to 2>;
+            bindings = <&to 6>;
             key-positions = <2 5>;
             timeout-ms = <50>;
             layers = <3>;
@@ -136,10 +134,33 @@
         base {
             label = "BASE";
             bindings = <
-&mkp LCLK  &mkp MCLK  &mkp RCLK  &mkp MB4  &mo 1  &mkp MB5
+&mkp LCLK  &mkp MCLK  &mkp RCLK  &mkp LCLK  &mo 4  &mkp LCLK
             >;
 
             sensor-bindings = <&scroll_up_down>;
+        };
+
+        /* 回転（すべて透過） */
+
+        rot90 {
+            label = "ROT_90";
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        rot180 {
+            label = "ROT_180";
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        rot270 {
+            label = "ROT_270";
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans
+            >;
         };
 
         layer_1 {
@@ -163,42 +184,12 @@
         /* 設定(選択)レイヤー：回転を選んで 6 で確定（閉じる） */
 
         selrot {
-            label = "SELECT_ROT";
+            label = "SELECT_BT;
             bindings = <
 &to ROT_0  &to ROT_90  &to ROT_180  &to ROT_270  &trans  &tog SELECT_ROT
             >;
 
             /* sensor-bindings は通常不要。必要なら透過運用に合わせて省略/付与 */
-        };
-
-        /* 回転（すべて透過） */
-
-        rot0 {
-            label = "ROT_0";
-            bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans
-            >;
-        };
-
-        rot90 {
-            label = "ROT_90";
-            bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans
-            >;
-        };
-
-        rot180 {
-            label = "ROT_180";
-            bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans
-            >;
-        };
-
-        rot270 {
-            label = "ROT_270";
-            bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans
-            >;
         };
     };
 };
