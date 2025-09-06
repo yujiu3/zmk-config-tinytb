@@ -183,10 +183,10 @@
 
         /* 設定(選択)レイヤー：回転を選んで 6 で確定（閉じる） */
 
-        selrot {
+        selbt {
             label = "SELECT_BT;
             bindings = <
-&to ROT_0  &to ROT_90  &to ROT_180  &to ROT_270  &trans  &tog SELECT_ROT
+&to ROT_0  &to ROT_90  &to ROT_180  &to ROT_270  &trans  &tog SELECT_BT
             >;
 
             /* sensor-bindings は通常不要。必要なら透過運用に合わせて省略/付与 */
