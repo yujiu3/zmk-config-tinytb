@@ -137,7 +137,6 @@
 &to 0  &mkp LCLK  &to 1  &to 2  &mo 4  &to 3
             >;
 
-            sensor-bindings = <&scroll_up_down>;
         };
 
         /* 回転（すべて透過） */
@@ -145,21 +144,21 @@
         rot90 {
             label = "ROT_90";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans
+&to 0  &mkp LCLK  &to 1  &to 2  &mo 4  &to 3
             >;
         };
 
         rot180 {
             label = "ROT_180";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans
+&to 0  &mkp LCLK  &to 1  &to 2  &mo 4  &to 3
             >;
         };
 
         rot270 {
             label = "ROT_270";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans
+&to 0  &mkp LCLK  &to 1  &to 2  &mo 4  &to 3
             >;
         };
 
@@ -169,7 +168,6 @@
 &trans  &trans  &trans  &trans  &trans  &trans
             >;
 
-            sensor-bindings = <&scroll_right_left>;
         };
 
         layer_2 {
@@ -178,7 +176,6 @@
 &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &tog 0
             >;
 
-            sensor-bindings = <&scroll_up_down>;
         };
 
         /* 設定(選択)レイヤー：回転を選んで 6 で確定（閉じる） */
