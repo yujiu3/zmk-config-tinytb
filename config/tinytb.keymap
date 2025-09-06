@@ -9,6 +9,7 @@
 #define SCROLL 1
 
 /* どこかの共通ヘッダの近くに */
+
 #define BASE        0
 #define ROT_90      1
 #define ROT_180     2
@@ -16,7 +17,6 @@
 #define L1          4
 #define L2          5
 #define SELECT_BT  6     /* 設定(選択)レイヤー */
-
 
 &mt {
     flavor = "balanced";
@@ -134,7 +134,7 @@
         base {
             label = "BASE";
             bindings = <
-&mkp LCLK  &mkp MCLK  &mkp RCLK  &mkp LCLK  &mo 4  &mkp LCLK
+&to 0  &mkp MCLK  &to 1  &to 2  &mo 4  &to 3
             >;
 
             sensor-bindings = <&scroll_up_down>;
