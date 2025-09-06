@@ -13,11 +13,11 @@
 #define BASE        0
 #define L1          1
 #define L2          2
-#define SELECT_ROT  80     /* 設定(選択)レイヤー */
-#define ROT_0       90
-#define ROT_90      91
-#define ROT_180     92
-#define ROT_270     93
+#define SELECT_ROT  3     /* 設定(選択)レイヤー */
+#define ROT_0       4
+#define ROT_90      5
+#define ROT_180     6
+#define ROT_270     7
 
 &mt { flavor = "balanced"; quick-tap-ms = <0>; };
 &lt { quick-tap-ms = <300>; flavor = "balanced"; };
