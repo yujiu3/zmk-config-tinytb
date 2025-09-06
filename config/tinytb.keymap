@@ -49,14 +49,6 @@
             sensor-bindings = <&scroll_up_down>;
         };
 
-/*
-        layer_1 {
-            bindings = <
-&trans  &trans  &trans  &trans
-            >;
-        };
-    };
-*/
     layer_1 {
         bindings = <
                 &bt BT_SEL 0  &trans
