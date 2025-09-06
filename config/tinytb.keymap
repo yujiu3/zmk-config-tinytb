@@ -107,7 +107,7 @@
         base {
             label = "BASE";
             bindings = <
-&mkp LCLK  &msc MOVE_X(0)  &mkp RCLK  &mkp LCLK  &mo 1  &mkp RCLK
+&mkp LCLK  &mkp MCLK  &mkp RCLK  &mkp MB4  &mo 1  &mkp MB5
             >;
 
             sensor-bindings = <&scroll_up_down>;
