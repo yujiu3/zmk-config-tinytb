@@ -135,7 +135,7 @@
         base {
             label = "BASE";
             bindings = <
-&mkp LCLK  &mkp LCLK  &mkp RCLK  &kp RCTRL  &mo 4  &mkp LCLK
+&mkp LCLK  &mkp RCLK  &mkp LCLK  &kp RCTRL  &mo 4  &mkp LCLK
             >;
         };
 
