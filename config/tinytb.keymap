@@ -134,8 +134,7 @@
         base {
             label = "BASE";
             bindings = <
-&mkp LCLK  &mkp RCLK                &mkp LCLK
-&kp RCTRL  &mo L1     &mkp LCLK
+&mkp LCLK  &mkp RCLK  &mkp LCLK  &kp RCTRL  &mo L1  &mkp LCLK
             >;
         };
 
@@ -158,7 +157,7 @@
         rot270 {
             label = "ROT_270";
             bindings = <
-&mkp LCLK  &mkp LCLK  &mkp LCLK  &mkp LCLK  &mkp LCLK  &mkp LCLK
+&mkp RCLK  &mkp MB3  &mkp MB5  &mo 4  &mkp LCLK  &mkp MB4
             >;
         };
 
@@ -167,8 +166,9 @@
             bindings = <
 &trans  &trans  &trans  &trans  &trans  &trans
             >;
-      sensor-bindings = <&scroll_up_down>;
-};
+
+            sensor-bindings = <&scroll_up_down>;
+        };
 
         layer_2 {
             label = "L2";
