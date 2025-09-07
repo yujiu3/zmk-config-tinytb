@@ -114,7 +114,7 @@
 
             /* 180° =XY入替 + Y反転 */
 
-            input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP  | INPUT_TRANSFORM_X_INVERT)>;
+            input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_Y_INVERT)>;
         };
 
         rot270 {
@@ -134,7 +134,7 @@
         base {
             label = "BASE";
             bindings = <
-&mkp LCLK  &mkp LCLK  &mkp RCLK  &to 2  &mo 4  &mkp LCLK
+&to 2  &to 2  &mkp RCLK  &to 2  &mo 4  &mkp LCLK
             >;
         };
 
