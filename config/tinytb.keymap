@@ -71,21 +71,21 @@
             bindings = <
                 &to 0  &trans  &mt LC(END) LC(HOME)  &kp LEFT_CONTROL
             >;
-            sensor-bindings = <&scroll_up_down>;
+//            sensor-bindings = <&scroll_up_down>;
         };
 
         layer_2 {
             bindings = <
                 &to 0  &mt LC(PG_UP) LC(PG_DN)  &trans  &trans
             >;
-            sensor-bindings = <&scroll_right_left>;
+//            sensor-bindings = <&scroll_right_left>;
         };
 
         layer_3 {
             bindings = <
                 &trans  &bt BT_CLR  &bt BT_SEL 1  &bt BT_SEL 0
             >;
-            sensor-bindings = <&scroll_right_left>;
+//            sensor-bindings = <&scroll_right_left>;
         };
     };
 };
