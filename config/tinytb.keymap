@@ -97,8 +97,8 @@
         compatible = "zmk,input-listener";
         status = "okay";
 
-        /* 基本(0°) = 変換なし */
-        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>;
+        /* 基本(0°) = XY入替 */
+        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>;
 
         rot90 {
             layers = <ROT_90>;
@@ -114,8 +114,8 @@
 
         rot270 {
             layers = <ROT_270>;
-            /* 270° = XY入替 + Y反転 */
-            input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_Y_INVERT)>;
+            /* 270° = Y反転 */
+            input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>;
         };
     };
 
