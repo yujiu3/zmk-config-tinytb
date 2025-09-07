@@ -106,7 +106,7 @@
 
             /* 90° = XY入替 + X反転 */
 
-            input-processors = <&zip_xy_transform (0)>;
+            input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT | INPUT_TRANSFORM_Y_INVERT)>;
         };
 
         rot180 {
