@@ -98,30 +98,23 @@
         status = "okay";
 
         /* 基本(0°) = XY入替 完成済み*/
-
         input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>;
 
         rot90 {
             layers = <ROT_90>;
-
             /* 90° = XY入替 + X反転 完成済み */
-
             input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>;
         };
 
         rot180 {
             layers = <ROT_180>;
-
-            /* 180° =XY入替 + Y反転 */
-
+            /* 180° =XY入替 + Y反転 完成済み */
             input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>;
         };
 
         rot270 {
             layers = <ROT_270>;
-
             /* 270° = Y反転 完成済み */
-
             input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>;
         };
     };
@@ -134,7 +127,7 @@
         base {
             label = "BASE";
             bindings = <
-&to 2  &to 2  &mkp RCLK  &to 2  &mo 4  &mkp LCLK
+ &mkp LCLK   &mkp LCLK  &mkp RCLK   &mkp LCLK  &mo 4  &mkp LCLK
             >;
         };
 
