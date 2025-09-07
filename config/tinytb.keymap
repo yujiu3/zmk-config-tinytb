@@ -38,6 +38,15 @@
 
             tap-ms = <20>;
         };
+
+        // TapDance追加 https://zmk.dev/docs/keymaps/behaviors/tap-dance
+        td0: tap_dance_0 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&lt 3 LA(ESC)>, <&to 1>, <&to 2>;
+        };
+
     };
 
     combos {
@@ -54,34 +63,29 @@
 
         default_layer {
             bindings = <
-&mo 3  &mo 1  &mkp RCLK  &mkp LCLK
+                &td0  &mo 1  &mkp RCLK  &mkp LCLK
             >;
-
-            //            sensor-bindings = <&scroll_up_down>;
         };
 
         layer_1 {
             bindings = <
-&trans  &trans  &kp LA(TAB)  &kp LEFT_CONTROL
+                &to 0  &trans  &mt LC(END) LC(HOME)  &kp LEFT_CONTROL
             >;
-
-            //            sensor-bindings = <&scroll_right_left>;
+            sensor-bindings = <&scroll_up_down>;
         };
 
         layer_2 {
             bindings = <
-&trans  &trans  &trans  &trans
+                &to 0  &mt LC(PGUP) LC(PGDN)  &trans  &trans
             >;
-
-            //            sensor-bindings = <&scroll_up_down>;
-
             sensor-bindings = <&scroll_right_left>;
         };
 
         layer_3 {
             bindings = <
-&trans  &bt BT_CLR  &bt BT_SEL 1  &bt BT_SEL 0
+                &trans  &bt BT_CLR  &bt BT_SEL 1  &bt BT_SEL 0
             >;
+            sensor-bindings = <&scroll_right_left>;
         };
     };
 };
