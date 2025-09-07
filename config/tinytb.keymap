@@ -98,23 +98,30 @@
         status = "okay";
 
         /* 基本(0°) = XY入替 */
+
         input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>;
 
         rot90 {
             layers = <ROT_90>;
+
             /* 90° = XY入替 + X反転 */
+
             input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>;
         };
 
         rot180 {
             layers = <ROT_180>;
+
             /* 180° = X反転 + Y反転 */
+
             input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT | INPUT_TRANSFORM_X_INVERT)>;
         };
 
         rot270 {
             layers = <ROT_270>;
+
             /* 270° = Y反転 */
+
             input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>;
         };
     };
@@ -127,9 +134,8 @@
         base {
             label = "BASE";
             bindings = <
-&to 0  &mkp LCLK  &to 1  &to 2  &mo 4  &to 3
+&mkp LCLK  &mkp LCLK  &to 1  &to 2  &mo 4  &mkp LCLK
             >;
-
         };
 
         /* 回転 */
@@ -160,7 +166,6 @@
             bindings = <
 &trans  &trans  &trans  &trans  &trans  &trans
             >;
-
         };
 
         layer_2 {
@@ -168,7 +173,6 @@
             bindings = <
 &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &tog 0
             >;
-
         };
 
         /* 設定(選択)レイヤー：回転を選んで 6 で確定（閉じる） */
