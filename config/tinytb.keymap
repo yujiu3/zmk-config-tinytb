@@ -164,7 +164,7 @@
         layer_1 {
             label = "L1";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans
+&kp K_PASTE  &kp K_CUT  &kp K_PASTE  &kp K_COPY  &trans  &kp K_COPY
             >;
 
             sensor-bindings = <&scroll_up_down>;
