@@ -182,7 +182,7 @@
         selbt {
             label = "SELECT_BT";
             bindings = <
-&to ROT_0  &to ROT_90  &to ROT_180  &to ROT_270  &trans  &tog SELECT_BT
+&bt BT_SEL 3  &trans  &bt BT_SEL 2  &bt BT_SEL 1  &trans  &bt BT_SEL 0
             >;
 
             /* sensor-bindings は通常不要。必要なら透過運用に合わせて省略/付与 */
