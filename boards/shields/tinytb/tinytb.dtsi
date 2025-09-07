@@ -34,29 +34,6 @@ default_transform: keymap_transform_0 {
             <&gpio1 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
     };
 
-  // --- 入力プロセッサ設定（基準＋レイヤー上書き）---
-  trackball_listener: trackball_listener {
-    compatible = "zmk,input-listener";
-    status = "okay";
 
-    // 基本（0°）: 変換なし
-    input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>;
-
-    rot90 {
-      layers = <ROT_90>;
-      // 90° = XY入替 + X反転
-      input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_XY_SWAP)>;
-    };
-    rot180 {
-      layers = <ROT_180>;
-      // 180° = X反転 + Y反転
-      input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>;
-    };
-    rot270 {
-      layers = <ROT_270>;
-      // 270° = XY入替 + Y反転
-      input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>;
-    };
-  };
 };
 
