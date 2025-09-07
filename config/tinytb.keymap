@@ -76,7 +76,7 @@
 
         layer_2 {
             bindings = <
-                &to 0  &mt LC(PGUP) LC(PGDN)  &trans  &trans
+                &to 0  &mt LC(PG_UP) LC(PG_DN)  &trans  &trans
             >;
             sensor-bindings = <&scroll_right_left>;
         };
