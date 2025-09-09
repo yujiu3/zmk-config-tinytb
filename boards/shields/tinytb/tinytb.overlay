@@ -57,7 +57,7 @@
     device = <&trackball>;
 
     scroller {
-        layers = <1>;
+        layers = <1 2>;
         input-processors = 
             <&zip_xy_transform INPUT_TRANSFORM_XY_SWAP>,        //X軸とY軸の入れ替え
             <&zip_xy_transform INPUT_TRANSFORM_X_INVERT>,       //X軸反転
