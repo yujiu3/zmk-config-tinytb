@@ -27,8 +27,7 @@ manifest:
 
     - name: zmk-scroll-snap
       remote: kot149
-      revision: main
-      path: modules/zmk-scroll-snap
+      revision: v1
 
   self:
     path: config
