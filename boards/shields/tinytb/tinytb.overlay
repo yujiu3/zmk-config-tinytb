@@ -57,6 +57,7 @@
     status = "okay";
     device = <&trackball>;
 
+/*
     scroller {
         layers = <1 2>;
         input-processors = 
@@ -70,7 +71,26 @@
 
 
     };
+*/
 
+    scroller_vertical {
+        layers = <1>; // layer1 でのみ有効
+        input-processors = 
+            <&zip_xy_transform INPUT_TRANSFORM_XY_SWAP>,        //X軸とY軸の入れ替え
+            <&zip_xy_to_scroll_mapper>, // トラックボール回転 → スクロール
+            <&zip_scroll_transform INPUT_TRANSFORM_Y_ONLY>, // Y軸のみスクロール
+            <&snap_scroll_mapper>; // snap スクロール
+    };
+
+    scroller_horizontal {
+        layers = <2>; // layer2 でのみ有効
+        input-processors = 
+            <&zip_xy_transform INPUT_TRANSFORM_XY_SWAP>,        //X軸とY軸の入れ替え
+            <&zip_xy_to_scroll_mapper>, // トラックボール回転 → スクロール
+            <&zip_scroll_transform INPUT_TRANSFORM_X_ONLY>, // X軸のみスクロール
+            <&snap_scroll_mapper>; // snap スクロール
+    };
+}
 
 };
 
@@ -82,18 +102,3 @@
     };
 };
 
-/ {
-    scroll_up_down: scroll_up_down {
-        compatible = "zmk,behavior-sensor-rotate";
-        #sensor-binding-cells = <0>;
-        bindings = <&msc SCRL_DOWN &msc SCRL_UP>;
-        tap-ms = <20>;
-    };
-
-    scroll_right_left: scroll_right_left {
-        compatible = "zmk,behavior-sensor-rotate";
-        #sensor-binding-cells = <0>;
-        bindings = <&msc SCRL_LEFT &msc SCRL_RIGHT>;
-        tap-ms = <20>;
-    };
-};
