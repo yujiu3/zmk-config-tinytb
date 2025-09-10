@@ -127,7 +127,7 @@
         base {
             label = "BASE";
             bindings = <
-&kp RETURN  &lt 4 SPACE  &mkp LCLK  &mt RCTRL BACKSPACE  &mkp RCLK  &mkp LCLK
+&lt 5 RETURN  &lt 4 SPACE  &mkp LCLK  &mt RCTRL BACKSPACE  &mkp RCLK  &mkp LCLK
             >;
         };
 
@@ -166,7 +166,7 @@
         layer_2 {
             label = "L2";
             bindings = <
-&bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &tog 0
+&trans  &trans  &trans  &trans  &kp PERIOD  &kp COMMA
             >;
 
             sensor-bindings = <&scroll_right_left>;
