@@ -23,6 +23,7 @@
 
 / {
     behaviors {
+/*
         scroll_up_down: mouse_wheel_up_down {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
@@ -38,6 +39,8 @@
 
             tap-ms = <20>;
         };
+
+*/
 
         // TapDance追加 https://zmk.dev/docs/keymaps/behaviors/tap-dance
         td0: tap_dance_0 {
@@ -71,14 +74,14 @@
             bindings = <
                 &to 0  &trans  &mt LC(END) LC(HOME)  &kp LEFT_CONTROL
             >;
-//            sensor-bindings = <&scroll_up_down>;
+            sensor-bindings = <&scroll_up_down>;
         };
 
         layer_2 {
             bindings = <
                 &to 0  &mt LC(PG_UP) LC(PG_DN)  &trans  &trans
             >;
-//            sensor-bindings = <&scroll_right_left>;
+            sensor-bindings = <&scroll_right_left>;
         };
 
         layer_3 {
