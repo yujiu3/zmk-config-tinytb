@@ -8,6 +8,8 @@ manifest:
       url-base: https://github.com/badjeff
     - name: caksoylar
       url-base: https://github.com/caksoylar
+    - name: kot149
+      url-base: https://github.com/kot149
 
   projects:
     - name: zmk
@@ -22,6 +24,11 @@ manifest:
     - name: zmk-rgbled-widget
       remote: caksoylar
       revision: main
+
+    - name: zmk-scroll-snap
+      remote: kot149
+      revision: main
+      path: modules/zmk-scroll-snap
 
   self:
     path: config
