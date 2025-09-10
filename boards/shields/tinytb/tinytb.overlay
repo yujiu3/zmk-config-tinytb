@@ -74,7 +74,13 @@
 
 };
 
-
+/ {
+    snap_scroll_mapper: snap_scroll_mapper {
+        compatible = "zmk,input-processor-snap-scroll";
+        snap = <1>;        // スナップ有効化
+        threshold = <20>;  // 感度調整（大きくすると直線性が強くなる）
+    };
+};
 
 
 
