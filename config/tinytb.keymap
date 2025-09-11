@@ -166,7 +166,7 @@
         layer_2 {
             label = "L2";
             bindings = <
-&trans  &trans  &trans  &trans  &kp PERIOD  &kp COMMA
+&trans  &kp RIGHT_ARROW  &kp LEFT_ARROW  &trans  &kp PERIOD  &kp COMMA
             >;
 
             sensor-bindings = <&scroll_right_left>;
