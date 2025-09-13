@@ -150,7 +150,7 @@
         rot270 {
             label = "ROT_270";
             bindings = <
-&mkp RCLK  &mkp MB3  &mkp MB5  &mo 5  &mkp LCLK  &mkp MB4
+&mkp RCLK  &mt RCTRL BACKSPACE  &kp ENTER  &lt 5 SPACE  &mkp LCLK  &mkp LCLK
             >;
         };
 
