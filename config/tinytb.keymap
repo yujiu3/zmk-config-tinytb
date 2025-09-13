@@ -169,7 +169,7 @@
 &trans  &kp RIGHT_ARROW  &kp LEFT_ARROW  &trans  &kp PERIOD  &kp COMMA
             >;
 
-            sensor-bindings = <&scroll_right_left>;
+            sensor-bindings = <&scroll_up_down>;
         };
 
         /* 設定(選択)レイヤー：回転を選んで 6 で確定（閉じる） */
