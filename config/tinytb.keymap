@@ -143,7 +143,7 @@
         rot180 {
             label = "ROT_180";
             bindings = <
-&to 0  &mkp LCLK  &to 1  &to 2  &mo 4  &to 3
+&lt 5 ENTER  &lt 4 SPACE  &mkp LCLK  &mt RCTRL BACKSPACE  &mkp RCLK  &mkp LCLK
             >;
         };
 
