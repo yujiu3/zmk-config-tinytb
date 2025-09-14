@@ -32,76 +32,23 @@
 
 / {
     /* --- コンボ定義 --- */
+combos {
+    compatible = "zmk,combos";
 
-    combos {
-        compatible = "zmk,combos";
-
-        combo_bt_select {
-            timeout-ms = <50>;
-            key-positions = <5 3 2 0>;
-            bindings = <&mo SELECT_BT>;   // 数値でなくシンボル
-            layers = <BASE>;              // 重複させない
-        };
-
-        r0 {
-            bindings = <&to BASE>;
-            key-positions = <5 4>;
-        };
-
-        r90 {
-            bindings = <&to ROT_90>;
-            key-positions = <4 3>;
-        };
-
-        r180 {
-            bindings = <&to ROT_180>;
-            key-positions = <1 2>;
-        };
-
-        r270 {
-            bindings = <&to ROT_270>;
-            key-positions = <1 0>;
-        };
+    combo_bt_select {
+      timeout-ms = <60>;
+      key-positions = <5 3 2 0>;
+      bindings = <&mo SELECT_BT>;
+      layers = <BASE>;
     };
 
-    behaviors {
+    r0   { bindings = <&to BASE>;    key-positions = <5 4>; };
+    r90  { bindings = <&to ROT_90>;  key-positions = <4 3>; };
+    r180 { bindings = <&to ROT_180>; key-positions = <1 2>; };
+    r270 { bindings = <&to ROT_270>; key-positions = <1 0>; };
+  };  /* combos 終了 */
 
-    };
 
-    /* 入力プロセッサ（回転設定） */
-/*    trackball_listener: trackball_listener {
-        compatible = "zmk,input-listener";
-        status = "okay";
-
-        /* 基本(0°) = XY入替 完成済み*/
-
-        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>;
-
-        rot90 {
-            layers = <ROT_90>;
-
-            /* 90° = XY入替 + X反転 完成済み */
-
-            input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>;
-        };
-
-        rot180 {
-            layers = <ROT_180>;
-
-            /* 180° =XY入替 + Y反転 完成済み */
-
-            input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>;
-        };
-
-        rot270 {
-            layers = <ROT_270>;
-
-            /* 270° = Y反転 完成済み */
-
-            input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>;
-        };
-    };
-*/
 
     keymap {
         compatible = "zmk,keymap";
