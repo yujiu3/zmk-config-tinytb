@@ -65,45 +65,7 @@
     };
 
     behaviors {
-        // 縦スクロール（通常）
 
-        scroll_ud: scroll_up_down {
-            compatible = "zmk,behavior-sensor-rotate";
-            #sensor-binding-cells = <0>;
-            bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
-
-            tap-ms = <20>;
-        };
-
-        // 縦スクロール（反転）
-
-        scroll_ud_inv: scroll_up_down_inv {
-            compatible = "zmk,behavior-sensor-rotate";
-            #sensor-binding-cells = <0>;
-            bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
-
-            tap-ms = <20>;
-        };
-
-        // 横スクロール（通常）
-
-        scroll_rl: scroll_right_left {
-            compatible = "zmk,behavior-sensor-rotate";
-            #sensor-binding-cells = <0>;
-            bindings = <&msc SCRL_LEFT>, <&msc SCRL_RIGHT>;
-
-            tap-ms = <20>;
-        };
-
-        // 横スクロール（反転）
-
-        scroll_rl_inv: scroll_right_left_inv {
-            compatible = "zmk,behavior-sensor-rotate";
-            #sensor-binding-cells = <0>;
-            bindings = <&msc SCRL_RIGHT>, <&msc SCRL_LEFT>;
-
-            tap-ms = <20>;
-        };
     };
 
     /* 入力プロセッサ（回転設定） */
@@ -181,8 +143,6 @@
             bindings = <
 &kp RG(V)  &trans  &kp RA(SPACE)  &kp LG(C)  &kp LG(X)  &kp LG(SPACE)
             >;
-
-            sensor-bindings = <&scroll_ud>;         // ← 縦（正）
         };
 
         layer_2 {
@@ -190,8 +150,6 @@
             bindings = <
 &trans  &kp RIGHT_ARROW  &kp LEFT_ARROW  &trans  &kp PERIOD  &kp COMMA
             >;
-
-            sensor-bindings = <&scroll_rl>;         // ← 横（正）
         };
 
         layer_3 {
@@ -199,8 +157,6 @@
             bindings = <
 &trans  &kp RIGHT_ARROW  &kp LEFT_ARROW  &trans  &kp PERIOD  &kp COMMA
             >;
-
-            sensor-bindings = <&scroll_ud_inv>;     // ← 縦（反転）
         };
 
         layer_4 {
@@ -208,8 +164,6 @@
             bindings = <
 &trans  &kp RIGHT_ARROW  &kp LEFT_ARROW  &trans  &kp PERIOD  &kp COMMA
             >;
-
-            sensor-bindings = <&scroll_rl_inv>;     // ← 横（反転）
         };
 
         /*BT 設定(選択)レイヤー */
