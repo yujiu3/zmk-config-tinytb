@@ -20,32 +20,32 @@
     base {
       label = "BASE";
       bindings = <
-        &kp ENTER            &mo L1          &mkp LCLK
-        &mt RCTRL BACKSPACE  &mo L2          &mkp RCLK
+&mo L1     &mo L1    &mo L1 
+&mo L1     &mo L1    &mo L1 
       >;
     };
 
     rot90 {
       label = "ROT_90";
       bindings = <
-        &kp ENTER            &mo L2          &mkp LCLK
-        &mt RCTRL BACKSPACE  &mo L3          &mkp RCLK
+&mo L2     &mo L2    &mo L2 
+&mo L2     &mo L2    &mo L2 
       >;
     };
 
     rot180 {
       label = "ROT_180";
       bindings = <
-        &kp ENTER            &mo L3          &mkp LCLK
-        &mt RCTRL BACKSPACE  &mo L4          &mkp RCLK
+&mo L3     &mo L3    &mo L3
+&mo L3     &mo L3    &mo L3
       >;
     };
 
     rot270 {
       label = "ROT_270";
       bindings = <
-        &kp ENTER            &mo L4          &mkp LCLK
-        &mt RCTRL BACKSPACE  &mo L1          &mkp RCLK
+&mo L4     &mo L4    &mo L4
+&mo L4     &mo L4    &mo L4
       >;
     };
 
