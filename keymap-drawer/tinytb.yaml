@@ -1,3 +1,77 @@
 layout: {zmk_keyboard: tinytb}
 layers:
-  default: [B, R, D, M]
+  BASE:
+  - ENTER
+  - {t: SPACE, h: 'Scroll_L0 '}
+  - '&mkp LCLK'
+  - {t: BACKSPACE, h: RCTRL}
+  - '&mkp RCLK'
+  - '&mkp LCLK'
+  ROT_90:
+  - '&mkp RCLK'
+  - {t: BACKSPACE, h: RCTRL}
+  - ENTER
+  - {t: SPACE, h: Scroll_L90}
+  - '&mkp LCLK'
+  - '&mkp LCLK'
+  ROT_180:
+  - '&mkp LCLK'
+  - '&mkp RCLK'
+  - '&mkp LCLK'
+  - '&mkp LCLK'
+  - {t: SPACE, h: Scroll_L180}
+  - '&mkp LCLK'
+  ROT_270:
+  - '&mkp RCLK'
+  - {t: BACKSPACE, h: RCTRL}
+  - ENTER
+  - {t: SPACE, h: Scroll_L270}
+  - '&mkp LCLK'
+  - '&mkp LCLK'
+  'Scroll_L0 ':
+  - {t: ▽, type: trans}
+  - {type: held}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  Scroll_L90:
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {type: held}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  Scroll_L180:
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {type: held}
+  - {t: ▽, type: trans}
+  Scroll_L270:
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {type: held}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  SELECT_BT:
+  - {type: held}
+  - {t: BT, h: '3'}
+  - {t: BT, h: '2'}
+  - {t: BT, h: '1'}
+  - {t: BT, h: '0'}
+  - {type: held}
+combos:
+- p: [5, 0]
+  k: SELECT_BT
+  l: [Scroll_L180]
+- p: [4, 5]
+  k: {t: BASE, h: toggle}
+- p: [4, 3]
+  k: {t: ROT_90, h: toggle}
+- p: [1, 2]
+  k: {t: ROT_180, h: toggle}
+- p: [1, 0]
+  k: {t: ROT_270, h: toggle}
