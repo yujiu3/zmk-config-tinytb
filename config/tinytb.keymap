@@ -16,7 +16,9 @@
 #define ROT_270     3
 #define L1          4
 #define L2          5
-#define SELECT_BT  6     /* 設定(選択)レイヤー */
+#define L3          6
+#define L4          7
+#define SELECT_BT  8     /* 設定(選択)レイヤー */
 
 &mt {
     flavor = "balanced";
@@ -39,7 +41,7 @@
         combo_bt_select {
             timeout-ms = <50>;              /* 反応が鈍ければ少し上げる(例: 60〜80) */
             key-positions = <5 3 2 0>;        /* ← ここは “1/2/3 キーの物理位置” */
-            bindings = <&mo 6>;   /* 入る/出るをトグル */
+            bindings = <&mo 8>;   /* 入る/出るをトグル */
             /* 必要なら layers = <BASE L1 L2>; を付けて適用範囲を絞る */
 
             layers = <6>;
@@ -143,14 +145,14 @@
         rot180 {
             label = "ROT_180";
             bindings = <
-&mkp LCLK  &mkp RCLK  &mkp LCLK  &mkp LCLK  &lt 4 SPACE  &mkp LCLK
+&mkp LCLK  &mkp RCLK  &mkp LCLK  &mkp LCLK  &lt 6 SPACE  &mkp LCLK
             >;
         };
 
         rot270 {
             label = "ROT_270";
             bindings = <
-&mkp RCLK  &mt RCTRL BACKSPACE  &kp ENTER  &lt 5 SPACE  &mkp LCLK  &mkp LCLK
+&mkp RCLK  &mt RCTRL BACKSPACE  &kp ENTER  &lt 7 SPACE  &mkp LCLK  &mkp LCLK
             >;
         };
 
@@ -167,6 +169,24 @@
 
         layer_2 {
             label = "L2";
+            bindings = <
+&trans  &kp RIGHT_ARROW  &kp LEFT_ARROW  &trans  &kp PERIOD  &kp COMMA
+            >;
+
+            sensor-bindings = <&scroll_up_down>;
+        };
+
+        layer_3 {
+            label = "L3";
+            bindings = <
+&trans  &kp RIGHT_ARROW  &kp LEFT_ARROW  &trans  &kp PERIOD  &kp COMMA
+            >;
+
+            sensor-bindings = <&scroll_up_down>;
+        };
+
+        layer_4 {
+            label = "L4";
             bindings = <
 &trans  &kp RIGHT_ARROW  &kp LEFT_ARROW  &trans  &kp PERIOD  &kp COMMA
             >;
