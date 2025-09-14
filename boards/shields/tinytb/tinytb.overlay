@@ -66,60 +66,71 @@
 
 /* ★ listener は必ずルート配下に作る（/ { ... } ブロック内） */
  /{
-    trackball_listener: trackball_listener {
-        compatible = "zmk,input-listener";
-        status = "okay";
-        device = <&trackball>;
+  trackball_listener: trackball_listener {
+    compatible = "zmk,input-listener";
+    status = "okay";
+    device = <&trackball>;   // ★必須（そのままでOK）
 
-        /* --- カーソルの回転（XYのみ） --- */
-        /* 基準（0°）: 必要なら XY_SWAP を含める */
-        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>;
+    /* === カーソル回転（基準は変換なし） === */
+    input-processors = <&zip_xy_transform (0)>;   // ★ここを (INPUT_TRANSFORM_XY_SWAP) から (0) に
 
-        rot90 {
-            layers = <ROT_90>;
-            input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>;
-        };
-        rot180 {
-            layers = <ROT_180>;
-            input-processors =
-                <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>;
-        };
-        rot270 {
-            layers = <ROT_270>;
-            input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>;
-        };
-
-        /* --- スクロール化（L1〜L4） --- */
-        scroller_v {
-            layers = <L1>;
-            input-processors =
-                <&zip_xy_to_scroll_mapper>,
-                <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>,
-                <&zip_scroll_scaler 1 5>;
-                /* <&zip_scroll_snap>; // 任意 */
-        };
-        scroller_h {
-            layers = <L2>;
-            input-processors =
-                <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>,
-                <&zip_xy_to_scroll_mapper>,
-                <&zip_scroll_scaler 1 5>;
-        };
-        scroller_v_inv {
-            layers = <L3>;
-            input-processors =
-                <&zip_xy_to_scroll_mapper>,
-                <&zip_scroll_scaler 1 5>;
-        };
-        scroller_h_inv {
-            layers = <L4>;
-            input-processors =
-                <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_Y_INVERT)>,
-                <&zip_xy_to_scroll_mapper>,
-                <&zip_scroll_scaler 1 5>;
-        };
+    /* 90° = XY入替 + X反転 */
+    rot90  { layers = <ROT_90>;
+      input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_X_INVERT)>;
     };
+
+    /* 180° = X反転 + Y反転 */
+    rot180 { layers = <ROT_180>;
+      input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>;
+    };
+
+    /* 270° = XY入替 + Y反転 */
+    rot270 { layers = <ROT_270>;
+      input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_Y_INVERT)>;
+    };
+
+    /* === スクロール変換（各レイヤーで軸と反転を完結） === */
+
+    /* L1: 縦（正）→ 逆に感じるなら下の Y_INVERT を有効化 */
+    scroller_v { layers = <L1>;
+      input-processors =
+        <&zip_xy_transform (0)>,
+        <&zip_xy_to_scroll_mapper>,
+        /* 逆に感じるなら↓の1行を有効化 */
+        /* <&zip_scroll_transform (INPUT_TRANSFORM_Y_INVERT)>, */
+        <&zip_scroll_scaler 1 1>;
+    };
+
+    /* L2: 横（正） */
+    scroller_h { layers = <L2>;
+      input-processors =
+        <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>,
+        <&zip_xy_to_scroll_mapper>,
+        /* 逆に感じるなら↓を有効化（横反転） */
+        /* <&zip_scroll_transform (INPUT_TRANSFORM_X_INVERT)>, */
+        <&zip_scroll_scaler 1 1>;
+    };
+
+    /* L3: 縦（反転） */
+    scroller_v_inv { layers = <L3>;
+      input-processors =
+        <&zip_xy_transform (0)>,
+        <&zip_xy_to_scroll_mapper>,
+        <&zip_scroll_transform (INPUT_TRANSFORM_Y_INVERT)>,
+        <&zip_scroll_scaler 1 1>;
+    };
+
+    /* L4: 横（反転） */
+    scroller_h_inv { layers = <L4>;
+      input-processors =
+        <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>,
+        <&zip_xy_to_scroll_mapper>,
+        <&zip_scroll_transform (INPUT_TRANSFORM_X_INVERT)>,
+        <&zip_scroll_scaler 1 1>;
+    };
+  };
 };
+
 
 
 
