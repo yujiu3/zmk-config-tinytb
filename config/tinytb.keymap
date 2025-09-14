@@ -33,37 +33,21 @@
 / {
     /* --- コンボ定義 --- */
 
-    combos {
-        compatible = "zmk,combos";
+combos {
+  compatible = "zmk,combos";
 
-        combo_bt_select {
-            timeout-ms = <50>;              /* 反応が鈍ければ少し上げる(例: 60〜80) */
-            key-positions = <1 4>;
-            bindings = <&mo 8>;
-            layers = <base>;                /* 適用範囲を絞る */
-            layers = <8>;
-        };
+  combo_bt_select {
+    timeout-ms = <50>;
+    key-positions = <1 4>;
+    bindings = <&mo SELECT_BT>;   // 数値でなくシンボル
+    layers = <BASE>;              // 重複させない
+  };
 
-        r0 {
-            bindings = <&to 0>;
-            key-positions = <1 4 0>;
-        };
-
-        r90 {
-            bindings = <&to 1>;
-            key-positions = <1 4 2>;
-        };
-
-        r180 {
-            bindings = <&to 2>;
-            key-positions = <1 4 3>;
-        };
-
-        r270 {
-            bindings = <&to 3>;
-            key-positions = <1 4 5>;
-        };
-    };
+  r0   { bindings = <&to BASE>;    key-positions = <1 4 0>; };
+  r90  { bindings = <&to ROT_90>;  key-positions = <1 4 2>; };
+  r180 { bindings = <&to ROT_180>; key-positions = <1 4 3>; };
+  r270 { bindings = <&to ROT_270>; key-positions = <1 4 5>; };
+};
 
     behaviors {
     // 縦スクロール（通常）
@@ -128,38 +112,37 @@
         compatible = "zmk,keymap";
 
         /* 6キー想定（2×3）: 行ごとに3つずつ並べて6個 */
+base {
+  label = "BASE";
+  bindings = <
+    &kp ENTER            &mo L1          &mkp LCLK
+    &mt RCTRL BACKSPACE  &mkp RCLK       &mkp LCLK
+  >;
+};
 
-        base {
-            label = "BASE";
-            bindings = <
-            &kp ENTER  &mo 4  &mkp LCLK  &mt RCTRL BACKSPACE  &mkp RCLK  &mkp LCLK
-            >;
-        };
+rot90 {
+  label = "ROT_90";
+  bindings = <
+    &mkp LCLK            &mo L2          &mkp LCLK
+    &mkp LCLK            &mkp LCLK       &mkp LCLK
+  >;
+};
 
-        /* 回転 */
+rot180 {
+  label = "ROT_180";
+  bindings = <
+    &mkp LCLK            &mkp RCLK       &mkp LCLK
+    &mkp LCLK            &mo L3          &mkp LCLK
+  >;
+};
 
-        rot90 {
-            label = "ROT_90";
-            bindings = <
-        &mkp LCLK    &mo 5 
-        &mkp LCLK    &mkp LCLK 
-        &mkp LCLK    &mkp LCL
-            >;
-        };
-
-        rot180 {
-            label = "ROT_180";
-            bindings = <
-            &mkp LCLK  &mkp RCLK  &mkp LCLK  &mkp LCLK  &mo 6  &mkp LCLK
-            >;
-        };
-
-        rot270 {
-            label = "ROT_270";
-            bindings = <
-            &mkp RCLK  &mt RCTRL BACKSPACE  &kp ENTER  &mo 7  &mkp LCLK  &mkp LCLK
-            >;
-        };
+rot270 {
+  label = "ROT_270";
+  bindings = <
+    &mkp RCLK            &mt RCTRL BACKSPACE  &kp ENTER
+    &mo L4               &mkp LCLK            &mkp LCLK
+  >;
+};
 
 
 /* スクロール方向を設定 */
