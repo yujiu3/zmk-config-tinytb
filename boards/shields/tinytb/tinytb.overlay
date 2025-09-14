@@ -60,7 +60,7 @@
     status = "okay";
     device = <&trackball>;
 
-    /* L1 = 4: 縦スクロール（例） */
+    /* L1 = 4: 縦スクロール */
     scroller_v {
       layers = <4>;
       input-processors =
@@ -71,7 +71,7 @@
         <&zip_scroll_snap>;
     };
 
-    /* L2 = 5: 横スクロール（例） */
+    /* L2 = 5: 横スクロール */
     scroller_h {
       layers = <5>;
       input-processors =
@@ -82,8 +82,8 @@
         <&zip_scroll_snap>;
     };
 
-    /* L3 = 6: 縦スクロール（例） */
-    scroller_v {
+    /* L3 = 6: 縦スクロール（逆） */
+    scroller_v_imv {
       layers = <4>;
       input-processors =
         <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_X_INVERT)>, /* ←必要な回転/反転は1行に集約 or 必要なだけ */
@@ -93,8 +93,8 @@
         <&zip_scroll_snap>;
     };
 
-    /* L4 = 7: 横スクロール（例） */
-    scroller_h {
+    /* L4 = 7: 横スクロール（逆） */
+    scroller_h_inv {
       layers = <5>;
       input-processors =
         <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>,
@@ -104,6 +104,7 @@
         <&zip_scroll_snap>;
     };
 };
+
 
 
 
