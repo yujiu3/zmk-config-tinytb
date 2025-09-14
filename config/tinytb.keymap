@@ -127,7 +127,7 @@
         base {
             label = "BASE";
             bindings = <
-&kp ENTER  &lt 4 SPACE  &mkp LCLK  &mt RCTRL BACKSPACE  &mkp RCLK  &mkp LCLK
+&lt 5 ENTER  &lt 4 SPACE  &mkp LCLK  &mt RCTRL BACKSPACE  &mkp RCLK  &mkp LCLK
             >;
         };
 
