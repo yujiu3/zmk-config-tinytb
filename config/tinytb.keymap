@@ -69,8 +69,7 @@
     };
 
     /* 入力プロセッサ（回転設定） */
-
-    trackball_listener: trackball_listener {
+/*    trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         status = "okay";
 
@@ -102,6 +101,7 @@
             input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>;
         };
     };
+*/
 
     keymap {
         compatible = "zmk,keymap";
