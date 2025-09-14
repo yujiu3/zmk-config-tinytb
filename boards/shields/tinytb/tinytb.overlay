@@ -3,7 +3,7 @@
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <dt-bindings/zmk/input_transform.h>
 
-/* ← overlay側でも使うレイヤー番号を定義（keymapと同じに！） */
+/* keymap と同じレイヤー番号に揃える */
 #define BASE    0
 #define ROT_90  1
 #define ROT_180 2
@@ -12,67 +12,20 @@
 #define L2      5
 #define L3      6
 #define L4      7
-/* SELECT_BT など他にも使うなら追加 */
 
-&kscan0 {
-    compatible = "zmk,kscan-gpio-direct";
-    input-gpios =
-        <&gpio0 28 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
-        <&gpio0 29 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
-        <&gpio1 11 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
-        <&gpio1 12 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
-        <&gpio1 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
-        <&gpio1 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-};
+/* （ここはあなたの既存の kscan / spi / pmw3610 定義そのままでOK） */
+/* pmw3610 デバイスのラベルが "trackball:" なら &trackball で参照できる */
 
-&pinctrl {
-    spi0_default: spi0_default {
-        group1 {
-            psels = <NRF_PSEL(SPIM_SCK,  0, 5)>,
-                    <NRF_PSEL(SPIM_MOSI, 0, 4)>,
-                    <NRF_PSEL(SPIM_MISO, 0, 4)>; /* ★ MISOはMOS﻿Iと別ピンに（例）*/
-        };
-    };
-    spi0_sleep: spi0_sleep {
-        group1 {
-            psels = <NRF_PSEL(SPIM_SCK,  0, 5)>,
-                    <NRF_PSEL(SPIM_MOSI, 0, 4)>,
-                    <NRF_PSEL(SPIM_MISO, 0, 4)>;
-            low-power-enable;
-        };
-    };
-};
-
-&spi0 {
-    status = "okay";
-    compatible = "nordic,nrf-spim";
-    pinctrl-0 = <&spi0_default>;
-    pinctrl-1 = <&spi0_sleep>;
-    pinctrl-names = "default", "sleep";
-    cs-gpios = <&gpio0 3 GPIO_ACTIVE_LOW>;
-
-    trackball: pmw3610@0 {
-        status = "okay";
-        compatible = "pixart,pmw3610";
-        reg = <0>;
-        spi-max-frequency = <2000000>;
-        irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        cpi = <800>;
-        evt-type = <INPUT_EV_REL>;
-        x-input-code = <INPUT_REL_X>;
-        y-input-code = <INPUT_REL_Y>;
-    };
-};
-
-/* ★ listener は必ずルート配下に作る（/ { ... } ブロック内） */
  /{
+  /* 入力リスナー本体（デバイスを監視し、レイヤーに応じて変換） */
   trackball_listener: trackball_listener {
     compatible = "zmk,input-listener";
     status = "okay";
-    device = <&trackball>;   // ★必須（そのままでOK）
+    device = <&trackball>;               /* ★必須：監視するセンサーを指定 */
 
-    /* === カーソル回転（基準は変換なし） === */
-    input-processors = <&zip_xy_transform (0)>;   // ★ここを (INPUT_TRANSFORM_XY_SWAP) から (0) に
+    /* === カーソル回転（本体の向き） ===
+       基準（0°）は変換なし！ここを (0) にしておくのがコツ */
+    input-processors = <&zip_xy_transform (0)>;
 
     /* 90° = XY入替 + X反転 */
     rot90  { layers = <ROT_90>;
@@ -89,24 +42,22 @@
       input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_Y_INVERT)>;
     };
 
-    /* === スクロール変換（各レイヤーで軸と反転を完結） === */
+    /* === スクロール変換（押している間だけ L1〜L4 に移動して有効化） === */
 
-    /* L1: 縦（正）→ 逆に感じるなら下の Y_INVERT を有効化 */
+    /* L1: 縦（正）—逆に感じたら下の Y_INVERT を有効化 */
     scroller_v { layers = <L1>;
       input-processors =
         <&zip_xy_transform (0)>,
         <&zip_xy_to_scroll_mapper>,
-        /* 逆に感じるなら↓の1行を有効化 */
-        /* <&zip_scroll_transform (INPUT_TRANSFORM_Y_INVERT)>, */
-        <&zip_scroll_scaler 1 1>;
+        /* <&zip_scroll_transform (INPUT_TRANSFORM_Y_INVERT)>, */ /* ←必要ならON */
+        <&zip_scroll_scaler 1 1>;   /* 等倍。速くしたいなら 2 1 等 */
     };
 
-    /* L2: 横（正） */
+    /* L2: 横（正）—逆に感じたら X_INVERT を有効化 */
     scroller_h { layers = <L2>;
       input-processors =
         <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>,
         <&zip_xy_to_scroll_mapper>,
-        /* 逆に感じるなら↓を有効化（横反転） */
         /* <&zip_scroll_transform (INPUT_TRANSFORM_X_INVERT)>, */
         <&zip_scroll_scaler 1 1>;
     };
@@ -130,10 +81,3 @@
     };
   };
 };
-
-
-
-
-
-
-
