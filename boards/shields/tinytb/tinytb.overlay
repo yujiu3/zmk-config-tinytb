@@ -60,9 +60,19 @@
     device = <&trackball>;
 
     scroller {
-        layers = <4 5>;
+        layers = <4>;
         input-processors = 
             <&zip_xy_transform INPUT_TRANSFORM_XY_SWAP>,        //X軸とY軸の入れ替え
+            <&zip_xy_transform INPUT_TRANSFORM_X_INVERT>,       //X軸反転
+            <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,       //Y軸反転
+            <&zip_xy_to_scroll_mapper>,                         //スクロールモードに変更
+            <&zip_scroll_transform INPUT_TRANSFORM_X_INVERT>,   //スクロールのX軸反転
+            <&zip_scroll_scaler 1 2>,                           //スクロール量を1/2倍
+            <&zip_scroll_snap>;
+
+
+        layers = <5>;
+        input-processors = 
             <&zip_xy_transform INPUT_TRANSFORM_X_INVERT>,       //X軸反転
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,       //Y軸反転
             <&zip_xy_to_scroll_mapper>,                         //スクロールモードに変更
@@ -72,6 +82,7 @@
     };
 
 };
+
 
 
 
