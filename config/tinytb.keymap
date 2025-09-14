@@ -161,37 +161,29 @@
         layer_1 {
             label = "L1";
             bindings = <
-&kp RG(V)  &trans  &kp RA(SPACE)  &kp LG(C)  &kp LG(X)  &kp LG(SPACE)
+&trans  &trans  &trans &trans    &trans &trans
             >;
-
-            sensor-bindings = <&scroll_up_down>;
         };
 
         layer_2 {
             label = "L2";
             bindings = <
-&trans  &kp RIGHT_ARROW  &kp LEFT_ARROW  &trans  &kp PERIOD  &kp COMMA
+&trans  &trans  &trans &trans    &trans &trans
             >;
-
-            sensor-bindings = <&scroll_up_down>;
         };
 
         layer_3 {
             label = "L3";
             bindings = <
-&trans  &kp RIGHT_ARROW  &kp LEFT_ARROW  &trans  &kp PERIOD  &kp COMMA
+&trans  &trans  &trans &trans    &trans &trans
             >;
-
-            sensor-bindings = <&scroll_up_down>;
         };
 
         layer_4 {
             label = "L4";
             bindings = <
-&trans  &kp RIGHT_ARROW  &kp LEFT_ARROW  &trans  &kp PERIOD  &kp COMMA
+&trans  &trans  &trans &trans    &trans &trans
             >;
-
-            sensor-bindings = <&scroll_up_down>;
         };
 
         /* 設定(選択)レイヤー：回転を選んで 6 で確定（閉じる） */
