@@ -69,9 +69,7 @@
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         status = "okay";
-
-        /* ここで“どのデバイスを監視するか”を指定する */
-        device = <&trackball>;     /* ← これが有効な結線 */
+        device = <&trackball>;
 
         /* --- カーソルの回転（XYのみ） --- */
         /* 基準（0°）: 必要なら XY_SWAP を含める */
@@ -95,7 +93,6 @@
         scroller_v {
             layers = <L1>;
             input-processors =
-                <&zip_xy_transform (0)>,
                 <&zip_xy_to_scroll_mapper>,
                 <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>,
                 <&zip_scroll_scaler 1 5>;
@@ -106,7 +103,7 @@
             input-processors =
                 <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>,
                 <&zip_xy_to_scroll_mapper>,
-                <&zip_scroll_scaler 1 10>;
+                <&zip_scroll_scaler 1 5>;
         };
         scroller_v_inv {
             layers = <L3>;
@@ -119,10 +116,11 @@
             input-processors =
                 <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_Y_INVERT)>,
                 <&zip_xy_to_scroll_mapper>,
-                <&zip_scroll_scaler 1 10>;
+                <&zip_scroll_scaler 1 5>;
         };
     };
 };
+
 
 
 
