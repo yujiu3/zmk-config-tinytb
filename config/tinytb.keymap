@@ -38,7 +38,7 @@
 
         combo_bt_select {
             timeout-ms = <50>;              /* 反応が鈍ければ少し上げる(例: 60〜80) */
-            key-positions = <1 4>;        /* ← ここは “1/2/3 キーの物理位置” */
+            key-positions = <5 3 2 0>;        /* ← ここは “1/2/3 キーの物理位置” */
             bindings = <&mo 6>;   /* 入る/出るをトグル */
             /* 必要なら layers = <BASE L1 L2>; を付けて適用範囲を絞る */
 
@@ -47,22 +47,22 @@
 
         r0 {
             bindings = <&to 0>;
-            key-positions = <1 4 0>;
+            key-positions = <4 5>;
         };
 
         r90 {
             bindings = <&to 1>;
-            key-positions = <1 4 2>;
+            key-positions = <4 3>;
         };
 
         r180 {
             bindings = <&to 2>;
-            key-positions = <1 4 3>;
+            key-positions = <1 2>;
         };
 
         r270 {
             bindings = <&to 3>;
-            key-positions = <1 4 5>;
+            key-positions = <1 0>;
         };
     };
 
