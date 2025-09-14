@@ -1,7 +1,7 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
-/* レイヤー番号は overlay と一致させること！ */
+/* overlay と同じ番号にする */
 #define BASE    0
 #define ROT_90  1
 #define ROT_180 2
@@ -11,88 +11,56 @@
 #define L3      6
 #define L4      7
 
-/ {
+/{
+  keymap {
+    compatible = "zmk,keymap";
 
-combos {
-    compatible = "zmk,combos";
+    /* 2x3 = 6キー想定。各レイヤーの要素数は常に6個に！ */
 
-    r0   { bindings = <&to BASE>;    key-positions = <5 4>; };
-    r90  { bindings = <&to ROT_90>;  key-positions = <4 3>; };
-    r180 { bindings = <&to ROT_180>; key-positions = <1 2>; };
-    r270 { bindings = <&to ROT_270>; key-positions = <1 0>; };
-  };  /* combos 終了 */
-
-
-    keymap {
-        compatible = "zmk,keymap";
-
-        /* === 基本レイヤー === */
-        base {
-            label = "BASE";
-            bindings = <
-&mo L1     &mo L1    &mo L1 
-&mo L1     &mo L1    &mo L1 
-            >;
-        };
-
-        /* === ROT_90 方向用 === */
-        rot90 {
-            label = "ROT_90";
-            bindings = <
-&mo L2     &mo L2    &mo L2 
-&mo L2     &mo L2    &mo L2 
-            >;
-        };
-
-        /* === ROT_180 方向用 === */
-        rot180 {
-            label = "ROT_180";
-            bindings = <
-&mo L3     &mo L3    &mo L3
-&mo L3     &mo L3    &mo L3
-            >;
-        };
-
-        /* === ROT_270 方向用 === */
-        rot270 {
-            label = "ROT_270";
-            bindings = <
-&mo L4     &mo L4    &mo L4
-&mo L4     &mo L4    &mo L4
-            >;
-        };
-
-        /* === スクロール用レイヤー === */
-        layer_1 {
-            label = "L1";   /* 縦スクロール */
-            bindings = <
-                &trans &trans &trans
-                &trans &trans &trans
-            >;
-        };
-
-        layer_2 {
-            label = "L2";   /* 横スクロール */
-            bindings = <
-                &trans &trans &trans
-                &trans &trans &trans
-            >;
-        };
-
-        layer_3 {
-            label = "L3";   /* 縦スクロール(反転) */
-            bindings = <
-                &trans &trans &trans
-                &trans &trans &trans
-            >;
-        };
-
-        layer_4 {
-            label = "L4";   /* 横スクロール(反転) */
-            bindings = <
-                &trans &trans &trans
-                &trans &trans &trans
-            >;
-        };
+    base {
+      label = "BASE";
+      bindings = <
+        &kp ENTER            &mo L1          &mkp LCLK
+        &mt RCTRL BACKSPACE  &mo L2          &mkp RCLK
+      >;
     };
+
+    rot90 {
+      label = "ROT_90";
+      bindings = <
+        &kp ENTER            &mo L2          &mkp LCLK
+        &mt RCTRL BACKSPACE  &mo L3          &mkp RCLK
+      >;
+    };
+
+    rot180 {
+      label = "ROT_180";
+      bindings = <
+        &kp ENTER            &mo L3          &mkp LCLK
+        &mt RCTRL BACKSPACE  &mo L4          &mkp RCLK
+      >;
+    };
+
+    rot270 {
+      label = "ROT_270";
+      bindings = <
+        &kp ENTER            &mo L4          &mkp LCLK
+        &mt RCTRL BACKSPACE  &mo L1          &mkp RCLK
+      >;
+    };
+
+    /* スクロール層は全キー透過。変換は overlay 側の listener が担当 */
+    layer_1 { label = "L1"; bindings = <
+      &trans &trans &trans  &trans &trans &trans
+    >; };
+    layer_2 { label = "L2"; bindings = <
+      &trans &trans &trans  &trans &trans &trans
+    >; };
+    layer_3 { label = "L3"; bindings = <
+      &trans &trans &trans  &trans &trans &trans
+    >; };
+    layer_4 { label = "L4"; bindings = <
+      &trans &trans &trans  &trans &trans &trans
+    >; };
+  };
 };
