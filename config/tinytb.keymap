@@ -17,7 +17,7 @@
 #define L1          4 
 #define L2          5
 #define L3          6
-#define L2          7
+#define L4          7
 #define SELECT_BT   8     /* BT設定(選択)レイヤー */
 
 &mt {
