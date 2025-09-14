@@ -16,7 +16,9 @@
 #define ROT_270     3
 #define L1          4
 #define L2          5
-#define SELECT_BT  6     /* 設定(選択)レイヤー */
+#define L3          6
+#define L4          7
+#define SELECT_BT   8     /* BT設定(選択)レイヤー */
 
 &mt {
     flavor = "balanced";
@@ -30,70 +32,23 @@
 
 / {
     /* --- コンボ定義 --- */
+combos {
+    compatible = "zmk,combos";
 
-    combos {
-        compatible = "zmk,combos";
-
-        /* 1+2+3 同時押しで 設定レイヤーを開閉（トグル） */
-
-        combo_bt_select {
-            timeout-ms = <50>;              /* 反応が鈍ければ少し上げる(例: 60〜80) */
-            key-positions = <1 4>;        /* ← ここは “1/2/3 キーの物理位置” */
-            bindings = <&mo 6>;   /* 入る/出るをトグル */
-            /* 必要なら layers = <BASE L1 L2>; を付けて適用範囲を絞る */
-
-            layers = <6>;
-        };
-
-        r0 {
-            bindings = <&to 0>;
-            key-positions = <1 4 0>;
-        };
-
-        r90 {
-            bindings = <&to 1>;
-            key-positions = <1 4 2>;
-        };
-
-        r180 {
-            bindings = <&to 2>;
-            key-positions = <1 4 3>;
-        };
-
-        r270 {
-            bindings = <&to 3>;
-            key-positions = <1 4 5>;
-        };
+    combo_bt_select {
+      timeout-ms = <60>;
+      key-positions = <5 3 2 0>;
+      bindings = <&mo SELECT_BT>;
+      layers = <BASE>;
     };
 
+    r0   { bindings = <&to BASE>;    key-positions = <5 4>; };
+    r90  { bindings = <&to ROT_90>;  key-positions = <4 3>; };
+    r180 { bindings = <&to ROT_180>; key-positions = <1 2>; };
+    r270 { bindings = <&to ROT_270>; key-positions = <1 0>; };
+  };  /* combos 終了 */
 
-    /* 入力プロセッサ（回転設定） */
 
-    trackball_listener: trackball_listener {
-        compatible = "zmk,input-listener";
-        status = "okay";
-
-        /* 基本(0°) = XY入替 完成済み*/
-        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>;
-
-        rot90 {
-            layers = <ROT_90>;
-            /* 90° = XY入替 + X反転 完成済み */
-            input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>;
-        };
-
-        rot180 {
-            layers = <ROT_180>;
-            /* 180° =XY入替 + Y反転 完成済み */
-            input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>;
-        };
-
-        rot270 {
-            layers = <ROT_270>;
-            /* 270° = Y反転 完成済み */
-            input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>;
-        };
-    };
 
     keymap {
         compatible = "zmk,keymap";
@@ -103,59 +58,68 @@
         base {
             label = "BASE";
             bindings = <
-            &mkp LCLK  &mkp RCLK  &mkp LCLK  &kp RCTRL  &mo L1  &mkp LCLK
+&kp ENTER  &mo L1  &mkp LCLK  &mt RCTRL BACKSPACE  &mkp RCLK  &mkp LCLK
             >;
-      sensor-bindings = <&scroll_ud>;         // ← 縦（正）
         };
-
-        /* 回転 */
 
         rot90 {
             label = "ROT_90";
             bindings = <
-            &mkp LCLK  &mkp LCLK  &mkp LCLK  &mkp LCLK  &mkp LCLK  &mkp LCLK
+&mkp LCLK  &mo L2  &mkp LCLK  &mkp LCLK  &mkp LCLK  &mkp LCLK
             >;
-      sensor-bindings = <&scroll_rl>;         // ← 横（正）
         };
 
         rot180 {
             label = "ROT_180";
             bindings = <
-            &to 0  &mkp LCLK  &to 1  &to 2  &mo 4  &to 3
+&mkp LCLK  &mkp RCLK  &mkp LCLK  &mkp LCLK  &mo L3  &mkp LCLK
             >;
-      sensor-bindings = <&scroll_ud_inv>;     // ← 縦（反転）
         };
 
         rot270 {
             label = "ROT_270";
             bindings = <
-            &mkp RCLK  &mkp MB3  &mkp MB5  &mo 4  &mkp LCLK  &mkp MB4
+&mkp RCLK  &mt RCTRL BACKSPACE  &kp ENTER  &mo L4  &mkp LCLK  &mkp LCLK
             >;
-　      sensor-bindings = <&scroll_rl_inv>;     // ← 横（反転）
         };
+
+        /* スクロール方向を設定 */
 
         layer_1 {
             label = "L1";
             bindings = <
-&kp RG(V)  &kp LG(X)  &kp RG(V)  &kp LG(C)  &trans  &kp LG(C)
+&kp RG(V)  &trans  &kp RA(SPACE)  &kp LG(C)  &kp LG(X)  &kp LG(SPACE)
             >;
         };
 
         layer_2 {
             label = "L2";
             bindings = <
-&bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &tog 0
+&trans  &kp RIGHT_ARROW  &kp LEFT_ARROW  &trans  &kp PERIOD  &kp COMMA
             >;
         };
 
-        /* 設定(選択)レイヤー：回転を選んで 6 で確定（閉じる） */
+        layer_3 {
+            label = "L3";
+            bindings = <
+&trans  &kp RIGHT_ARROW  &kp LEFT_ARROW  &trans  &kp PERIOD  &kp COMMA
+            >;
+        };
+
+        layer_4 {
+            label = "L4";
+            bindings = <
+&trans  &kp RIGHT_ARROW  &kp LEFT_ARROW  &trans  &kp PERIOD  &kp COMMA
+            >;
+        };
+
+        /*BT 設定(選択)レイヤー */
 
         selbt {
             label = "SELECT_BT";
             bindings = <
 &bt BT_SEL 3  &trans  &bt BT_SEL 2  &bt BT_SEL 1  &trans  &bt BT_SEL 0
             >;
-
         };
     };
 };
