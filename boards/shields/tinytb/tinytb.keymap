@@ -14,11 +14,11 @@
 #define ROT_90      1
 #define ROT_180     2
 #define ROT_270     3
-#define L1          4
-#define L2          5
-#define L3          6
-#define L4          7
-#define SELECT_BT  8     /* 設定(選択)レイヤー */
+#define Scroll_L0   4
+#define Scroll_L90  5
+#define Scroll_L180 6
+#define Scroll_L270 7
+#define SELECT_BT   8     /* BT設定レイヤー */
 
 &mt {
     flavor = "balanced";
@@ -40,8 +40,8 @@
 
         combo_bt_select {
             timeout-ms = <50>;              /* 反応が鈍ければ少し上げる(例: 60〜80) */
-            key-positions = <1 4>;        /* ← ここは “1/2/3 キーの物理位置” */
-            bindings = <&mo 6>;   /* 入る/出るをトグル */
+            key-positions = <5 3 2 0>;        /* ← ここは “1/2/3 キーの物理位置” */
+            bindings = <&mo 8>;   /* 入る/出るをトグル */
             /* 必要なら layers = <BASE L1 L2>; を付けて適用範囲を絞る */
 
             layers = <6>;
@@ -49,42 +49,25 @@
 
         r0 {
             bindings = <&to 0>;
-            key-positions = <1 4 0>;
+            key-positions = <4 5>;
         };
 
         r90 {
             bindings = <&to 1>;
-            key-positions = <1 4 2>;
+            key-positions = <4 3>;
         };
 
         r180 {
             bindings = <&to 2>;
-            key-positions = <1 4 3>;
+            key-positions = <1 2>;
         };
 
         r270 {
             bindings = <&to 3>;
-            key-positions = <1 4 5>;
+            key-positions = <1 0>;
         };
     };
 
-    behaviors {
-        scroll_up_down: mouse_wheel_up_down {
-            compatible = "zmk,behavior-sensor-rotate";
-            #sensor-binding-cells = <0>;
-            bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
-
-            tap-ms = <20>;
-        };
-
-        scroll_right_left: mouse_wheel_right_left {
-            compatible = "zmk,behavior-sensor-rotate";
-            #sensor-binding-cells = <0>;
-            bindings = <&msc SCRL_LEFT>, <&msc SCRL_RIGHT>;
-
-            tap-ms = <20>;
-        };
-    };
 
     /* 入力プロセッサ（回転設定） */
 
@@ -129,7 +112,7 @@
         base {
             label = "BASE";
             bindings = <
-&mkp LCLK  &mkp RCLK  &mkp LCLK  &kp RCTRL  &mo L1  &mkp LCLK
+&lt 5 ENTER  &lt 4 SPACE  &mkp LCLK  &mt RCTRL BACKSPACE  &mkp RCLK  &mkp LCLK
             >;
         };
 
@@ -138,40 +121,52 @@
         rot90 {
             label = "ROT_90";
             bindings = <
-&mkp LCLK  &mkp LCLK  &mkp LCLK  &mkp LCLK  &mkp LCLK  &mkp LCLK
+&mkp RCLK  &mt RCTRL BACKSPACE  &kp ENTER  &lt 5 SPACE  &mkp LCLK  &mkp LCLK
             >;
         };
 
         rot180 {
             label = "ROT_180";
             bindings = <
-&to 0  &mkp LCLK  &to 1  &to 2  &mo 4  &to 3
+&mkp LCLK  &mkp RCLK  &mkp LCLK  &mkp LCLK  &lt 6 SPACE  &mkp LCLK
             >;
         };
 
         rot270 {
             label = "ROT_270";
             bindings = <
-&mkp RCLK  &mkp MB3  &mkp MB5  &mo 4  &mkp LCLK  &mkp MB4
+&mkp RCLK  &mt RCTRL BACKSPACE  &kp ENTER  &lt 7 SPACE  &mkp LCLK  &mkp LCLK
             >;
         };
 
-        layer_1 {
-            label = "L1";
-            bindings = <
-&kp RG(V)  &kp LG(X)  &kp RG(V)  &kp LG(C)  &trans  &kp LG(C)
-            >;
+        /* スクロール用 */
 
-            sensor-bindings = <&scroll_up_down>;
+        Scroll_L0 {
+            label = "Scroll_L0 ";
+            bindings = <
+&trans  &trans  &trans &trans &trans &trans
+            >;
         };
 
-        layer_2 {
-            label = "L2";
+        Scroll_L90 {
+            label = "Scroll_L90";
             bindings = <
-&bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &tog 0
+&trans  &trans  &trans &trans &trans &trans
             >;
+        };
 
-            sensor-bindings = <&scroll_right_lefts>:
+        Scroll_L180 {
+            label = "Scroll_L180";
+            bindings = <
+&trans  &trans  &trans &trans &trans &trans
+            >;
+        };
+
+        Scroll_L270 {
+            label = "Scroll_L270";
+            bindings = <
+&trans  &trans  &trans &trans &trans &trans
+            >;
         };
 
         /* 設定(選択)レイヤー：回転を選んで 6 で確定（閉じる） */
@@ -181,8 +176,6 @@
             bindings = <
 &bt BT_SEL 3  &trans  &bt BT_SEL 2  &bt BT_SEL 1  &trans  &bt BT_SEL 0
             >;
-
-            /* sensor-bindings は通常不要。必要なら透過運用に合わせて省略/付与 */
         };
     };
 };
