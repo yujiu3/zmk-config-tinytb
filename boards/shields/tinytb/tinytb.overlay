@@ -54,16 +54,74 @@
     };
 };
 
-&trackball_listener {
-    status = "okay";
-    device = <&trackball>;
-    scroller {
-        layers = <4 5 6 7>;
-        input-processors = 
-            <&zip_scroll_scaler 1 10>,
-            <&zip_scroll_snap>;
+    trackball_listener: trackball_listener {
+        compatible = "zmk,input-listener";
+        status = "okay";
+
+        /* --- カーソルの回転（XYだけ回す） --- */
+        /* 0°（基準）: 必要なら XY_SWAP を含める。今までの基準に合わせて！ */
+        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>;
+
+        /* 90°: XY入替 + X反転（あなたの既存値に合わせて） */
+        rot90 {
+            layers = <ROT_90>;
+            input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>;
+        };
+
+        /* 180°: XY入替 + X/Y反転（あなたの既存値） */
+        rot180 {
+            layers = <ROT_180>;
+            input-processors =
+                <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>;
+        };
+
+        /* 270°: Y反転（あなたの既存値） */
+        rot270 {
+            layers = <ROT_270>;
+            input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>;
+        };
+
+        /* --- ここからスクロール化：L1〜L4 に入った時だけ XY→スクロールへ変換 --- */
+        /* L1: 縦スクロール（通常） */
+        scroller_v {
+            layers = <L1>;
+            input-processors =
+                <&zip_xy_transform (0)>,               /* 軸そのまま */
+                <&zip_xy_to_scroll_mapper>,            /* XY → スクロール */
+                <&zip_scroll_scaler 1 10>;             /* 速度調整（任意） */
+                /* <&zip_scroll_snap>;                 // 必要なら */
+        };
+
+        /* L2: 横スクロール（通常） */
+        scroller_h {
+            layers = <L2>;
+            input-processors =
+                <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>,  /* 軸を入替えて横へ */
+                <&zip_xy_to_scroll_mapper>,
+                <&zip_scroll_scaler 1 10>;
+        };
+
+        /* L3: 縦スクロール（反転） */
+        scroller_v_inv {
+            layers = <L3>;
+            input-processors =
+                <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>, /* 縦を反転 */
+                <&zip_xy_to_scroll_mapper>,
+                <&zip_scroll_scaler 1 10>;
+        };
+
+        /* L4: 横スクロール（反転） */
+        scroller_h_inv {
+            layers = <L4>;
+            input-processors =
+                <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_Y_INVERT)>, /* 横+反転 */
+                <&zip_xy_to_scroll_mapper>,
+                <&zip_scroll_scaler 1 10>;
+        };
     };
+
 };
+
 
 
 
