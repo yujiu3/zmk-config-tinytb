@@ -63,7 +63,7 @@
         /* ★ ここに直接 listeners を付けてもOK（どちらでも良い） */
         listeners = <&trackball_listener>;
     };
-}
+};
 
 /* ★ listener は必ずルート配下に作る（/ { ... } ブロック内） */
  /{
@@ -127,3 +127,4 @@
     listeners = <&trackball_listener>;
 };
 */
+
