@@ -16,7 +16,9 @@
 #define ROT_270     3
 #define L1          4
 #define L2          5
-#define SELECT_BT  6     /* 設定(選択)レイヤー */
+#define L3          6
+#define L4          7
+#define SELECT_BT  8     /* 設定(選択)レイヤー */
 
 &mt {
     flavor = "balanced";
