@@ -84,7 +84,7 @@
 
     /* L3 = 6: 縦スクロール（逆） */
     scroller_v_imv {
-      layers = <4>;
+      layers = <6>;
       input-processors =
         <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_X_INVERT)>, /* ←必要な回転/反転は1行に集約 or 必要なだけ */
         <&zip_xy_to_scroll_mapper>,
@@ -95,7 +95,7 @@
 
     /* L4 = 7: 横スクロール（逆） */
     scroller_h_inv {
-      layers = <5>;
+      layers = <7>;
       input-processors =
         <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>,
         <&zip_xy_to_scroll_mapper>,
@@ -104,6 +104,7 @@
         <&zip_scroll_snap>;
     };
 };
+
 
 
 
