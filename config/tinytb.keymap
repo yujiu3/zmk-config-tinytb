@@ -1,124 +1,86 @@
-#include <input/processors.dtsi>
-#include <dt-bindings/zmk/input_transform.h>
-#include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <behaviors.dtsi>
-#include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/pointing.h>
 
-#define SCROLL 1
-
-/* どこかの共通ヘッダの近くに */
-
-#define BASE        0
-#define ROT_90      1
-#define ROT_180     2
-#define ROT_270     3
-#define L1          4
-#define L2          5
-#define L3          6
-#define L4          7
-#define SELECT_BT   8     /* BT設定(選択)レイヤー */
-
-&mt {
-    flavor = "balanced";
-    quick-tap-ms = <0>;
-};
-
-&lt {
-    quick-tap-ms = <300>;
-    flavor = "balanced";
-};
+/* レイヤー番号は overlay と一致させること！ */
+#define BASE    0
+#define ROT_90  1
+#define ROT_180 2
+#define ROT_270 3
+#define L1      4
+#define L2      5
+#define L3      6
+#define L4      7
 
 / {
-    /* --- コンボ定義 --- */
-combos {
-    compatible = "zmk,combos";
-
-    combo_bt_select {
-      timeout-ms = <60>;
-      key-positions = <5 3 2 0>;
-      bindings = <&mo SELECT_BT>;
-      layers = <BASE>;
-    };
-
-    r0   { bindings = <&to BASE>;    key-positions = <5 4>; };
-    r90  { bindings = <&to ROT_90>;  key-positions = <4 3>; };
-    r180 { bindings = <&to ROT_180>; key-positions = <1 2>; };
-    r270 { bindings = <&to ROT_270>; key-positions = <1 0>; };
-  };  /* combos 終了 */
-
-
-
     keymap {
         compatible = "zmk,keymap";
 
-        /* 6キー想定（2×3）: 行ごとに3つずつ並べて6個 */
-
+        /* === 基本レイヤー === */
         base {
             label = "BASE";
             bindings = <
-&kp ENTER  &mo L1  &mkp LCLK  &mt RCTRL BACKSPACE  &mkp RCLK  &mkp LCLK
+                &kp ENTER     &mo L1    &mkp LCLK
+                &mt RCTRL BSPC &mo L2   &mkp RCLK
             >;
         };
 
+        /* === ROT_90 方向用 === */
         rot90 {
             label = "ROT_90";
             bindings = <
-&mkp LCLK  &mo L2  &mkp LCLK  &mkp LCLK  &mkp LCLK  &mkp LCLK
+                &kp ENTER     &mo L2    &mkp LCLK
+                &mt RCTRL BSPC &mo L3   &mkp RCLK
             >;
         };
 
+        /* === ROT_180 方向用 === */
         rot180 {
             label = "ROT_180";
             bindings = <
-&mkp LCLK  &mkp RCLK  &mkp LCLK  &mkp LCLK  &mo L3  &mkp LCLK
+                &kp ENTER     &mo L3    &mkp LCLK
+                &mt RCTRL BSPC &mo L4   &mkp RCLK
             >;
         };
 
+        /* === ROT_270 方向用 === */
         rot270 {
             label = "ROT_270";
             bindings = <
-&mkp RCLK  &mt RCTRL BACKSPACE  &kp ENTER  &mo L4  &mkp LCLK  &mkp LCLK
+                &kp ENTER     &mo L4    &mkp LCLK
+                &mt RCTRL BSPC &mo L1   &mkp RCLK
             >;
         };
 
-        /* スクロール方向を設定 */
-
+        /* === スクロール用レイヤー === */
         layer_1 {
-            label = "L1";
+            label = "L1";   /* 縦スクロール */
             bindings = <
-&kp RG(V)  &trans  &kp RA(SPACE)  &kp LG(C)  &kp LG(X)  &kp LG(SPACE)
+                &trans &trans &trans
+                &trans &trans &trans
             >;
         };
 
         layer_2 {
-            label = "L2";
+            label = "L2";   /* 横スクロール */
             bindings = <
-&trans  &kp RIGHT_ARROW  &kp LEFT_ARROW  &trans  &kp PERIOD  &kp COMMA
+                &trans &trans &trans
+                &trans &trans &trans
             >;
         };
 
         layer_3 {
-            label = "L3";
+            label = "L3";   /* 縦スクロール(反転) */
             bindings = <
-&trans  &kp RIGHT_ARROW  &kp LEFT_ARROW  &trans  &kp PERIOD  &kp COMMA
+                &trans &trans &trans
+                &trans &trans &trans
             >;
         };
 
         layer_4 {
-            label = "L4";
+            label = "L4";   /* 横スクロール(反転) */
             bindings = <
-&trans  &kp RIGHT_ARROW  &kp LEFT_ARROW  &trans  &kp PERIOD  &kp COMMA
-            >;
-        };
-
-        /*BT 設定(選択)レイヤー */
-
-        selbt {
-            label = "SELECT_BT";
-            bindings = <
-&bt BT_SEL 3  &trans  &bt BT_SEL 2  &bt BT_SEL 1  &trans  &bt BT_SEL 0
+                &trans &trans &trans
+                &trans &trans &trans
             >;
         };
     };
