@@ -12,6 +12,24 @@
 #define L4      7
 
 / {
+
+combos {
+    compatible = "zmk,combos";
+
+    combo_bt_select {
+      timeout-ms = <60>;
+      key-positions = <5 3 2 0>;
+      bindings = <&mo SELECT_BT>;
+      layers = <BASE>;
+    };
+
+    r0   { bindings = <&to BASE>;    key-positions = <5 4>; };
+    r90  { bindings = <&to ROT_90>;  key-positions = <4 3>; };
+    r180 { bindings = <&to ROT_180>; key-positions = <1 2>; };
+    r270 { bindings = <&to ROT_270>; key-positions = <1 0>; };
+  };  /* combos 終了 */
+
+
     keymap {
         compatible = "zmk,keymap";
 
