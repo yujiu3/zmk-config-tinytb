@@ -67,20 +67,33 @@
     };
 
     behaviors {
-        scroll_up_down: mouse_wheel_up_down {
-            compatible = "zmk,behavior-sensor-rotate";
-            #sensor-binding-cells = <0>;
-            bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
-
-            tap-ms = <20>;
-        };
-
-        scroll_right_left: mouse_wheel_right_left {
-            compatible = "zmk,behavior-sensor-rotate";
-            #sensor-binding-cells = <0>;
-            bindings = <&msc SCRL_LEFT>, <&msc SCRL_RIGHT>;
-
-            tap-ms = <20>;
+    // 縦スクロール（通常）
+    scroll_ud: scroll_up_down {
+      compatible = "zmk,behavior-sensor-rotate";
+      #sensor-binding-cells = <0>;
+      bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
+      tap-ms = <20>;
+    };
+    // 縦スクロール（反転）
+    scroll_ud_inv: scroll_up_down_inv {
+      compatible = "zmk,behavior-sensor-rotate";
+      #sensor-binding-cells = <0>;
+      bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
+      tap-ms = <20>;
+    };
+    // 横スクロール（通常）
+    scroll_rl: scroll_right_left {
+      compatible = "zmk,behavior-sensor-rotate";
+      #sensor-binding-cells = <0>;
+      bindings = <&msc SCRL_LEFT>, <&msc SCRL_RIGHT>;
+      tap-ms = <20>;
+    };
+    // 横スクロール（反転）
+    scroll_rl_inv: scroll_right_left_inv {
+      compatible = "zmk,behavior-sensor-rotate";
+      #sensor-binding-cells = <0>;
+      bindings = <&msc SCRL_RIGHT>, <&msc SCRL_LEFT>;
+      tap-ms = <20>;
         };
     };
 
@@ -91,30 +104,23 @@
         status = "okay";
 
         /* 基本(0°) = XY入替 完成済み*/
-
         input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>;
 
         rot90 {
             layers = <ROT_90>;
-
             /* 90° = XY入替 + X反転 完成済み */
-
             input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>;
         };
 
         rot180 {
             layers = <ROT_180>;
-
             /* 180° =XY入替 + Y反転 完成済み */
-
             input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>;
         };
 
         rot270 {
             layers = <ROT_270>;
-
             /* 270° = Y反転 完成済み */
-
             input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>;
         };
     };
@@ -127,8 +133,9 @@
         base {
             label = "BASE";
             bindings = <
-&kp ENTER  &lt 4 SPACE  &mkp LCLK  &mt RCTRL BACKSPACE  &mkp RCLK  &mkp LCLK
+            &kp ENTER  &lt 4 SPACE  &mkp LCLK  &mt RCTRL BACKSPACE  &mkp RCLK  &mkp LCLK
             >;
+            sensor-bindings = <&scroll_ud>;         // ← 縦（正）
         };
 
         /* 回転 */
@@ -136,22 +143,25 @@
         rot90 {
             label = "ROT_90";
             bindings = <
-&mkp LCLK  &mkp LCLK  &mkp LCLK  &mkp LCLK  &mkp LCLK  &mkp LCLK
+            &mkp LCLK  &mkp LCLK  &mkp LCLK  &mkp LCLK  &mkp LCLK  &mkp LCLK
             >;
+            sensor-bindings = <&scroll_rl>;         // ← 横（正）
         };
 
         rot180 {
             label = "ROT_180";
             bindings = <
-&mkp LCLK  &mkp RCLK  &mkp LCLK  &mkp LCLK  &lt 4 SPACE  &mkp LCLK
+            &mkp LCLK  &mkp RCLK  &mkp LCLK  &mkp LCLK  &lt 4 SPACE  &mkp LCLK
             >;
+           sensor-bindings = <&scroll_ud_inv>;     // ← 縦（反転）
         };
 
         rot270 {
             label = "ROT_270";
             bindings = <
-&mkp RCLK  &mt RCTRL BACKSPACE  &kp ENTER  &lt 5 SPACE  &mkp LCLK  &mkp LCLK
+            &mkp RCLK  &mt RCTRL BACKSPACE  &kp ENTER  &lt 5 SPACE  &mkp LCLK  &mkp LCLK
             >;
+            sensor-bindings = <&scroll_rl_inv>;     // ← 横（反転）
         };
 
         layer_1 {
@@ -159,8 +169,6 @@
             bindings = <
 &kp RG(V)  &trans  &kp RA(SPACE)  &kp LG(C)  &kp LG(X)  &kp LG(SPACE)
             >;
-
-            sensor-bindings = <&scroll_up_down>;
         };
 
         layer_2 {
@@ -168,8 +176,6 @@
             bindings = <
 &trans  &kp RIGHT_ARROW  &kp LEFT_ARROW  &trans  &kp PERIOD  &kp COMMA
             >;
-
-            sensor-bindings = <&scroll_right_left>;
         };
 
         /* 設定(選択)レイヤー：回転を選んで 6 で確定（閉じる） */
