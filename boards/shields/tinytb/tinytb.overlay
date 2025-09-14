@@ -59,3 +59,11 @@
     device = <&trackball>;
 
 };
+
+
+    scroller {
+        layers = <4 5 6 7>;
+        input-processors = 
+            <&zip_scroll_scaler 1 10>,
+            <&zip_scroll_snap>;
+    };
