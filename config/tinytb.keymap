@@ -14,11 +14,11 @@
 #define ROT_90      1
 #define ROT_180     2
 #define ROT_270     3
-#define L1          4
-#define L2          5
-#define L3          6
-#define L4          7
-#define SELECT_BT  8     /* 設定(選択)レイヤー */
+#define Scroll_L0   4
+#define Scroll_L90  5
+#define Scroll_L180 6
+#define Scroll_L270 7
+#define SELECT_BT   8     /* BT設定レイヤー */
 
 &mt {
     flavor = "balanced";
@@ -68,23 +68,6 @@
         };
     };
 
-    behaviors {
-        scroll_up_down: mouse_wheel_up_down {
-            compatible = "zmk,behavior-sensor-rotate";
-            #sensor-binding-cells = <0>;
-            bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
-
-            tap-ms = <20>;
-        };
-
-        scroll_right_left: mouse_wheel_right_left {
-            compatible = "zmk,behavior-sensor-rotate";
-            #sensor-binding-cells = <0>;
-            bindings = <&msc SCRL_LEFT>, <&msc SCRL_RIGHT>;
-
-            tap-ms = <20>;
-        };
-    };
 
     /* 入力プロセッサ（回転設定） */
 
@@ -158,31 +141,31 @@
 
         /* スクロール用 */
 
-        layer_1 {
-            label = "L1";
+        Scroll_L0 {
+            label = "Scroll_L0 ";
             bindings = <
-&trans  &trans  &trans &trans    &trans &trans
+&trans  &trans  &trans &trans &trans &trans
             >;
         };
 
-        layer_2 {
-            label = "L2";
+        Scroll_L90 {
+            label = "Scroll_L90";
             bindings = <
-&trans  &trans  &trans &trans    &trans &trans
+&trans  &trans  &trans &trans &trans &trans
             >;
         };
 
-        layer_3 {
-            label = "L3";
+        Scroll_L180 {
+            label = "Scroll_L180";
             bindings = <
-&trans  &trans  &trans &trans    &trans &trans
+&trans  &trans  &trans &trans &trans &trans
             >;
         };
 
-        layer_4 {
-            label = "L4";
+        Scroll_L270 {
+            label = "Scroll_L270";
             bindings = <
-&trans  &trans  &trans &trans    &trans &trans
+&trans  &trans  &trans &trans &trans &trans
             >;
         };
 
