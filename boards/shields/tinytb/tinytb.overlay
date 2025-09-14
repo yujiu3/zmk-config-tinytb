@@ -60,7 +60,7 @@
     status = "okay";
     device = <&trackball>;
 
-    /* L1 = 4: 縦スクロール */
+    /* SL0 = 4: 縦スクロール */
     scroller_v {
       layers = <4>;
       input-processors =
@@ -71,7 +71,7 @@
         <&zip_scroll_snap>;
     };
 
-    /* L2 = 5: 横スクロール */
+    /* SL90 = 5: 横スクロール */
     scroller_h {
       layers = <5>;
       input-processors =
@@ -82,7 +82,7 @@
         <&zip_scroll_snap>;
     };
 
-    /* L3 = 6: 縦スクロール（逆） */
+    /* SL180 = 6: 縦スクロール（逆） */
     scroller_v_imv {
       layers = <6>;
       input-processors =
@@ -93,7 +93,7 @@
         <&zip_scroll_snap>;
     };
 
-    /* L4 = 7: 横スクロール（逆） */
+    /* SL270 = 7: 横スクロール（逆） */
     scroller_h_inv {
       layers = <7>;
       input-processors =
@@ -104,18 +104,3 @@
         <&zip_scroll_snap>;
     };
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
