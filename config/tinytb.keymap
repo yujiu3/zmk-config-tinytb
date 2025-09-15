@@ -198,7 +198,7 @@
         selbt {
             label = "SELECT_BT";
             bindings = <
-&bt BT_SEL 2  &bt BT_SEL 1  &bt BT_SEL 0  &reset  &trans  &bt BT_CLR_ALL
+&bt BT_SEL 2  &bt BT_SEL 1  &bt BT_SEL 0  &bootloader  &trans  &bt BT_CLR_ALL
             >;
         };
 
