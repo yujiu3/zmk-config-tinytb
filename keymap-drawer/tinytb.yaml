@@ -1,12 +1,12 @@
 layout: {zmk_keyboard: tinytb}
 layers:
   BASE:
-  - ENTER
-  - {t: SPACE, h: 'Scroll_L0 '}
+  - {t: RIGHT, h: '11'}
+  - {t: LEFT, h: 'Scroll_L0 '}
   - '&mkp LCLK'
-  - {t: BACKSPACE, h: RCTRL}
+  - {t: DOWN, h: '10'}
+  - {t: UP, h: SELECT_BT}
   - '&mkp RCLK'
-  - '&mkp LCLK'
   ROT_90:
   - '&mkp RCLK'
   - {t: BACKSPACE, h: RCTRL}
@@ -29,12 +29,12 @@ layers:
   - '&mkp LCLK'
   - '&mkp LCLK'
   'Scroll_L0 ':
-  - {t: ▽, type: trans}
+  - Ctl+END
   - {type: held}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - Ctl+HOME
+  - Ctl+PG DN
+  - LCTRL
+  - Ctl+PG UP
   Scroll_L90:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -57,17 +57,38 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   SELECT_BT:
-  - {type: held}
-  - {t: BT, h: '3'}
   - {t: BT, h: '2'}
   - {t: BT, h: '1'}
   - {t: BT, h: '0'}
+  - '&sys_reset'
   - {type: held}
+  - BT CLR ALL
+  '9':
+  - KP 3
+  - KP 2
+  - {t: KP 1, type: held}
+  - {t: KP 6, type: held}
+  - KP 5
+  - KP 4
+  '10':
+  - {t: ▽, type: trans}
+  - /
+  - '*'
+  - {type: held}
+  - '-'
+  - +
+  '11':
+  - {type: held}
+  - .
+  - ','
+  - {t: ▽, type: trans}
+  - ENTER
+  - '='
 combos:
 - p: [5, 0]
   k: SELECT_BT
   l: [Scroll_L180]
-- p: [4, 5]
+- p: [5, 2, 0, 1, 3, 4]
   k: {t: BASE, h: toggle}
 - p: [4, 3]
   k: {t: ROT_90, h: toggle}
@@ -75,3 +96,13 @@ combos:
   k: {t: ROT_180, h: toggle}
 - p: [1, 0]
   k: {t: ROT_270, h: toggle}
+- p: [5, 2]
+  k: KP 7
+- p: [1, 4]
+  k: KP 8
+- p: [0, 3]
+  k: KP 9
+- p: [4, 5]
+  k: KP 0
+- p: [2, 3]
+  k: '9'
