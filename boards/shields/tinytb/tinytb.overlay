@@ -1,6 +1,7 @@
 #include "tinytb.dtsi"
 #include <input/processors.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
+#include <dt-bindings/zmk/input_transform.h>
 
 &kscan0 {
         compatible = "zmk,kscan-gpio-direct";
@@ -55,26 +56,51 @@
 };
 
 &trackball_listener {
+    compatible = "zmk,input-listener";
     status = "okay";
     device = <&trackball>;
 
-    scroller {
-        layers = <4>;
-        input-processors = 
-            <&zip_xy_transform INPUT_TRANSFORM_XY_SWAP>,        //X軸とY軸の入れ替え
-            <&zip_xy_transform INPUT_TRANSFORM_X_INVERT>,       //X軸反転
-            <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,       //Y軸反転
-            <&zip_xy_to_scroll_mapper>,                         //スクロールモードに変更
-            <&zip_scroll_transform INPUT_TRANSFORM_X_INVERT>,   //スクロールのX軸反転
-            <&zip_scroll_scaler 1 10>,                           //スクロール量を1/4倍
-            <&zip_scroll_snap>;
+    /* SL0 = 4: 縦スクロール */
+    scroller_v {
+      layers = <4>;
+      input-processors =
+        <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>, /* ←必要な回転/反転は1行に集約 or 必要なだけ */
+        <&zip_xy_to_scroll_mapper>,
+        <&zip_scroll_transform (INPUT_TRANSFORM_X_INVERT)>,  /* 必要なら反転。不要なら消す */
+        <&zip_scroll_scaler 1 5>,                             /* 1/2倍なら 1 2 */
+        <&zip_scroll_snap>;
     };
 
+    /* SL90 = 5: 横スクロール */
+    scroller_h {
+      layers = <5>;
+      input-processors =
+        <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>,
+        <&zip_xy_to_scroll_mapper>,
+        <&zip_scroll_transform (INPUT_TRANSFORM_X_INVERT)>,
+        <&zip_scroll_scaler 1 5>,
+        <&zip_scroll_snap>;
+    };
+
+    /* SL180 = 6: 縦スクロール（逆） */
+    scroller_v_imv {
+      layers = <6>;
+      input-processors =
+        <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_X_INVERT)>, /* ←必要な回転/反転は1行に集約 or 必要なだけ */
+        <&zip_xy_to_scroll_mapper>,
+        <&zip_scroll_transform (INPUT_TRANSFORM_X_INVERT)>,  /* 必要なら反転。不要なら消す */
+        <&zip_scroll_scaler 1 5>,                             /* 1/2倍なら 1 2 */
+        <&zip_scroll_snap>;
+    };
+
+    /* SL270 = 7: 横スクロール（逆） */
+    scroller_h_inv {
+      layers = <7>;
+      input-processors =
+        <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>,
+        <&zip_xy_to_scroll_mapper>,
+        <&zip_scroll_transform (INPUT_TRANSFORM_X_INVERT)>,
+        <&zip_scroll_scaler 1 5>,
+        <&zip_scroll_snap>;
+    };
 };
-
-
-
-
-
-
-
