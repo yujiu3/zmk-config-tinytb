@@ -1,94 +1,94 @@
 layout: {zmk_keyboard: tinytb}
 layers:
   BASE:
-  - {t: RIGHT, h: '11'}
-  - {t: LEFT, h: 'Scroll_L0 '}
-  - '&mkp LCLK'
-  - {t: DOWN, h: '10'}
-  - {t: UP, h: SELECT_BT}
+  - {t: RIGHT, h: '10'}
+  - DOWN
+  - '&lt11 LEFT'
   - '&mkp RCLK'
+  - {t: UP, h: 'Scroll_L0 '}
+  - '&mkp LCLK'
   ROT_90:
+  - '&mkp LCLK'
+  - LEFT
+  - UP
   - '&mkp RCLK'
-  - {t: BACKSPACE, h: RCTRL}
-  - ENTER
-  - {t: SPACE, h: Scroll_L90}
-  - '&mkp LCLK'
-  - '&mkp LCLK'
+  - {t: RIGHT, h: Scroll_L90}
+  - DOWN
   ROT_180:
   - '&mkp LCLK'
+  - UP
   - '&mkp RCLK'
-  - '&mkp LCLK'
-  - '&mkp LCLK'
-  - {t: SPACE, h: Scroll_L180}
-  - '&mkp LCLK'
+  - LEFT
+  - {t: DOWN, h: Scroll_L180}
+  - RIGHT
   ROT_270:
   - '&mkp RCLK'
-  - {t: BACKSPACE, h: RCTRL}
-  - ENTER
-  - {t: SPACE, h: Scroll_L270}
+  - DOWN
+  - RIGHT
   - '&mkp LCLK'
-  - '&mkp LCLK'
+  - {t: UP, h: Scroll_L270}
+  - LEFT
   'Scroll_L0 ':
   - Ctl+END
-  - {type: held}
+  - LCTRL
   - Ctl+HOME
   - Ctl+PG DN
-  - LCTRL
+  - {type: held}
   - Ctl+PG UP
   Scroll_L90:
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - Ctl+HOME
+  - LCTRL
+  - Ctl+PG UP
+  - Ctl+END
   - {type: held}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - Ctl+PG DN
   Scroll_L180:
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - Ctl+PG UP
+  - LCTRL
+  - Ctl+PG DN
+  - Ctl+HOME
   - {type: held}
-  - {t: ▽, type: trans}
+  - Ctl+END
   Scroll_L270:
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - Ctl+PG DN
+  - LCTRL
+  - Ctl+END
+  - Ctl+PG UP
   - {type: held}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - Ctl+HOME
   SELECT_BT:
-  - {t: BT, h: '2'}
+  - {t: BT, h: '2', type: held}
   - {t: BT, h: '1'}
   - {t: BT, h: '0'}
-  - '&sys_reset'
-  - {type: held}
-  - BT CLR ALL
+  - '&reset'
+  - {t: ▽, type: trans}
+  - {t: BT CLR ALL, type: held}
   '9':
-  - KP 3
-  - KP 2
+  - {t: KP 3, type: held}
+  - {t: KP 2, type: held}
   - {t: KP 1, type: held}
-  - {t: KP 6, type: held}
+  - KP 6
   - KP 5
   - KP 4
   '10':
-  - {t: ▽, type: trans}
+  - {type: held}
   - /
   - '*'
-  - {type: held}
+  - {t: ▽, type: trans}
   - '-'
   - +
   '11':
-  - {type: held}
   - .
   - ','
   - {t: ▽, type: trans}
   - ENTER
   - '='
+  - {t: ▽, type: trans}
 combos:
 - p: [5, 0]
   k: SELECT_BT
   l: [Scroll_L180]
-- p: [5, 2, 0, 1, 3, 4]
+- p: [5, 4]
   k: {t: BASE, h: toggle}
 - p: [4, 3]
   k: {t: ROT_90, h: toggle}
@@ -102,7 +102,7 @@ combos:
   k: KP 8
 - p: [0, 3]
   k: KP 9
-- p: [4, 5]
+- p: [3, 4, 5]
   k: KP 0
-- p: [2, 3]
+- p: [0, 1, 2]
   k: '9'
