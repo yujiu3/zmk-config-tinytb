@@ -3,7 +3,7 @@ layers:
   BASE:
   - {t: RIGHT, h: '10'}
   - DOWN
-  - '&lt11 LEFT'
+  - {t: LEFT, h: '11'}
   - '&mkp RCLK'
   - {t: UP, h: 'Scroll_L0 '}
   - '&mkp LCLK'
@@ -80,7 +80,7 @@ layers:
   '11':
   - .
   - ','
-  - {t: ▽, type: trans}
+  - {type: held}
   - ENTER
   - '='
   - {t: ▽, type: trans}
