@@ -63,13 +63,7 @@ layers:
   - '&bootloader'
   - {t: ▽, type: trans}
   - BT CLR ALL
-  '9':
-  - {t: KP 3, type: held}
-  - {t: KP 2, type: held}
-  - {t: KP 1, type: held}
-  - KP 6
-  - KP 5
-  - KP 4
+  '9': [KP 3, KP 2, KP 1, KP 6, KP 5, KP 4]
   '10':
   - {type: held}
   - /
@@ -105,4 +99,4 @@ combos:
 - p: [3, 4, 5]
   k: KP 0
 - p: [0, 1, 2]
-  k: '9'
+  k: {t: '9', h: toggle}
