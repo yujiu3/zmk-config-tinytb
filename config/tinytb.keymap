@@ -87,8 +87,9 @@
             key-positions = <3 4 5>;
         };
 
+        /* テンキーレイヤー（トグル） */
         L9 {
-            bindings = <&mo 9>;
+            bindings = <&tog 9>;
             key-positions = <0 1 2>;
         };
     };
