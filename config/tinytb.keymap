@@ -127,7 +127,7 @@
         rot180 {
             label = "ROT_180";
             bindings = <
-&mkp LCLK  &mkp RCLK  &mkp LCLK  &mkp LCLK  &lt 6 SPACE  &mkp LCLK
+&mkp LCLK  &mkp LCLK  &mkp RCLK  &mkp LCLK  &lt 6 SPACE  &mkp MCLK
             >;
         };
 
