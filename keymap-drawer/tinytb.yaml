@@ -16,11 +16,11 @@ layers:
   - '&mkp LCLK'
   ROT_180:
   - '&mkp LCLK'
+  - '&mkp LCLK'
   - '&mkp RCLK'
   - '&mkp LCLK'
-  - '&mkp LCLK'
   - {t: SPACE, h: Scroll_L180}
-  - '&mkp LCLK'
+  - '&mkp MCLK'
   ROT_270:
   - '&mkp RCLK'
   - {t: BACKSPACE, h: RCTRL}
