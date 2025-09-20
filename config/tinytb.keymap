@@ -47,44 +47,56 @@
             // layers = <6>;
         };
 
-        r0 {
-            bindings = <&to 0>;
+        //r0 {
+            //bindings = <&to 0>;
+        PU {
+            bindings = <&kp LC(PG_UP)>;
             key-positions = <5 4>;
         };
 
-        r90 {
-            bindings = <&to 1>;
+        //r90 {
+        //    bindings = <&to 1>;
+        PD {
+            bindings = <&kp LC(PG_DN)>;
             key-positions = <4 3>;
         };
 
-        r180 {
-            bindings = <&to 2>;
+        //r180 {
+        //    bindings = <&to 2>;
+        HM {
+            bindings = <&kp LC(HOME)>;
             key-positions = <1 2>;
         };
 
-        r270 {
-            bindings = <&to 3>;
+        //r270 {
+        //    bindings = <&to 3>;
+        ED {
+            bindings = <&kp LC(END)>;
             key-positions = <1 0>;
         };
 
         n7 {
             bindings = <&kp KP_N7>;
             key-positions = <5 2>;
+            layers = <9>;
         };
 
         n8 {
             bindings = <&kp KP_N8>;
             key-positions = <1 4>;
+            layers = <9>;
         };
 
         n9 {
             bindings = <&kp KP_N9>;
             key-positions = <0 3>;
+            layers = <9>;
         };
 
         n0 {
             bindings = <&kp KP_N0>;
             key-positions = <3 4 5>;
+            layers = <9>;
         };
 
         /* テンキーレイヤー（トグル） */
@@ -137,7 +149,8 @@
         base {
             label = "BASE";
             bindings = <
-&lt 10 RIGHT  &kp DOWN  &lt 11 LEFT  &mkp RCLK  &lt 4 UP  &mkp LCLK
+// &lt 10 RIGHT  &kp DOWN  &lt 11 LEFT  &mkp RCLK  &lt 4 UP  &mkp LCLK
+&mkp RCLK  &lt 4 DOWN  &mkp LCLK  &kp RIGHT  &kp UP  &kp LEFT
             >;
         };
 
@@ -169,7 +182,8 @@
         Scroll_L0 {
             label = "Scroll_L0 ";
             bindings = <
-&kp LC(END)  &kp LCTRL  &kp LC(HOME)  &kp LC(PG_DN)  &trans  &kp LC(PG_UP)
+// &kp LC(END)  &kp LCTRL  &kp LC(HOME)  &kp LC(PG_DN)  &trans  &kp LC(PG_UP)
+&trans  &trans  &trans  &trans  &kp LCTRL  &trans 
             >;
         };
 
