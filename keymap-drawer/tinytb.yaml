@@ -1,12 +1,12 @@
 layout: {zmk_keyboard: tinytb}
 layers:
   BASE:
-  - {t: RIGHT, h: '10'}
-  - DOWN
-  - {t: LEFT, h: '11'}
   - '&mkp RCLK'
-  - {t: UP, h: 'Scroll_L0 '}
+  - {t: DOWN, h: 'Scroll_L0 '}
   - '&mkp LCLK'
+  - RIGHT
+  - UP
+  - LEFT
   ROT_90:
   - '&mkp LCLK'
   - LEFT
@@ -29,12 +29,12 @@ layers:
   - {t: UP, h: Scroll_L270}
   - LEFT
   'Scroll_L0 ':
-  - Ctl+END
-  - LCTRL
-  - Ctl+HOME
-  - Ctl+PG DN
+  - {t: ▽, type: trans}
   - {type: held}
-  - Ctl+PG UP
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - LCTRL
+  - {t: ▽, type: trans}
   Scroll_L90:
   - Ctl+HOME
   - LCTRL
@@ -65,7 +65,7 @@ layers:
   - BT CLR ALL
   '9': [KP 3, KP 2, KP 1, KP 6, KP 5, KP 4]
   '10':
-  - {type: held}
+  - {t: ▽, type: trans}
   - /
   - '*'
   - {t: ▽, type: trans}
@@ -74,7 +74,7 @@ layers:
   '11':
   - .
   - ','
-  - {type: held}
+  - {t: ▽, type: trans}
   - ENTER
   - '='
   - {t: ▽, type: trans}
@@ -82,20 +82,24 @@ combos:
 - p: [5, 0]
   k: {t: SELECT_BT, h: toggle}
 - p: [5, 4]
-  k: {t: BASE, h: toggle}
+  k: Ctl+PG UP
 - p: [4, 3]
-  k: {t: ROT_90, h: toggle}
+  k: Ctl+PG DN
 - p: [1, 2]
-  k: {t: ROT_180, h: toggle}
+  k: Ctl+HOME
 - p: [1, 0]
-  k: {t: ROT_270, h: toggle}
+  k: Ctl+END
 - p: [5, 2]
   k: KP 7
+  l: ['9']
 - p: [1, 4]
   k: KP 8
+  l: ['9']
 - p: [0, 3]
   k: KP 9
+  l: ['9']
 - p: [3, 4, 5]
   k: KP 0
+  l: ['9']
 - p: [0, 1, 2]
   k: {t: '9', h: toggle}
