@@ -44,7 +44,7 @@
             bindings = <&tog 8>;   /* 入る/出るをトグル */
             /* 必要なら layers = <BASE L1 L2>; を付けて適用範囲を絞る */
 
-            layers = <6>;
+            // layers = <6>;
         };
 
         r0 {
@@ -199,7 +199,7 @@
         selbt {
             label = "SELECT_BT";
             bindings = <
-&bt BT_SEL 2  &bt BT_SEL 1  &bt BT_SEL 0  &bootloader  &trans  &bt BT_CLR_ALL
+&bt BT_SEL 2  &bt BT_SEL 1  &bt BT_SEL 0  &bootloader  &bt BT_CLR  &bt BT_CLR_ALL
             >;
         };
 
