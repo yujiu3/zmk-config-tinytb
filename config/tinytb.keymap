@@ -31,6 +31,19 @@
 };
 
 / {
+
+    behaviors {
+        // TapDance追加 https://zmk.dev/docs/keymaps/behaviors/tap-dance
+        td0: tap_dance_0 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&lt 3 LA(ESC)>, <&to 1>, <&to 2>;
+        };
+
+    };
+
+
     /* --- コンボ定義 --- */
 
     combos {
@@ -52,6 +65,7 @@
         PU {
             bindings = <&kp LC(PG_UP)>;
             key-positions = <5 4>;
+            layers = <0>;
         };
 
         //r90 {
@@ -59,6 +73,7 @@
         PD {
             bindings = <&kp LC(PG_DN)>;
             key-positions = <4 3>;
+            layers = <0>;
         };
 
         //r180 {
@@ -66,6 +81,7 @@
         HM {
             bindings = <&kp LC(HOME)>;
             key-positions = <1 2>;
+            layers = <0>;
         };
 
         //r270 {
@@ -73,7 +89,8 @@
         ED {
             bindings = <&kp LC(END)>;
             key-positions = <1 0>;
-        };
+             layers = <0>;
+       };
 
         n7 {
             bindings = <&kp KP_N7>;
