@@ -38,7 +38,7 @@
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&lt 3 LA(ESC)>, <&to 1>, <&to 2>;
+            bindings = <&lt 8 LEFT>, <LA(ESC)>, <&tog 9>;
         };
     };
 
@@ -242,7 +242,7 @@
 
         num {
             bindings = <
-&kp KP_N3  &kp KP_N2  &kp KP_N1  &kp KP_N6  &kp KP_N5  &kp KP_N4
+&lt 10 KP_N3  &kp KP_N2  &kp KP_N1  &kp KP_N6  &kp KP_N5  &kp KP_N4
             >;
 
             label = "NUM";
@@ -250,7 +250,7 @@
 
         layer_10 {
             bindings = <
-&trans  &kp SLASH  &kp ASTRK  &trans  &kp MINUS  &kp PLUS
+&trans  &kp SLASH  &kp ASTRK  &kp EQUAL  &kp MINUS  &kp PLUS
             >;
         };
 
