@@ -63,7 +63,7 @@ layers:
   - '&bootloader'
   - BT CLR
   - BT CLR ALL
-  '9': [KP 3, KP 2, KP 1, KP 6, KP 5, KP 4]
+  NUM: [KP 3, KP 2, KP 1, KP 6, KP 5, KP 4]
   '10':
   - {t: ▽, type: trans}
   - /
@@ -95,15 +95,18 @@ combos:
   l: [BASE]
 - p: [5, 2]
   k: KP 7
-  l: ['9']
+  l: [NUM]
 - p: [1, 4]
   k: KP 8
-  l: ['9']
+  l: [NUM]
 - p: [0, 3]
   k: KP 9
-  l: ['9']
+  l: [NUM]
 - p: [3, 4, 5]
   k: KP 0
-  l: ['9']
+  l: [NUM]
 - p: [0, 1, 2]
-  k: {t: '9', h: toggle}
+  k: {t: NUM, h: toggle}
+- p: [5, 4]
+  k: '0'
+  l: [NUM]
