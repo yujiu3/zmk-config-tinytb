@@ -310,7 +310,7 @@
 
         layer_10 {
             bindings = <
-&trans  &kp SLASH  &kp JP_ASTRK  &kp JP_EQUAL  &kp MINUS  &kp JP_PLUS
+&trans  &kp SLASH  &kp JP_ASTERISK  &kp JP_EQUAL  &kp MINUS  &kp JP_PLUS
             >;
         };
 
