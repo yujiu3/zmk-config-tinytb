@@ -109,7 +109,7 @@ combos:
   k: KP 9
   l: [NUM]
 - p: [0, 1, 2]
-  k: {t: NUM, h: toggle}
+  k: '&num'
 - p: [5, 4]
   k: '0'
   l: [NUM]
