@@ -124,7 +124,7 @@
             key-positions = <0 1 2>;
         };
 
-        n0 {
+        n0_2 {
             bindings = <&kp N0>;
             key-positions = <5 4>;
             layers = <9>;
