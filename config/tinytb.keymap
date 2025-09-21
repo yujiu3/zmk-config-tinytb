@@ -38,17 +38,16 @@
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&lt 8 LEFT>, <&kp LA(ESC)>, <&tog 9>;
+            bindings = <&lt 8 LEFT>, <&kp LA(ESC)>, <&num>;
         };
 
         td4: tap_dance_4 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&kp KP_N4>, <&kp BACKSPACE>, <&tog 9>;
+            bindings = <&kp KP_N4>, <&kp BACKSPACE>, <&num>;
         };
-
-};
+    };
 
     /* --- コンボ定義 --- */
 
@@ -122,7 +121,7 @@
         /* テンキーレイヤー（トグル） */
 
         L9 {
-            bindings = <&tog 9>;
+            bindings = <&num>;
             key-positions = <0 1 2>;
         };
 
@@ -189,6 +188,15 @@
             /* 270° = Y反転 完成済み */
 
             input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>;
+        };
+    };
+
+    macros {
+        num: num {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&tog 9 &kp KP_NUMLOCK>;
+            label = "NUM";
         };
     };
 
