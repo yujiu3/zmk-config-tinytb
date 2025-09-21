@@ -63,12 +63,18 @@ layers:
   - '&bootloader'
   - BT CLR
   - BT CLR ALL
-  NUM: [KP 3, KP 2, KP 1, KP 6, KP 5, KP 4]
+  NUM:
+  - {t: KP 3, h: '10'}
+  - KP 2
+  - KP 1
+  - KP 6
+  - KP 5
+  - KP 4
   '10':
-  - {t: ▽, type: trans}
+  - {type: held}
   - /
   - '*'
-  - {t: ▽, type: trans}
+  - '='
   - '-'
   - +
   '11':
