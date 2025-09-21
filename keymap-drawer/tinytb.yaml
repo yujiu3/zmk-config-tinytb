@@ -6,7 +6,7 @@ layers:
   - '&mkp LCLK'
   - RIGHT
   - UP
-  - LEFT
+  - '&td0'
   ROT_90:
   - '&mkp LCLK'
   - LEFT
@@ -69,7 +69,7 @@ layers:
   - KP 1
   - KP 6
   - KP 5
-  - KP 4
+  - '&td4'
   '10':
   - {type: held}
   - /
