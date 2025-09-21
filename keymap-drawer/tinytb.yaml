@@ -83,12 +83,16 @@ combos:
   k: {t: SELECT_BT, h: toggle}
 - p: [5, 4]
   k: Ctl+PG UP
+  l: [BASE]
 - p: [4, 3]
   k: Ctl+PG DN
+  l: [BASE]
 - p: [1, 2]
   k: Ctl+HOME
+  l: [BASE]
 - p: [1, 0]
   k: Ctl+END
+  l: [BASE]
 - p: [5, 2]
   k: KP 7
   l: ['9']
