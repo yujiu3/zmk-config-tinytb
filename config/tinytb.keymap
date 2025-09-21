@@ -111,12 +111,6 @@
             layers = <9>;
         };
 
-        n0 {
-            bindings = <&kp KP_N0>;
-            key-positions = <3 4 5>;
-            layers = <9>;
-        };
-
         /* テンキーレイヤー（トグル） */
 
         L9 {
@@ -124,9 +118,33 @@
             key-positions = <0 1 2>;
         };
 
-        n0_2 {
+        n0 {
             bindings = <&kp N0>;
             key-positions = <5 4>;
+            layers = <9>;
+        };
+
+        ent {
+            bindings = <&kp ENTER>;
+            key-positions = <4 3>;
+            layers = <9>;
+        };
+
+        comma {
+            bindings = <&kp COMMA>;
+            key-positions = <1 2>;
+            layers = <9>;
+        };
+
+        period {
+            bindings = <&kp PERIOD>;
+            key-positions = <0 1>;
+            layers = <9>;
+        };
+
+        bs {
+            bindings = <&kp BACKSPACE>;
+            key-positions = <3 2>;
             layers = <9>;
         };
     };
