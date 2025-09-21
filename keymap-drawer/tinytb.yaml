@@ -108,11 +108,20 @@ combos:
 - p: [0, 3]
   k: KP 9
   l: [NUM]
-- p: [3, 4, 5]
-  k: KP 0
-  l: [NUM]
 - p: [0, 1, 2]
   k: {t: NUM, h: toggle}
 - p: [5, 4]
   k: '0'
+  l: [NUM]
+- p: [4, 3]
+  k: ENTER
+  l: [NUM]
+- p: [1, 2]
+  k: ','
+  l: [NUM]
+- p: [0, 1]
+  k: .
+  l: [NUM]
+- p: [3, 2]
+  k: BACKSPACE
   l: [NUM]
