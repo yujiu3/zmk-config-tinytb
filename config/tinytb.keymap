@@ -38,7 +38,7 @@
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&lt 8 LEFT>, <LA(ESC)>, <&tog 9>;
+            bindings = <&lt 8 LEFT>, <&kp LA(ESC)>, <&tog 9>;
         };
     };
 
