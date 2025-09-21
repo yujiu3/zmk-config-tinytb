@@ -40,7 +40,15 @@
             tapping-term-ms = <200>;
             bindings = <&lt 8 LEFT>, <&kp LA(ESC)>, <&tog 9>;
         };
-    };
+
+        td4: tap_dance_4 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp KP_N4>, <&kp BACKSPACE>, <&tog 9>;
+        };
+
+};
 
     /* --- コンボ定義 --- */
 
@@ -192,7 +200,7 @@
         base {
             label = "BASE";
             bindings = <
-&mkp RCLK  &lt 4 DOWN  &mkp LCLK  &kp RIGHT  &kp UP  &kp LEFT
+&mkp RCLK  &lt 4 DOWN  &mkp LCLK  &kp RIGHT  &kp UP  &td0
             >;
         };
 
@@ -260,7 +268,7 @@
 
         num {
             bindings = <
-&lt 10 KP_N3  &kp KP_N2  &kp KP_N1  &kp KP_N6  &kp KP_N5  &kp KP_N4
+&lt 10 KP_N3  &kp KP_N2  &kp KP_N1  &kp KP_N6  &kp KP_N5  &td4
             >;
 
             label = "NUM";
