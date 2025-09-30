@@ -67,11 +67,11 @@ combos:
 - p: [5, 0]
   k: SELECT_BT
   l: [Scroll_L180]
-- p: [4, 5]
+- p: [4, 5, 0]
   k: {t: BASE, h: toggle}
-- p: [4, 3]
+- p: [4, 3, 2]
   k: {t: ROT_90, h: toggle}
-- p: [1, 2]
+- p: [1, 2, 3]
   k: {t: ROT_180, h: toggle}
-- p: [1, 0]
+- p: [1, 0, 5]
   k: {t: ROT_270, h: toggle}

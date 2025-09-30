@@ -161,28 +161,36 @@ path.combo {
 </text>
 </g>
 <g class="combo combopos-0">
-<rect rx="6" ry="6" x="46" y="17" width="28" height="26" class="combo"/>
+<path d="M90,50 l-41,-14" class="combo"/>
+<path d="M90,50 l43,29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="37" width="28" height="26" class="combo"/>
 <a href="#BASE">
-<text x="60" y="30" class="combo tap layer-activator">BASE</text>
-</a><text x="60" y="41" class="combo hold">toggle</text>
+<text x="90" y="50" class="combo tap layer-activator">BASE</text>
+</a><text x="90" y="61" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-1">
-<rect rx="6" ry="6" x="106" y="17" width="28" height="26" class="combo"/>
+<path d="M90,50 l41,-14" class="combo"/>
+<path d="M90,50 l-43,29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="37" width="28" height="26" class="combo"/>
 <a href="#ROT_90">
-<text x="120" y="30" class="combo tap layer-activator">ROT_90</text>
-</a><text x="120" y="41" class="combo hold">toggle</text>
+<text x="90" y="50" class="combo tap layer-activator">ROT_90</text>
+</a><text x="90" y="61" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-2">
-<rect rx="6" ry="6" x="46" y="77" width="28" height="26" class="combo"/>
+<path d="M90,70 l-41,14" class="combo"/>
+<path d="M90,70 l43,-29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="57" width="28" height="26" class="combo"/>
 <a href="#ROT_180">
-<text x="60" y="90" class="combo tap layer-activator">ROT_180</text>
-</a><text x="60" y="101" class="combo hold">toggle</text>
+<text x="90" y="70" class="combo tap layer-activator">ROT_180</text>
+</a><text x="90" y="81" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-3">
-<rect rx="6" ry="6" x="106" y="77" width="28" height="26" class="combo"/>
+<path d="M90,70 l41,14" class="combo"/>
+<path d="M90,70 l-43,-29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="57" width="28" height="26" class="combo"/>
 <a href="#ROT_270">
-<text x="120" y="90" class="combo tap layer-activator">ROT_270</text>
-</a><text x="120" y="101" class="combo hold">toggle</text>
+<text x="90" y="70" class="combo tap layer-activator">ROT_270</text>
+</a><text x="90" y="81" class="combo hold">toggle</text>
 </g>
 </g>
 </g>
@@ -223,28 +231,36 @@ path.combo {
 </text>
 </g>
 <g class="combo combopos-0">
-<rect rx="6" ry="6" x="46" y="17" width="28" height="26" class="combo"/>
+<path d="M90,50 l-41,-14" class="combo"/>
+<path d="M90,50 l43,29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="37" width="28" height="26" class="combo"/>
 <a href="#BASE">
-<text x="60" y="30" class="combo tap layer-activator">BASE</text>
-</a><text x="60" y="41" class="combo hold">toggle</text>
+<text x="90" y="50" class="combo tap layer-activator">BASE</text>
+</a><text x="90" y="61" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-1">
-<rect rx="6" ry="6" x="106" y="17" width="28" height="26" class="combo"/>
+<path d="M90,50 l41,-14" class="combo"/>
+<path d="M90,50 l-43,29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="37" width="28" height="26" class="combo"/>
 <a href="#ROT_90">
-<text x="120" y="30" class="combo tap layer-activator">ROT_90</text>
-</a><text x="120" y="41" class="combo hold">toggle</text>
+<text x="90" y="50" class="combo tap layer-activator">ROT_90</text>
+</a><text x="90" y="61" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-2">
-<rect rx="6" ry="6" x="46" y="77" width="28" height="26" class="combo"/>
+<path d="M90,70 l-41,14" class="combo"/>
+<path d="M90,70 l43,-29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="57" width="28" height="26" class="combo"/>
 <a href="#ROT_180">
-<text x="60" y="90" class="combo tap layer-activator">ROT_180</text>
-</a><text x="60" y="101" class="combo hold">toggle</text>
+<text x="90" y="70" class="combo tap layer-activator">ROT_180</text>
+</a><text x="90" y="81" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-3">
-<rect rx="6" ry="6" x="106" y="77" width="28" height="26" class="combo"/>
+<path d="M90,70 l41,14" class="combo"/>
+<path d="M90,70 l-43,-29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="57" width="28" height="26" class="combo"/>
 <a href="#ROT_270">
-<text x="120" y="90" class="combo tap layer-activator">ROT_270</text>
-</a><text x="120" y="101" class="combo hold">toggle</text>
+<text x="90" y="70" class="combo tap layer-activator">ROT_270</text>
+</a><text x="90" y="81" class="combo hold">toggle</text>
 </g>
 </g>
 </g>
@@ -288,28 +304,36 @@ path.combo {
 </text>
 </g>
 <g class="combo combopos-0">
-<rect rx="6" ry="6" x="46" y="17" width="28" height="26" class="combo"/>
+<path d="M90,50 l-41,-14" class="combo"/>
+<path d="M90,50 l43,29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="37" width="28" height="26" class="combo"/>
 <a href="#BASE">
-<text x="60" y="30" class="combo tap layer-activator">BASE</text>
-</a><text x="60" y="41" class="combo hold">toggle</text>
+<text x="90" y="50" class="combo tap layer-activator">BASE</text>
+</a><text x="90" y="61" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-1">
-<rect rx="6" ry="6" x="106" y="17" width="28" height="26" class="combo"/>
+<path d="M90,50 l41,-14" class="combo"/>
+<path d="M90,50 l-43,29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="37" width="28" height="26" class="combo"/>
 <a href="#ROT_90">
-<text x="120" y="30" class="combo tap layer-activator">ROT_90</text>
-</a><text x="120" y="41" class="combo hold">toggle</text>
+<text x="90" y="50" class="combo tap layer-activator">ROT_90</text>
+</a><text x="90" y="61" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-2">
-<rect rx="6" ry="6" x="46" y="77" width="28" height="26" class="combo"/>
+<path d="M90,70 l-41,14" class="combo"/>
+<path d="M90,70 l43,-29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="57" width="28" height="26" class="combo"/>
 <a href="#ROT_180">
-<text x="60" y="90" class="combo tap layer-activator">ROT_180</text>
-</a><text x="60" y="101" class="combo hold">toggle</text>
+<text x="90" y="70" class="combo tap layer-activator">ROT_180</text>
+</a><text x="90" y="81" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-3">
-<rect rx="6" ry="6" x="106" y="77" width="28" height="26" class="combo"/>
+<path d="M90,70 l41,14" class="combo"/>
+<path d="M90,70 l-43,-29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="57" width="28" height="26" class="combo"/>
 <a href="#ROT_270">
-<text x="120" y="90" class="combo tap layer-activator">ROT_270</text>
-</a><text x="120" y="101" class="combo hold">toggle</text>
+<text x="90" y="70" class="combo tap layer-activator">ROT_270</text>
+</a><text x="90" y="81" class="combo hold">toggle</text>
 </g>
 </g>
 </g>
@@ -350,28 +374,36 @@ path.combo {
 </text>
 </g>
 <g class="combo combopos-0">
-<rect rx="6" ry="6" x="46" y="17" width="28" height="26" class="combo"/>
+<path d="M90,50 l-41,-14" class="combo"/>
+<path d="M90,50 l43,29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="37" width="28" height="26" class="combo"/>
 <a href="#BASE">
-<text x="60" y="30" class="combo tap layer-activator">BASE</text>
-</a><text x="60" y="41" class="combo hold">toggle</text>
+<text x="90" y="50" class="combo tap layer-activator">BASE</text>
+</a><text x="90" y="61" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-1">
-<rect rx="6" ry="6" x="106" y="17" width="28" height="26" class="combo"/>
+<path d="M90,50 l41,-14" class="combo"/>
+<path d="M90,50 l-43,29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="37" width="28" height="26" class="combo"/>
 <a href="#ROT_90">
-<text x="120" y="30" class="combo tap layer-activator">ROT_90</text>
-</a><text x="120" y="41" class="combo hold">toggle</text>
+<text x="90" y="50" class="combo tap layer-activator">ROT_90</text>
+</a><text x="90" y="61" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-2">
-<rect rx="6" ry="6" x="46" y="77" width="28" height="26" class="combo"/>
+<path d="M90,70 l-41,14" class="combo"/>
+<path d="M90,70 l43,-29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="57" width="28" height="26" class="combo"/>
 <a href="#ROT_180">
-<text x="60" y="90" class="combo tap layer-activator">ROT_180</text>
-</a><text x="60" y="101" class="combo hold">toggle</text>
+<text x="90" y="70" class="combo tap layer-activator">ROT_180</text>
+</a><text x="90" y="81" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-3">
-<rect rx="6" ry="6" x="106" y="77" width="28" height="26" class="combo"/>
+<path d="M90,70 l41,14" class="combo"/>
+<path d="M90,70 l-43,-29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="57" width="28" height="26" class="combo"/>
 <a href="#ROT_270">
-<text x="120" y="90" class="combo tap layer-activator">ROT_270</text>
-</a><text x="120" y="101" class="combo hold">toggle</text>
+<text x="90" y="70" class="combo tap layer-activator">ROT_270</text>
+</a><text x="90" y="81" class="combo hold">toggle</text>
 </g>
 </g>
 </g>
@@ -402,28 +434,36 @@ path.combo {
 <text x="0" y="0" class="key trans tap">▽</text>
 </g>
 <g class="combo combopos-0">
-<rect rx="6" ry="6" x="46" y="17" width="28" height="26" class="combo"/>
+<path d="M90,50 l-41,-14" class="combo"/>
+<path d="M90,50 l43,29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="37" width="28" height="26" class="combo"/>
 <a href="#BASE">
-<text x="60" y="30" class="combo tap layer-activator">BASE</text>
-</a><text x="60" y="41" class="combo hold">toggle</text>
+<text x="90" y="50" class="combo tap layer-activator">BASE</text>
+</a><text x="90" y="61" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-1">
-<rect rx="6" ry="6" x="106" y="17" width="28" height="26" class="combo"/>
+<path d="M90,50 l41,-14" class="combo"/>
+<path d="M90,50 l-43,29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="37" width="28" height="26" class="combo"/>
 <a href="#ROT_90">
-<text x="120" y="30" class="combo tap layer-activator">ROT_90</text>
-</a><text x="120" y="41" class="combo hold">toggle</text>
+<text x="90" y="50" class="combo tap layer-activator">ROT_90</text>
+</a><text x="90" y="61" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-2">
-<rect rx="6" ry="6" x="46" y="77" width="28" height="26" class="combo"/>
+<path d="M90,70 l-41,14" class="combo"/>
+<path d="M90,70 l43,-29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="57" width="28" height="26" class="combo"/>
 <a href="#ROT_180">
-<text x="60" y="90" class="combo tap layer-activator">ROT_180</text>
-</a><text x="60" y="101" class="combo hold">toggle</text>
+<text x="90" y="70" class="combo tap layer-activator">ROT_180</text>
+</a><text x="90" y="81" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-3">
-<rect rx="6" ry="6" x="106" y="77" width="28" height="26" class="combo"/>
+<path d="M90,70 l41,14" class="combo"/>
+<path d="M90,70 l-43,-29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="57" width="28" height="26" class="combo"/>
 <a href="#ROT_270">
-<text x="120" y="90" class="combo tap layer-activator">ROT_270</text>
-</a><text x="120" y="101" class="combo hold">toggle</text>
+<text x="90" y="70" class="combo tap layer-activator">ROT_270</text>
+</a><text x="90" y="81" class="combo hold">toggle</text>
 </g>
 </g>
 </g>
@@ -454,28 +494,36 @@ path.combo {
 <text x="0" y="0" class="key trans tap">▽</text>
 </g>
 <g class="combo combopos-0">
-<rect rx="6" ry="6" x="46" y="17" width="28" height="26" class="combo"/>
+<path d="M90,50 l-41,-14" class="combo"/>
+<path d="M90,50 l43,29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="37" width="28" height="26" class="combo"/>
 <a href="#BASE">
-<text x="60" y="30" class="combo tap layer-activator">BASE</text>
-</a><text x="60" y="41" class="combo hold">toggle</text>
+<text x="90" y="50" class="combo tap layer-activator">BASE</text>
+</a><text x="90" y="61" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-1">
-<rect rx="6" ry="6" x="106" y="17" width="28" height="26" class="combo"/>
+<path d="M90,50 l41,-14" class="combo"/>
+<path d="M90,50 l-43,29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="37" width="28" height="26" class="combo"/>
 <a href="#ROT_90">
-<text x="120" y="30" class="combo tap layer-activator">ROT_90</text>
-</a><text x="120" y="41" class="combo hold">toggle</text>
+<text x="90" y="50" class="combo tap layer-activator">ROT_90</text>
+</a><text x="90" y="61" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-2">
-<rect rx="6" ry="6" x="46" y="77" width="28" height="26" class="combo"/>
+<path d="M90,70 l-41,14" class="combo"/>
+<path d="M90,70 l43,-29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="57" width="28" height="26" class="combo"/>
 <a href="#ROT_180">
-<text x="60" y="90" class="combo tap layer-activator">ROT_180</text>
-</a><text x="60" y="101" class="combo hold">toggle</text>
+<text x="90" y="70" class="combo tap layer-activator">ROT_180</text>
+</a><text x="90" y="81" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-3">
-<rect rx="6" ry="6" x="106" y="77" width="28" height="26" class="combo"/>
+<path d="M90,70 l41,14" class="combo"/>
+<path d="M90,70 l-43,-29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="57" width="28" height="26" class="combo"/>
 <a href="#ROT_270">
-<text x="120" y="90" class="combo tap layer-activator">ROT_270</text>
-</a><text x="120" y="101" class="combo hold">toggle</text>
+<text x="90" y="70" class="combo tap layer-activator">ROT_270</text>
+</a><text x="90" y="81" class="combo hold">toggle</text>
 </g>
 </g>
 </g>
@@ -513,28 +561,36 @@ path.combo {
 <text x="90" y="60" class="combo tap layer-activator"><tspan style="font-size: 78%">SELECT_BT</tspan></text>
 </a></g>
 <g class="combo combopos-1">
-<rect rx="6" ry="6" x="46" y="17" width="28" height="26" class="combo"/>
+<path d="M90,50 l-41,-14" class="combo"/>
+<path d="M90,50 l43,29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="37" width="28" height="26" class="combo"/>
 <a href="#BASE">
-<text x="60" y="30" class="combo tap layer-activator">BASE</text>
-</a><text x="60" y="41" class="combo hold">toggle</text>
+<text x="90" y="50" class="combo tap layer-activator">BASE</text>
+</a><text x="90" y="61" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-2">
-<rect rx="6" ry="6" x="106" y="17" width="28" height="26" class="combo"/>
+<path d="M90,50 l41,-14" class="combo"/>
+<path d="M90,50 l-43,29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="37" width="28" height="26" class="combo"/>
 <a href="#ROT_90">
-<text x="120" y="30" class="combo tap layer-activator">ROT_90</text>
-</a><text x="120" y="41" class="combo hold">toggle</text>
+<text x="90" y="50" class="combo tap layer-activator">ROT_90</text>
+</a><text x="90" y="61" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-3">
-<rect rx="6" ry="6" x="46" y="77" width="28" height="26" class="combo"/>
+<path d="M90,70 l-41,14" class="combo"/>
+<path d="M90,70 l43,-29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="57" width="28" height="26" class="combo"/>
 <a href="#ROT_180">
-<text x="60" y="90" class="combo tap layer-activator">ROT_180</text>
-</a><text x="60" y="101" class="combo hold">toggle</text>
+<text x="90" y="70" class="combo tap layer-activator">ROT_180</text>
+</a><text x="90" y="81" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-4">
-<rect rx="6" ry="6" x="106" y="77" width="28" height="26" class="combo"/>
+<path d="M90,70 l41,14" class="combo"/>
+<path d="M90,70 l-43,-29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="57" width="28" height="26" class="combo"/>
 <a href="#ROT_270">
-<text x="120" y="90" class="combo tap layer-activator">ROT_270</text>
-</a><text x="120" y="101" class="combo hold">toggle</text>
+<text x="90" y="70" class="combo tap layer-activator">ROT_270</text>
+</a><text x="90" y="81" class="combo hold">toggle</text>
 </g>
 </g>
 </g>
@@ -565,28 +621,36 @@ path.combo {
 <text x="0" y="0" class="key trans tap">▽</text>
 </g>
 <g class="combo combopos-0">
-<rect rx="6" ry="6" x="46" y="17" width="28" height="26" class="combo"/>
+<path d="M90,50 l-41,-14" class="combo"/>
+<path d="M90,50 l43,29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="37" width="28" height="26" class="combo"/>
 <a href="#BASE">
-<text x="60" y="30" class="combo tap layer-activator">BASE</text>
-</a><text x="60" y="41" class="combo hold">toggle</text>
+<text x="90" y="50" class="combo tap layer-activator">BASE</text>
+</a><text x="90" y="61" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-1">
-<rect rx="6" ry="6" x="106" y="17" width="28" height="26" class="combo"/>
+<path d="M90,50 l41,-14" class="combo"/>
+<path d="M90,50 l-43,29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="37" width="28" height="26" class="combo"/>
 <a href="#ROT_90">
-<text x="120" y="30" class="combo tap layer-activator">ROT_90</text>
-</a><text x="120" y="41" class="combo hold">toggle</text>
+<text x="90" y="50" class="combo tap layer-activator">ROT_90</text>
+</a><text x="90" y="61" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-2">
-<rect rx="6" ry="6" x="46" y="77" width="28" height="26" class="combo"/>
+<path d="M90,70 l-41,14" class="combo"/>
+<path d="M90,70 l43,-29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="57" width="28" height="26" class="combo"/>
 <a href="#ROT_180">
-<text x="60" y="90" class="combo tap layer-activator">ROT_180</text>
-</a><text x="60" y="101" class="combo hold">toggle</text>
+<text x="90" y="70" class="combo tap layer-activator">ROT_180</text>
+</a><text x="90" y="81" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-3">
-<rect rx="6" ry="6" x="106" y="77" width="28" height="26" class="combo"/>
+<path d="M90,70 l41,14" class="combo"/>
+<path d="M90,70 l-43,-29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="57" width="28" height="26" class="combo"/>
 <a href="#ROT_270">
-<text x="120" y="90" class="combo tap layer-activator">ROT_270</text>
-</a><text x="120" y="101" class="combo hold">toggle</text>
+<text x="90" y="70" class="combo tap layer-activator">ROT_270</text>
+</a><text x="90" y="81" class="combo hold">toggle</text>
 </g>
 </g>
 </g>
@@ -620,28 +684,36 @@ path.combo {
 <rect rx="6" ry="6" x="-28" y="-28" width="56" height="56" class="key held"/>
 </g>
 <g class="combo combopos-0">
-<rect rx="6" ry="6" x="46" y="17" width="28" height="26" class="combo"/>
+<path d="M90,50 l-41,-14" class="combo"/>
+<path d="M90,50 l43,29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="37" width="28" height="26" class="combo"/>
 <a href="#BASE">
-<text x="60" y="30" class="combo tap layer-activator">BASE</text>
-</a><text x="60" y="41" class="combo hold">toggle</text>
+<text x="90" y="50" class="combo tap layer-activator">BASE</text>
+</a><text x="90" y="61" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-1">
-<rect rx="6" ry="6" x="106" y="17" width="28" height="26" class="combo"/>
+<path d="M90,50 l41,-14" class="combo"/>
+<path d="M90,50 l-43,29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="37" width="28" height="26" class="combo"/>
 <a href="#ROT_90">
-<text x="120" y="30" class="combo tap layer-activator">ROT_90</text>
-</a><text x="120" y="41" class="combo hold">toggle</text>
+<text x="90" y="50" class="combo tap layer-activator">ROT_90</text>
+</a><text x="90" y="61" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-2">
-<rect rx="6" ry="6" x="46" y="77" width="28" height="26" class="combo"/>
+<path d="M90,70 l-41,14" class="combo"/>
+<path d="M90,70 l43,-29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="57" width="28" height="26" class="combo"/>
 <a href="#ROT_180">
-<text x="60" y="90" class="combo tap layer-activator">ROT_180</text>
-</a><text x="60" y="101" class="combo hold">toggle</text>
+<text x="90" y="70" class="combo tap layer-activator">ROT_180</text>
+</a><text x="90" y="81" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-3">
-<rect rx="6" ry="6" x="106" y="77" width="28" height="26" class="combo"/>
+<path d="M90,70 l41,14" class="combo"/>
+<path d="M90,70 l-43,-29" class="combo"/>
+<rect rx="6" ry="6" x="76" y="57" width="28" height="26" class="combo"/>
 <a href="#ROT_270">
-<text x="120" y="90" class="combo tap layer-activator">ROT_270</text>
-</a><text x="120" y="101" class="combo hold">toggle</text>
+<text x="90" y="70" class="combo tap layer-activator">ROT_270</text>
+</a><text x="90" y="81" class="combo hold">toggle</text>
 </g>
 </g>
 </g>
