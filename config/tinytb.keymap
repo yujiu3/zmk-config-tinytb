@@ -33,70 +33,6 @@
 
 / {
 
-  behaviors {
-    /* --- レイヤー移動の 0 引数ラッパー --- */
-    to_base: to_base {
-      compatible = "zmk,behavior-macro";
-      #binding-cells = <0>;
-      bindings = <&to BASE>;
-    };
-
-    to_rot90: to_rot90 {
-      compatible = "zmk,behavior-macro";
-      #binding-cells = <0>;
-      bindings = <&to ROT_90>;
-    };
-
-    to_rot180: to_rot180 {
-      compatible = "zmk,behavior-macro";
-      #binding-cells = <0>;
-      bindings = <&to ROT_180>;
-    };
-
-    to_rot270: to_rot270 {
-      compatible = "zmk,behavior-macro";
-      #binding-cells = <0>;
-      bindings = <&to ROT_270>;
-    };
-
-    /* --- 1秒長押しでだけ発火する Hold-Tap --- */
-    ht_rot0: ht_rot0 {
-      compatible = "zmk,behavior-hold-tap";
-      #binding-cells = <0>;
-      flavor = "hold-preferred";
-      tapping-term-ms = <1000>;  /* 1秒 */
-      quick-tap-ms = <0>;
-      bindings = <&to_base &none>;   /* ← phandles だけ */
-    };
-
-    ht_rot90: ht_rot90 {
-      compatible = "zmk,behavior-hold-tap";
-      #binding-cells = <0>;
-      flavor = "hold-preferred";
-      tapping-term-ms = <1000>;
-      quick-tap-ms = <0>;
-      bindings = <&to_rot90 &none>;
-    };
-
-    ht_rot180: ht_rot180 {
-      compatible = "zmk,behavior-hold-tap";
-      #binding-cells = <0>;
-      flavor = "hold-preferred";
-      tapping-term-ms = <1000>;
-      quick-tap-ms = <0>;
-      bindings = <&to_rot180 &none>;
-    };
-
-    ht_rot270: ht_rot270 {
-      compatible = "zmk,behavior-hold-tap";
-      #binding-cells = <0>;
-      flavor = "hold-preferred";
-      tapping-term-ms = <1000>;
-      quick-tap-ms = <0>;
-      bindings = <&to_rot270 &none>;
-    };
-  };
-
     /* --- コンボ定義 --- */
 
     combos {
@@ -109,31 +45,30 @@
             key-positions = <5 0>;        /* ← ここは “1/2/3 キーの物理位置” */
             bindings = <&mo 8>;   /* 入る/出るをトグル */
             /* 必要なら layers = <BASE L1 L2>; を付けて適用範囲を絞る */
-
             layers = <6>;
         };
 
         r0 {
-            timeout-ms = <4 0>;
-            bindings = <&ht_rot0>;     /* ★1秒ホールドで 0 へ */
+            timeout-ms = <40>;
+            bindings = <&to 0>;
             key-positions = <4 5>;
         };
 
         r90 {
             timeout-ms = <50>;              /* 反応が鈍ければ少し上げる(例: 60〜80) */
-            bindings = <&ht_rot90>;     /* ★1秒ホールドで 90 へ */
+            bindings = <&to 1>;
             key-positions = <4 3>;
         };
 
         r180 {
             timeout-ms = <50>;              /* 反応が鈍ければ少し上げる(例: 60〜80) */
-            bindings = <&ht_rot180>;     /* ★1秒ホールドで 180 へ */
+            bindings = <&to 2>;     /* ★1秒ホールドで 180 へ */
             key-positions = <1 2>;
         };
 
         r270 {
             timeout-ms = <50>;              /* 反応が鈍ければ少し上げる(例: 60〜80) */
-            bindings = <&ht_rot270>;     /* ★1秒ホールドで 270 へ */
+            bindings = <&to 3>;     /* ★1秒ホールドで 270 へ */
             key-positions = <1 0>;
         };
     };
