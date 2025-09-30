@@ -31,6 +31,18 @@
 };
 
 / {
+
+  behaviors {
+    /* 1秒長押ししたら “HOLD” を発火、タップは無視 */
+    ht_long: ht_long {
+      compatible = "zmk,behavior-hold-tap";
+      #binding-cells = <2>;        /* 1: hold で呼ぶ動作, 2: tap で呼ぶ動作 */
+      flavor = "hold-preferred";   /* 基本はホールド優先 */
+      tapping-term-ms = <1000>;    /* ★1秒 */
+      quick-tap-ms = <0>;          /* 連打でのタップ確定を無効化 */
+    };
+  };
+
     /* --- コンボ定義 --- */
 
     combos {
@@ -48,26 +60,26 @@
         };
 
         r0 {
-            timeout-ms = <50>;              /* 反応が鈍ければ少し上げる(例: 60〜80) */
-            bindings = <&to 0>;
+            timeout-ms = <4 0>;
+            bindings = <&ht_long &to 0 &none>;     /* ★1秒ホールドで 0 へ */
             key-positions = <4 5>;
         };
 
         r90 {
             timeout-ms = <50>;              /* 反応が鈍ければ少し上げる(例: 60〜80) */
-            bindings = <&to 1>;
+            bindings = <&ht_long &to 1 &none>;     /* ★1秒ホールドで 1 へ */
             key-positions = <4 3>;
         };
 
         r180 {
             timeout-ms = <50>;              /* 反応が鈍ければ少し上げる(例: 60〜80) */
-            bindings = <&to 2>;
+            bindings = <&ht_long &to 2 &none>;     /* ★1秒ホールドで 2 へ */
             key-positions = <1 2>;
         };
 
         r270 {
             timeout-ms = <50>;              /* 反応が鈍ければ少し上げる(例: 60〜80) */
-            bindings = <&to 3>;
+            bindings = <&ht_long &to 3 &none>;     /* ★1秒ホールドで 3 へ */
             key-positions = <1 0>;
         };
     };
