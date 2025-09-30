@@ -16,8 +16,8 @@ layers:
   - '&mkp LCLK'
   ROT_180:
   - '&mkp LCLK'
-  - '&mkp LCLK'
-  - '&mkp RCLK'
+  - '&mkp MB2'
+  - {t: Gui+BACKSPACE, h: RIGHT CONTROL}
   - '&mkp LCLK'
   - {t: SPACE, h: Scroll_L180}
   - '&mkp MCLK'
@@ -31,10 +31,10 @@ layers:
   'Scroll_L0 ':
   - {t: ▽, type: trans}
   - {type: held}
+  - '&mkp MB4'
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - '&mkp MCLK'
   Scroll_L90:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
