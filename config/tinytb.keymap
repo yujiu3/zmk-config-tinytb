@@ -34,13 +34,42 @@
 / {
 
   behaviors {
-    /* 1秒長押ししたら “HOLD” を発火、タップは無視 */
-    ht_long: ht_long {
+
+    /* 1秒長押しで回転を確定、タップは無効化 */
+    ht_rot0: ht_rot0 {
       compatible = "zmk,behavior-hold-tap";
-      #binding-cells = <2>;        /* 1: hold で呼ぶ動作, 2: tap で呼ぶ動作 */
-      flavor = "hold-preferred";   /* 基本はホールド優先 */
-      tapping-term-ms = <1000>;    /* ★1秒 */
-      quick-tap-ms = <0>;          /* 連打でのタップ確定を無効化 */
+      #binding-cells = <0>;                 /* ← 呼び出し時に引数は不要 */
+      flavor = "hold-preferred";
+      tapping-term-ms = <1000>;             /* ★ 1秒 */
+      quick-tap-ms = <0>;                   /* 連打タップ確定オフ */
+      bindings = <&to BASE>, <&none>;       /* HOLD = BASEへ, TAP = 何もしない */
+    };
+
+    ht_rot90: ht_rot90 {
+      compatible = "zmk,behavior-hold-tap";
+      #binding-cells = <0>;
+      flavor = "hold-preferred";
+      tapping-term-ms = <1000>;
+      quick-tap-ms = <0>;
+      bindings = <&to ROT_90>, <&none>;
+    };
+
+    ht_rot180: ht_rot180 {
+      compatible = "zmk,behavior-hold-tap";
+      #binding-cells = <0>;
+      flavor = "hold-preferred";
+      tapping-term-ms = <1000>;
+      quick-tap-ms = <0>;
+      bindings = <&to ROT_180>, <&none>;
+    };
+
+    ht_rot270: ht_rot270 {
+      compatible = "zmk,behavior-hold-tap";
+      #binding-cells = <0>;
+      flavor = "hold-preferred";
+      tapping-term-ms = <1000>;
+      quick-tap-ms = <0>;
+      bindings = <&to ROT_270>, <&none>;
     };
   };
 
@@ -62,25 +91,25 @@
 
         r0 {
             timeout-ms = <4 0>;
-            bindings = <&ht_long &to 0 &none>;     /* ★1秒ホールドで 0 へ */
+            bindings = <&ht_rot0>;     /* ★1秒ホールドで 0 へ */
             key-positions = <4 5>;
         };
 
         r90 {
             timeout-ms = <50>;              /* 反応が鈍ければ少し上げる(例: 60〜80) */
-            bindings = <&ht_long &to 1 &none>;     /* ★1秒ホールドで 1 へ */
+            bindings = <&ht_rot90>;     /* ★1秒ホールドで 90 へ */
             key-positions = <4 3>;
         };
 
         r180 {
             timeout-ms = <50>;              /* 反応が鈍ければ少し上げる(例: 60〜80) */
-            bindings = <&ht_long &to 2 &none>;     /* ★1秒ホールドで 2 へ */
+            bindings = <&ht_rot180>;     /* ★1秒ホールドで 180 へ */
             key-positions = <1 2>;
         };
 
         r270 {
             timeout-ms = <50>;              /* 反応が鈍ければ少し上げる(例: 60〜80) */
-            bindings = <&ht_long &to 3 &none>;     /* ★1秒ホールドで 3 へ */
+            bindings = <&ht_rot270>;     /* ★1秒ホールドで 270 へ */
             key-positions = <1 0>;
         };
     };
