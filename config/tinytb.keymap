@@ -34,15 +34,39 @@
 / {
 
   behaviors {
+    /* --- レイヤー移動の 0 引数ラッパー --- */
+    to_base: to_base {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&to BASE>;
+    };
 
-    /* 1秒長押しで回転を確定、タップは無効化 */
+    to_rot90: to_rot90 {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&to ROT_90>;
+    };
+
+    to_rot180: to_rot180 {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&to ROT_180>;
+    };
+
+    to_rot270: to_rot270 {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&to ROT_270>;
+    };
+
+    /* --- 1秒長押しでだけ発火する Hold-Tap --- */
     ht_rot0: ht_rot0 {
       compatible = "zmk,behavior-hold-tap";
-      #binding-cells = <0>;                 /* ← 呼び出し時に引数は不要 */
+      #binding-cells = <0>;
       flavor = "hold-preferred";
-      tapping-term-ms = <1000>;             /* ★ 1秒 */
-      quick-tap-ms = <0>;                   /* 連打タップ確定オフ */
-      bindings = <&to BASE &none>;       /* HOLD = BASEへ, TAP = 何もしない */
+      tapping-term-ms = <1000>;  /* 1秒 */
+      quick-tap-ms = <0>;
+      bindings = <&to_base &none>;   /* ← phandles だけ */
     };
 
     ht_rot90: ht_rot90 {
@@ -51,7 +75,7 @@
       flavor = "hold-preferred";
       tapping-term-ms = <1000>;
       quick-tap-ms = <0>;
-      bindings = <&to ROT_90 &none>;
+      bindings = <&to_rot90 &none>;
     };
 
     ht_rot180: ht_rot180 {
@@ -60,7 +84,7 @@
       flavor = "hold-preferred";
       tapping-term-ms = <1000>;
       quick-tap-ms = <0>;
-      bindings = <&to ROT_180 &none>;
+      bindings = <&to_rot180 &none>;
     };
 
     ht_rot270: ht_rot270 {
@@ -69,7 +93,7 @@
       flavor = "hold-preferred";
       tapping-term-ms = <1000>;
       quick-tap-ms = <0>;
-      bindings = <&to ROT_270 &none>;
+      bindings = <&to_rot270 &none>;
     };
   };
 
