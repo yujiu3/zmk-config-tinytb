@@ -42,7 +42,7 @@
       flavor = "hold-preferred";
       tapping-term-ms = <1000>;             /* ★ 1秒 */
       quick-tap-ms = <0>;                   /* 連打タップ確定オフ */
-      bindings = <&to BASE>, <&none>;       /* HOLD = BASEへ, TAP = 何もしない */
+      bindings = <&to BASE &none>;       /* HOLD = BASEへ, TAP = 何もしない */
     };
 
     ht_rot90: ht_rot90 {
@@ -51,7 +51,7 @@
       flavor = "hold-preferred";
       tapping-term-ms = <1000>;
       quick-tap-ms = <0>;
-      bindings = <&to ROT_90>, <&none>;
+      bindings = <&to ROT_90 &none>;
     };
 
     ht_rot180: ht_rot180 {
@@ -60,7 +60,7 @@
       flavor = "hold-preferred";
       tapping-term-ms = <1000>;
       quick-tap-ms = <0>;
-      bindings = <&to ROT_180>, <&none>;
+      bindings = <&to ROT_180 &none>;
     };
 
     ht_rot270: ht_rot270 {
@@ -69,7 +69,7 @@
       flavor = "hold-preferred";
       tapping-term-ms = <1000>;
       quick-tap-ms = <0>;
-      bindings = <&to ROT_270>, <&none>;
+      bindings = <&to ROT_270 &none>;
     };
   };
 
