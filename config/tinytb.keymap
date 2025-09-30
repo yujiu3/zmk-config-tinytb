@@ -132,7 +132,7 @@
         rot180 {
             label = "ROT_180";
             bindings = <
-&mkp LCLK  &mkp LCLK  &mkp RCLK  &mkp LCLK  &lt 6 SPACE  &mkp MCLK
+&mkp LCLK  &mkp MB2  &mt RIGHT_CONTROL LG(BACKSPACE)  &mkp LCLK  &lt 6 SPACE  &mkp MCLK
             >;
         };
 
@@ -148,7 +148,7 @@
         Scroll_L0 {
             label = "Scroll_L0 ";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &mkp MB4  &trans  &trans  &mkp MCLK
             >;
         };
 
