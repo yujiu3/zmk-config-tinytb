@@ -68,10 +68,10 @@ combos:
   k: SELECT_BT
   l: [Scroll_L180]
 - p: [4, 5]
-  k: {t: BASE, h: toggle}
+  k: '&ht_rot0'
 - p: [4, 3]
-  k: {t: ROT_90, h: toggle}
+  k: '&ht_rot90'
 - p: [1, 2]
-  k: {t: ROT_180, h: toggle}
+  k: '&ht_rot180'
 - p: [1, 0]
-  k: {t: ROT_270, h: toggle}
+  k: '&ht_rot270'
