@@ -2,10 +2,10 @@ layout: {zmk_keyboard: tinytb}
 layers:
   BASE:
   - ENTER
+  - {t: BACKSPACE, h: RIGHT CONTROL}
   - {t: SPACE, h: 'Scroll_L0 '}
-  - '&mkp LCLK'
-  - {t: BACKSPACE, h: RCTRL}
   - '&mkp RCLK'
+  - '&mkp LCLK'
   - '&mkp LCLK'
   ROT_90:
   - '&mkp RCLK'
@@ -30,8 +30,8 @@ layers:
   - '&mkp LCLK'
   'Scroll_L0 ':
   - {t: ▽, type: trans}
-  - {type: held}
-  - '&mkp MB4'
+  - {t: ▽, type: trans}
+  - {t: '&mkp MB4', type: held}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - '&mkp MCLK'
