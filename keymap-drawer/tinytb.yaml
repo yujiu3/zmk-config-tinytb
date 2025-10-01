@@ -2,11 +2,11 @@ layout: {zmk_keyboard: tinytb}
 layers:
   BASE:
   - ENTER
-  - {t: BACKSPACE, h: RIGHT CONTROL}
+  - '&mkp LCLK'
   - {t: SPACE, h: 'Scroll_L0 '}
   - '&mkp RCLK'
   - '&mkp LCLK'
-  - '&mkp LCLK'
+  - {t: BACKSPACE, h: RIGHT CONTROL}
   ROT_90:
   - '&mkp RCLK'
   - {t: BACKSPACE, h: RCTRL}
