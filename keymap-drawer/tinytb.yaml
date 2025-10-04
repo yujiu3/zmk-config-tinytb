@@ -57,15 +57,15 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   SELECT_BT:
-  - {type: held}
+  - {t: ▽, type: trans}
   - {t: BT, h: '3'}
   - {t: BT, h: '2'}
   - {t: BT, h: '1'}
   - {t: BT, h: '0'}
-  - {type: held}
+  - {t: ▽, type: trans}
 combos:
 - p: [5, 0]
-  k: SELECT_BT
+  k: {t: SELECT_BT, h: toggle}
   l: [Scroll_L180]
 - p: [4, 5, 0]
   k: {t: BASE, h: toggle}

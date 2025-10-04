@@ -565,7 +565,8 @@ path.combo {
 <rect rx="6" ry="6" x="76" y="47" width="28" height="26" class="combo"/>
 <a href="#SELECT_BT">
 <text x="90" y="60" class="combo tap layer-activator"><tspan style="font-size: 78%">SELECT_BT</tspan></text>
-</a></g>
+</a><text x="90" y="71" class="combo hold">toggle</text>
+</g>
 <g class="combo combopos-1">
 <path d="M90,50 l-41,-14" class="combo"/>
 <path d="M90,50 l43,29" class="combo"/>
@@ -663,8 +664,9 @@ path.combo {
 <g transform="translate(30, 1408)" class="layer-SELECT_BT">
 <text x="0" y="28" class="label" id="SELECT_BT">SELECT_BT:</text>
 <g transform="translate(0, 56)">
-<g transform="translate(150, 90)" class="key held keypos-0">
-<rect rx="6" ry="6" x="-28" y="-28" width="56" height="56" class="key held"/>
+<g transform="translate(150, 90)" class="key trans keypos-0">
+<rect rx="6" ry="6" x="-28" y="-28" width="56" height="56" class="key trans"/>
+<text x="0" y="0" class="key trans tap">▽</text>
 </g>
 <g transform="translate(90, 90)" class="key keypos-1">
 <rect rx="6" ry="6" x="-28" y="-28" width="56" height="56" class="key"/>
@@ -686,8 +688,9 @@ path.combo {
 <text x="0" y="0" class="key tap">BT</text>
 <text x="0" y="26" class="key hold">0</text>
 </g>
-<g transform="translate(30, 30)" class="key held keypos-5">
-<rect rx="6" ry="6" x="-28" y="-28" width="56" height="56" class="key held"/>
+<g transform="translate(30, 30)" class="key trans keypos-5">
+<rect rx="6" ry="6" x="-28" y="-28" width="56" height="56" class="key trans"/>
+<text x="0" y="0" class="key trans tap">▽</text>
 </g>
 <g class="combo combopos-0">
 <path d="M90,50 l-41,-14" class="combo"/>
