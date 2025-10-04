@@ -31,8 +31,8 @@ layers:
   'Scroll_L0 ':
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {t: '&mkp MB4', type: held}
-  - {t: ▽, type: trans}
+  - {type: held}
+  - {t: SELECT_BT, h: toggle}
   - {t: ▽, type: trans}
   - '&mkp MCLK'
   Scroll_L90:
