@@ -57,12 +57,12 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   SELECT_BT:
-  - {t: ▽, type: trans}
+  - BT CLR ALL
+  - {t: BT, h: '4'}
   - {t: BT, h: '3'}
   - {t: BT, h: '2'}
   - {t: BT, h: '1'}
   - {t: BT, h: '0'}
-  - {t: ▽, type: trans}
 combos:
 - p: [5, 0, 3, 2]
   k: {t: SELECT_BT, h: toggle}
