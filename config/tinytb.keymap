@@ -148,7 +148,7 @@
         Scroll_L0 {
             label = "Scroll_L0 ";
             bindings = <
-&trans  &trans  &mkp MB4  &trans  &trans  &mkp MCLK
+&trans  &trans  &trans  &to 8  &trans  &mkp MCLK
             >;
         };
 
