@@ -562,6 +562,8 @@ path.combo {
 <g class="combo combopos-0">
 <path d="M90,60 l-42,-21" class="combo"/>
 <path d="M90,60 l42,21" class="combo"/>
+<path d="M90,60 l42,-21" class="combo"/>
+<path d="M90,60 l-42,21" class="combo"/>
 <rect rx="6" ry="6" x="76" y="47" width="28" height="26" class="combo"/>
 <a href="#SELECT_BT">
 <text x="90" y="60" class="combo tap layer-activator"><tspan style="font-size: 78%">SELECT_BT</tspan></text>

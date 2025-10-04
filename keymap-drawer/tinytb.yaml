@@ -64,7 +64,7 @@ layers:
   - {t: BT, h: '0'}
   - {t: ▽, type: trans}
 combos:
-- p: [5, 0]
+- p: [5, 0, 3, 2]
   k: {t: SELECT_BT, h: toggle}
   l: [Scroll_L180]
 - p: [4, 5, 0]
